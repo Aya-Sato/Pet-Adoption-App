@@ -1,5 +1,12 @@
 import { createGlobalStyle } from 'styled-components';
 
+export const themeVars = {
+    white: "#FFFFFF",
+    teaGreen: "#CCF5AC",
+    yellow: "#FFC30B",
+    coralOrange: "#FF704D"
+};
+
 const GlobalStyles = createGlobalStyle`
     html,
     body,
