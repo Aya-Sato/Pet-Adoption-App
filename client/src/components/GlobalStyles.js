@@ -4,7 +4,8 @@ export const themeVars = {
     white: "#FFFFFF",
     teaGreen: "#CCF5AC",
     yellow: "#FFC30B",
-    coralOrange: "#FF704D"
+    coralOrange: "#FF704D",
+    gray: "#BEBEBE"
 };
 
 const GlobalStyles = createGlobalStyle`
