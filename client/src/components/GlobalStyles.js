@@ -2,9 +2,12 @@ import { createGlobalStyle } from 'styled-components';
 
 export const themeVars = {
     white: "#FFFFFF",
+    tintedWhite: "#f4f9f9",
     teaGreen: "#CCF5AC",
     yellow: "#FFC30B",
     coralOrange: "#FF704D",
+    green: "#03C04A",
+    purple: "#8510d8",
     gray: "#BEBEBE"
 };
 

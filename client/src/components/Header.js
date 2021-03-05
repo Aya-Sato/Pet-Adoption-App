@@ -11,6 +11,7 @@ const Wrapper = styled.div`
     display: flex;
     justify-content: space-around;
     align-items: center;
+    background: ${themeVars.tintedWhite};
 `;
 
 const StyledBtn = styled.button`
@@ -48,7 +49,7 @@ const Header = () => {
                 </svg>
                 <FaPaw 
                     style={{
-                        fontSize: "40px",
+                        fontSize: "35px",
                         transform: "rotate(-30deg)",
                         fill: active === "main" ? "url(#gradient)" : `${themeVars.gray}`
                     }}
@@ -69,7 +70,7 @@ const Header = () => {
                 </svg>
                 <BsFillBookmarksFill 
                     style={{
-                        fontSize: "40px",
+                        fontSize: "35px",
                         fill: active === "bookmark" ? "url(#gradient)" : `${themeVars.gray}`
                     }}
                 />
@@ -89,7 +90,7 @@ const Header = () => {
                 </svg>
                 <BsFillChatDotsFill 
                     style={{
-                        fontSize: "40px",
+                        fontSize: "35px",
                         fill: active === "message" ? "url(#gradient)" : `${themeVars.gray}`
                     }}
                 />
@@ -109,7 +110,7 @@ const Header = () => {
                 </svg>
                 <BsPeopleCircle 
                     style={{
-                        fontSize: "40px",
+                        fontSize: "35px",
                         fill: active === "settings" ? "url(#gradient)" : `${themeVars.gray}`
                     }}
                 />

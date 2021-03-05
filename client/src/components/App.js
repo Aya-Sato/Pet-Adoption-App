@@ -12,7 +12,7 @@ import {
     receiveAccessTokenFailed
 } from "../actions";
 
-import LandingPage from "./LandingPage";
+import SignIn from "./SignIn";
 import Preference from "./Preference";
 import Header from "./Header";
 import Main from "./Main";
@@ -43,7 +43,7 @@ const App = () => {
                 <Router>
                     <Switch>
                         <Route exact path="/">
-                            <LandingPage />
+                            <SignIn />
                         </Route>
                         <Route exact path="/preference">
                             <Preference />
