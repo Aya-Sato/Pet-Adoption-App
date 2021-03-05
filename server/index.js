@@ -4,8 +4,7 @@
 const express = require("express");
 const bodyParser = require("body-parser");
 const morgan = require("morgan");
-const fetch = require("isomorphic-fetch");
-require("dotenv").config();
+const { getToken } = require("./handlers");
 
 express()
     .use(morgan("tiny"))
@@ -13,30 +12,7 @@ express()
     .use(bodyParser.json())
     .use(express.static("public"))
 
-    .get("/petfinder_access_token", (req, res, next) => {
-        const clientId = process.env.PETFINDER_CLIENT_ID;
-        const clientSecret = process.env.PETFINDER_SECRET;
-
-        const authString = Buffer.from(clientId + ':' + clientSecret).toString(
-            'base64'
-        );
-
-        fetch("https://api.petfinder.com/v2/oauth2/token", {
-            method: "POST",
-            headers: {
-                Authorization: `Basic ${authString}`,
-                'Content-Type': 'application/x-www-form-urlencoded',
-            },
-            body: `grant_type=client_credentials&client_id=${clientId}&client_secret=${clientSecret}`
-        })
-        .then((response) => response.json())
-        .then((json) => {
-            res.send(json);
-        })
-        .catch((err) => {
-            console.log(err);
-        })
-    })
+    .get("/petfinder_access_token", getToken)
 
   // this is our catch all endpoint.
     .get("*", (req, res) => {
