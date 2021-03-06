@@ -4,22 +4,24 @@
 const express = require("express");
 const bodyParser = require("body-parser");
 const morgan = require("morgan");
+const cors = require("cors");
 const { getToken } = require("./handlers");
 
 express()
-    .use(morgan("tiny"))
-    .use(bodyParser.urlencoded({ extended: false }))
-    .use(bodyParser.json())
-    .use(express.static("public"))
+  .use(morgan("tiny"))
+  .use(bodyParser.urlencoded({ extended: false }))
+  .use(bodyParser.json())
+  .use(express.static("public"))
+  .use(cors())
 
-    .get("/petfinder_access_token", getToken)
+  .get("/petfinder_access_token", getToken)
 
   // this is our catch all endpoint.
-    .get("*", (req, res) => {
-        res.status(404).json({
-        status: 404,
-        message: "This is obviously not what you are looking for.",
-        });
-    })
+  .get("*", (req, res) => {
+    res.status(404).json({
+      status: 404,
+      message: "This is obviously not what you are looking for.",
+    });
+  })
 
-    .listen(8000, () => console.log(`Listening on port 8000`));
+  .listen(8000, () => console.log(`Listening on port 8000`));
