@@ -5,7 +5,7 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const morgan = require("morgan");
 const cors = require("cors");
-const { getToken } = require("./handlers");
+const { getToken, getCurrentLocation } = require("./handlers");
 
 express()
   .use(morgan("tiny"))
@@ -15,6 +15,8 @@ express()
   .use(cors())
 
   .get("/petfinder_access_token", getToken)
+
+  .get("/current_location", getCurrentLocation)
 
   // this is our catch all endpoint.
   .get("*", (req, res) => {
