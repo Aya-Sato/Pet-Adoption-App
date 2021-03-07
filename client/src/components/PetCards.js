@@ -5,16 +5,28 @@ import { useSelector } from "react-redux";
 import TinderCard from "react-tinder-card";
 import "../PetCards.css";
 
-const Line1 = styled.div`
+const CardContainer = styled.div`
   display: flex;
-  align-items: center;
-  background: transparent;
+  justify-content: center;
+  margin-top: 120px;
+`;
+
+const Card = styled.div`
+  position: relative;
+  width: 600px;
+  padding: 20px;
+  max-width: 96vw;
+  height: calc(100vh - 220px);
+  border-radius: 15px;
+  background-size: cover;
+  background-position: center;
 `;
 
 const TextContainer = styled.div`
   position: absolute;
   bottom: 0;
   background: transparent;
+  margin-right: 8px;
 `;
 
 const Name = styled.h3`
@@ -48,28 +60,22 @@ const PetCards = () => {
     });
 
   return (
-    <div className="cardContainer">
+    <CardContainer>
       {photosForEachPetArr &&
         photosForEachPetArr.map((photos, index) => (
           <TinderCard className="swipe" key={index} preventSwipe={["down"]}>
-            <div
-              style={{ backgroundImage: `url(${photos[photoIndex]})` }}
-              className="card"
-            >
+            <Card style={{ backgroundImage: `url(${photos[photoIndex]})` }}>
               <TextContainer>
-                <Line1>
-                  <Name>{petsArr[index].name}</Name>
-                  <Characteristics>{petsArr[index].gender}</Characteristics>
-                </Line1>
+                <Name>{petsArr[index].name}</Name>
                 <Characteristics>
-                  {`${petsArr[index].age}, ${petsArr[index].breeds.primary}`}
+                  {`${petsArr[index].gender}, ${petsArr[index].breeds.primary}`}
                 </Characteristics>
                 <Description>{petsArr[index].description}</Description>
               </TextContainer>
-            </div>
+            </Card>
           </TinderCard>
         ))}
-    </div>
+    </CardContainer>
   );
 };
 
