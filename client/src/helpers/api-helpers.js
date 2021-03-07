@@ -32,9 +32,11 @@ export function fetchAnimals(dispatch, token, location, distance, type, age) {
   dispatch(requestPets());
   return fetch(url, options)
     .then((res) => res.json())
-    .then((json) => {
-      console.log(json, "pets");
-      dispatch(receivePets(json));
+    .then((pets) => {
+      const filteredPetsWithPhotos = pets.animals.filter((pet) => {
+        return pet.photos.length > 0;
+      });
+      dispatch(receivePets(filteredPetsWithPhotos));
     })
     .catch((err) => {
       console.error(err);
