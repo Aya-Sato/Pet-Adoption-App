@@ -16,10 +16,12 @@ const Wrapper = styled.div`
 const Main = () => {
   const dispatch = useDispatch();
   const accessToken = useSelector((state) => state.auth.token);
-  const location = "Montreal, Quebec";
-  const distance = 500;
-  const type = "cat";
-  const age = "young";
+  const preference = {
+    location: "Montreal, Quebec",
+    distance: 500,
+    type: "cat",
+    age: "young",
+  };
 
   const isTokenExpired = useSelector((state) =>
     isExpired(state.auth.expiresAt)
@@ -29,9 +31,9 @@ const Main = () => {
     if (!accessToken || isTokenExpired) {
       fetchToken(dispatch);
     } else {
-      fetchAnimals(dispatch, accessToken, location, distance, type, age);
+      fetchAnimals(dispatch, accessToken, preference);
     }
-  }, [accessToken]);
+  }, [accessToken, preference]);
 
   return (
     <Wrapper>

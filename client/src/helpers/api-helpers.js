@@ -21,7 +21,8 @@ export function fetchToken(dispatch) {
     });
 }
 
-export function fetchAnimals(dispatch, token, location, distance, type, age) {
+export function fetchAnimals(dispatch, token, preference) {
+  const { type, age, location, distance } = preference;
   const options = {
     headers: {
       Authorization: `Bearer ${token}`,
