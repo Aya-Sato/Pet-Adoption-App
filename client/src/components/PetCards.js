@@ -5,10 +5,13 @@ import { useSelector } from "react-redux";
 import TinderCard from "react-tinder-card";
 import "../PetCards.css";
 
+import LoadingIcon from "./LoadingIcon";
+import Rotate from "./Rotate";
+
 const CardContainer = styled.div`
   display: flex;
   justify-content: center;
-  margin-top: 120px;
+  margin-top: 100px;
 `;
 
 const Card = styled.div`
@@ -48,6 +51,13 @@ const Description = styled.p`
   margin: 8px 5px 5px 0;
 `;
 
+const LoadingIconContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  position: relative;
+  top: 250px;
+`;
+
 const PetCards = () => {
   const [photoIndex, setPhotoIndex] = useState(0);
   const petsArr = useSelector((state) => state.pets.pets);
@@ -60,22 +70,31 @@ const PetCards = () => {
     });
 
   return (
-    <CardContainer>
-      {photosForEachPetArr &&
-        photosForEachPetArr.map((photos, index) => (
-          <TinderCard className="swipe" key={index} preventSwipe={["down"]}>
-            <Card style={{ backgroundImage: `url(${photos[photoIndex]})` }}>
-              <TextContainer>
-                <Name>{petsArr[index].name}</Name>
-                <Characteristics>
-                  {`${petsArr[index].gender}, ${petsArr[index].breeds.primary}`}
-                </Characteristics>
-                <Description>{petsArr[index].description}</Description>
-              </TextContainer>
-            </Card>
-          </TinderCard>
-        ))}
-    </CardContainer>
+    <>
+      {photosForEachPetArr ? (
+        <CardContainer>
+          {photosForEachPetArr.map((photos, index) => (
+            <TinderCard className="swipe" key={index} preventSwipe={["down"]}>
+              <Card style={{ backgroundImage: `url(${photos[photoIndex]})` }}>
+                <TextContainer>
+                  <Name>{petsArr[index].name}</Name>
+                  <Characteristics>
+                    {`${petsArr[index].gender}, ${petsArr[index].breeds.primary}`}
+                  </Characteristics>
+                  <Description>{petsArr[index].description}</Description>
+                </TextContainer>
+              </Card>
+            </TinderCard>
+          ))}
+        </CardContainer>
+      ) : (
+        <LoadingIconContainer>
+          <Rotate>
+            <LoadingIcon />
+          </Rotate>
+        </LoadingIconContainer>
+      )}
+    </>
   );
 };
 
