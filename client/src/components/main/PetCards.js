@@ -1,12 +1,12 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import { themeVars } from "./GlobalStyles";
+import { themeVars } from "../GlobalStyles";
 import { useSelector } from "react-redux";
 import TinderCard from "react-tinder-card";
-import "../PetCards.css";
+import "./PetCards.css";
 
-import LoadingIcon from "./LoadingIcon";
-import Rotate from "./Rotate";
+import LoadingIcon from "../LoadingIcon";
+import Rotate from "../Rotate";
 
 const CardContainer = styled.div`
   display: flex;
