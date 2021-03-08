@@ -27,7 +27,7 @@ const TypeDetails = styled.div`
 `;
 
 const InputContainer = styled.div`
-  margin-left: 10px;
+  margin: 0 30px;
   background: ${themeVars.white};
 `;
 

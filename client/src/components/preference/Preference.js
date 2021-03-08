@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import { themeVars } from "../GlobalStyles";
 import { FaPaw } from "react-icons/fa";
@@ -66,11 +66,23 @@ const SubmitBtn = styled.button`
   border: 2px solid ${themeVars.yellow};
   border-radius: 8px;
   padding: 10px 0;
-  margin-top: 15px;
+  margin: 15px 0 30px 0;
 `;
 
 const Preference = () => {
+  const [location, setLocation] = useState();
   const [distance, setDistance] = useState("300");
+
+  useEffect(() => {
+    fetch("/current_location")
+      .then((res) => res.json())
+      .then((json) => {
+        setLocation(`${json.data.city}, ${json.data.region_iso_code}`);
+      })
+      .catch((err) => {
+        console.error(err);
+      });
+  }, []);
 
   return (
     <Wrapper>
@@ -80,7 +92,7 @@ const Preference = () => {
         </Para>
         <Heading>Discovery Settings</Heading>
         <Form>
-          <Location />
+          <Location location={location} />
           <Distance distance={distance} />
           <Type />
           <Age />

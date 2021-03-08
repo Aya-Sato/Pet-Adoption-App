@@ -33,7 +33,7 @@ const CurrentLocation = styled.div`
   flex-direction: column;
   align-items: flex-end;
   position: relative;
-  right: 20px;
+  right: 25px;
   background: ${themeVars.white};
 `;
 
@@ -43,14 +43,14 @@ const City = styled.div`
   background: ${themeVars.white};
 `;
 
-const Location = () => {
+const Location = ({ location }) => {
   return (
     <Wrapper>
       <Heading>Location</Heading>
       <LocationDetails>
         <CurrentLocation>
           <City>My Current Location</City>
-          <City>City, States</City>
+          <City>{location}</City>
         </CurrentLocation>
         <IoIosArrowForward
           style={{
