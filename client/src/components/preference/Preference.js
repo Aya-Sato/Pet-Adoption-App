@@ -9,28 +9,10 @@ import Type from "./Type";
 import Age from "./Age";
 import Photo from "./Photo";
 
-const Wrapper = styled.div`
-  width: 100vw;
-  height: 100vh;
-  background: linear-gradient(
-    to top,
-    ${themeVars.coralOrange} 0%,
-    ${themeVars.yellow} 60%,
-    ${themeVars.teaGreen} 100%
-  );
-  display: flex;
-  justify-content: center;
-  align-items: center;
-`;
-
 const FormContainer = styled.div`
-  width: 92%;
-  height: 95%;
-  border-radius: 15px;
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  width: 100%;
   display: flex;
   flex-direction: column;
-  overflow: scroll;
 `;
 
 const Para = styled.p`
@@ -38,6 +20,7 @@ const Para = styled.p`
   font-weight: bold;
   color: ${themeVars.coralOrange};
   text-align: center;
+  margin-top: 40px;
   font-family: "Delius Swash Caps", cursive;
 `;
 
@@ -63,10 +46,19 @@ const SubmitBtn = styled.button`
   color: ${themeVars.white};
   font-size: 15px;
   font-weight: bold;
-  border: 2px solid ${themeVars.yellow};
+  border: none;
   border-radius: 8px;
+  outline: none;
   padding: 10px 0;
-  margin: 15px 0 30px 0;
+  margin: 15px 0 50px 0;
+
+  &:active {
+    transform: scale(1.1);
+  }
+
+  &:focus-visible {
+    outline: 2px solid ${themeVars.yellow};
+  }
 `;
 
 const Preference = () => {
@@ -85,24 +77,22 @@ const Preference = () => {
   }, []);
 
   return (
-    <Wrapper>
-      <FormContainer>
-        <Para>
-          Welcome Name! <FaPaw style={{ transform: "rotate(-30deg)" }} />
-        </Para>
-        <Heading>Discovery Settings</Heading>
-        <Form>
-          <Location location={location} />
-          <Distance distance={distance} />
-          <Type />
-          <Age />
-          <Photo />
-          <BtnContainer>
-            <SubmitBtn>Find my pet</SubmitBtn>
-          </BtnContainer>
-        </Form>
-      </FormContainer>
-    </Wrapper>
+    <FormContainer>
+      <Para>
+        Welcome Name! <FaPaw style={{ transform: "rotate(-30deg)" }} />
+      </Para>
+      <Heading>Discovery Settings</Heading>
+      <Form>
+        <Location location={location} />
+        <Distance distance={distance} />
+        <Type />
+        <Age />
+        <Photo />
+        <BtnContainer>
+          <SubmitBtn>Find my pet</SubmitBtn>
+        </BtnContainer>
+      </Form>
+    </FormContainer>
   );
 };
 
