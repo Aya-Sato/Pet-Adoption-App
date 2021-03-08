@@ -84,7 +84,7 @@ const Preference = () => {
       <Heading>Discovery Settings</Heading>
       <Form>
         <Location location={location} />
-        <Distance distance={distance} />
+        <Distance distance={distance} setDistance={setDistance} />
         <Type />
         <Age />
         <Photo />

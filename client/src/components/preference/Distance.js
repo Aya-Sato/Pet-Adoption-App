@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { themeVars } from "../GlobalStyles";
+import "./Slider.css";
 
 const Wrapper = styled.div`
   width: 100%;
@@ -37,11 +38,14 @@ const Mile = styled.div`
 `;
 
 const RangeInput = styled.input`
-  margin-top: 20px;
-  width: 70%;
+  margin: 30px 0 15px 0;
 `;
 
-const Distance = ({ distance }) => {
+const Distance = ({ distance, setDistance }) => {
+  const updateDistance = (ev) => {
+    setDistance(ev.target.value);
+  };
+
   return (
     <Wrapper>
       <DistanceDetails>
@@ -55,6 +59,8 @@ const Distance = ({ distance }) => {
           max="500"
           value={distance}
           id="distance"
+          className="slider"
+          onChange={updateDistance}
         ></RangeInput>
       </InputContainer>
     </Wrapper>
