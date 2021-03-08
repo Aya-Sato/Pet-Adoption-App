@@ -25,7 +25,8 @@ const Para = styled.p`
 `;
 
 const Heading = styled.h2`
-  font-size: 18px;
+  font-size: 16px;
+  font-weight: normal;
   color: ${themeVars.darkGray};
   margin: 10px 15px;
 `;
@@ -50,7 +51,7 @@ const SubmitBtn = styled.button`
   border-radius: 8px;
   outline: none;
   padding: 10px 0;
-  margin: 15px 0 50px 0;
+  margin: 30px 0 50px 0;
 
   &:active {
     transform: scale(1.1);

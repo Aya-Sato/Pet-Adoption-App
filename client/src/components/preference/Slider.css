@@ -1,4 +1,4 @@
-.slider {
+.distance {
   -webkit-appearance: none;
   width: 70%;
   height: 5px;
@@ -10,7 +10,7 @@
   transition: opacity 0.2s;
 }
 
-.slider::-webkit-slider-thumb {
+.distance::-webkit-slider-thumb {
   -webkit-appearance: none;
   appearance: none;
   width: 20px;
@@ -20,7 +20,7 @@
   cursor: pointer;
 }
 
-.slider::-moz-range-thumb {
+.distance::-moz-range-thumb {
   width: 20px;
   height: 20px;
   border-radius: 50%;

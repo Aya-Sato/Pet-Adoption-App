@@ -59,7 +59,7 @@ const Distance = ({ distance, setDistance }) => {
           max="500"
           value={distance}
           id="distance"
-          className="slider"
+          className="distance"
           onChange={updateDistance}
         ></RangeInput>
       </InputContainer>
