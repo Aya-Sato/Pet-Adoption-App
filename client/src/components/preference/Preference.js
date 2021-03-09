@@ -13,6 +13,7 @@ const FormContainer = styled.div`
   width: 100%;
   display: flex;
   flex-direction: column;
+  margin-top: 40px;
 `;
 
 const Para = styled.p`
@@ -45,13 +46,14 @@ const SubmitBtn = styled.button`
   width: 150px;
   background: ${themeVars.coralOrange};
   color: ${themeVars.white};
-  font-size: 15px;
+  font-size: 16px;
   font-weight: bold;
   border: none;
   border-radius: 8px;
   outline: none;
   padding: 10px 0;
   margin: 30px 0 50px 0;
+  line-height: 18px;
 
   &:active {
     transform: scale(1.1);
@@ -79,9 +81,6 @@ const Preference = () => {
 
   return (
     <FormContainer>
-      <Para>
-        Welcome Name! <FaPaw style={{ transform: "rotate(-30deg)" }} />
-      </Para>
       <Heading>Discovery Settings</Heading>
       <Form>
         <Location location={location} />
@@ -90,7 +89,17 @@ const Preference = () => {
         <Age />
         <Photo />
         <BtnContainer>
-          <SubmitBtn>Find my pet</SubmitBtn>
+          <SubmitBtn>
+            Find my pet{" "}
+            <FaPaw
+              style={{
+                fontSize: "18px",
+                transform: "rotate(-30deg)",
+                position: "relative",
+                top: "3px",
+              }}
+            />
+          </SubmitBtn>
         </BtnContainer>
       </Form>
     </FormContainer>

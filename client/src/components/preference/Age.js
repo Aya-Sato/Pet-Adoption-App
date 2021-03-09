@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { themeVars } from "../GlobalStyles";
+import "./Checkbox.css";
 
 const Wrapper = styled.div`
   width: 100%;
@@ -23,12 +24,19 @@ const Heading = styled.h3`
 
 const AgeDetails = styled.div`
   display: flex;
+  flex-direction: column;
+  background: ${themeVars.white};
+`;
+
+const Row = styled.div`
+  display: flex;
   justify-content: space-around;
   background: ${themeVars.white};
 `;
 
 const InputContainer = styled.div`
   background: ${themeVars.white};
+  width: 80px;
 `;
 
 const Label = styled.label`
@@ -36,29 +44,43 @@ const Label = styled.label`
   color: ${themeVars.darkGray};
 `;
 
-const Input = styled.input``;
-
 const Age = () => {
   return (
     <Wrapper>
       <Heading>Age</Heading>
       <AgeDetails>
-        <InputContainer>
-          <Label htmlFor="baby">Baby</Label>
-          <Input type="checkbox" id="baby" name="age" value="baby" />
-        </InputContainer>
-        <InputContainer>
-          <Label htmlFor="young">Young</Label>
-          <Input type="checkbox" id="young" name="age" value="young" />
-        </InputContainer>
-        <InputContainer>
-          <Label htmlFor="adult">Adult</Label>
-          <Input type="checkbox" id="adult" name="age" value="adult" />
-        </InputContainer>
-        <InputContainer>
-          <Label htmlFor="senior">Senior</Label>
-          <Input type="checkbox" id="senior" name="age" value="senior" />
-        </InputContainer>
+        <Row>
+          <InputContainer>
+            <Label htmlFor="baby" className="container">
+              Baby
+              <input type="checkbox" id="baby" name="age" value="baby" />
+              <span className="checkmark"></span>
+            </Label>
+          </InputContainer>
+          <InputContainer>
+            <Label htmlFor="young" className="container">
+              Young
+              <input type="checkbox" id="young" name="age" value="young" />
+              <span className="checkmark"></span>
+            </Label>
+          </InputContainer>
+        </Row>
+        <Row>
+          <InputContainer>
+            <Label htmlFor="adult" className="container">
+              Adult
+              <input type="checkbox" id="adult" name="age" value="adult" />
+              <span className="checkmark"></span>
+            </Label>
+          </InputContainer>
+          <InputContainer>
+            <Label htmlFor="senior" className="container">
+              Senior
+              <input type="checkbox" id="senior" name="age" value="senior" />
+              <span className="checkmark"></span>
+            </Label>
+          </InputContainer>
+        </Row>
       </AgeDetails>
     </Wrapper>
   );

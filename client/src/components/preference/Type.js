@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { themeVars } from "../GlobalStyles";
+import "./Checkbox.css";
 
 const Wrapper = styled.div`
   width: 100%;
@@ -22,13 +23,13 @@ const Heading = styled.h3`
 
 const TypeDetails = styled.div`
   display: flex;
-  justify-content: center;
+  justify-content: space-around;
   background: ${themeVars.white};
 `;
 
 const InputContainer = styled.div`
-  margin: 0 30px;
   background: ${themeVars.white};
+  width: 80px;
 `;
 
 const Label = styled.label`
@@ -36,20 +37,24 @@ const Label = styled.label`
   color: ${themeVars.darkGray};
 `;
 
-const Input = styled.input``;
-
 const Type = () => {
   return (
     <Wrapper>
       <Heading>Animal Type</Heading>
       <TypeDetails>
         <InputContainer>
-          <Label htmlFor="dog">Dogs</Label>
-          <Input type="checkbox" id="dog" name="type" value="dog" />
+          <Label htmlFor="dog" className="container">
+            Dogs
+            <input type="checkbox" id="dog" name="type" value="dog" />
+            <span className="checkmark"></span>
+          </Label>
         </InputContainer>
         <InputContainer>
-          <Label htmlFor="cat">Cats</Label>
-          <Input type="checkbox" id="cat" name="type" value="cat" />
+          <Label htmlFor="cat" className="container">
+            Cats
+            <input type="checkbox" id="cat" name="type" value="cat" />
+            <span className="checkmark"></span>
+          </Label>
         </InputContainer>
       </TypeDetails>
     </Wrapper>
