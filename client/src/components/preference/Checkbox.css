@@ -26,11 +26,13 @@
   height: 20px;
   width: 20px;
   border-radius: 50%;
-  background-color: #bebebe;
+  border: 2px solid #ffc30b;
+  background-color: white;
 }
 
 .container input:checked ~ .checkmark {
   background-color: #ff704d;
+  border: 2px solid #ff704d;
   border-radius: 50%;
 }
 
@@ -45,8 +47,8 @@
 }
 
 .container .checkmark:after {
-  left: 6px;
-  top: 6px;
+  left: 4px;
+  top: 4px;
   width: 8px;
   height: 8px;
   border-radius: 50%;

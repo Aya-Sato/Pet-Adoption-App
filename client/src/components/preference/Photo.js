@@ -4,7 +4,7 @@ import { themeVars } from "../GlobalStyles";
 
 const Wrapper = styled.div`
   width: 100%;
-  height: 80px;
+  height: 60px;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -31,48 +31,33 @@ const Label = styled.label`
 `;
 
 const SliderInput = styled.input`
-  opacity: 0;
-  width: 0;
-  height: 0;
+  position: relative;
+  width: 41px;
+  height: 24px;
+  -webkit-appearance: none;
+  background: ${themeVars.gray};
+  outline: none;
+  border-radius: 15px;
+  transition: 0.5s;
 
-  &:checked + .slider {
-    background-color: ${themeVars.coralOrange};
+  &:checked {
+    background: ${themeVars.coralOrange};
   }
-
-  &:focus + .slider {
-    background-color: ${themeVars.coralOrange};
-  }
-
-  &:checked + .slider:before {
-    -webkit-transform: translateX(22px);
-    -ms-transform: translateX(22px);
-    transform: translateX(22px);
-  }
-`;
-
-const Slider = styled.span`
-  position: absolute;
-  cursor: pointer;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: #ccc;
-  -webkit-transition: 0.4s;
-  transition: 0.4s;
-  border-radius: 34px;
 
   &:before {
-    position: absolute;
     content: "";
-    height: 20px;
+    position: absolute;
     width: 20px;
-    left: 5px;
-    bottom: 4px;
-    background-color: white;
-    -webkit-transition: 0.4s;
-    transition: 0.4s;
-    border-radius: 50%;
+    height: 20px;
+    border-radius: 15px;
+    top: 2px;
+    left: 2px;
+    background: ${themeVars.white};
+    transition: 0.5s;
+  }
+
+  &:checked:before {
+    left: 19px;
   }
 `;
 
@@ -82,7 +67,6 @@ const Photo = () => {
       <Heading>Show pets without photos</Heading>
       <Label>
         <SliderInput type="checkbox" />
-        <Slider className="slider"></Slider>
       </Label>
     </Wrapper>
   );
