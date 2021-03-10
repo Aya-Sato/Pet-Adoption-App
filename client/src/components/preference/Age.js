@@ -14,6 +14,7 @@ const Wrapper = styled.div`
 `;
 
 const Heading = styled.h3`
+  width: 100px;
   font-size: 16px;
   position: relative;
   top: -15px;

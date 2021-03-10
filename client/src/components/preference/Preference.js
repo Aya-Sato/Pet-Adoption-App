@@ -16,20 +16,16 @@ const FormContainer = styled.div`
   margin-top: 40px;
 `;
 
-const Para = styled.p`
-  font-size: 22px;
-  font-weight: bold;
-  color: ${themeVars.coralOrange};
-  text-align: center;
-  margin-top: 40px;
-  font-family: "Delius Swash Caps", cursive;
-`;
-
 const Heading = styled.h2`
   font-size: 16px;
   font-weight: normal;
   color: ${themeVars.darkGray};
   margin: 10px 15px;
+  text-align: center;
+
+  span {
+    font-size: 25px;
+  }
 `;
 
 const Form = styled.form`
@@ -81,7 +77,9 @@ const Preference = () => {
 
   return (
     <FormContainer>
-      <Heading>Discovery Settings</Heading>
+      <Heading>
+        Discovery Settings <span>🐩🐈‍⬛</span> ...
+      </Heading>
       <Form>
         <Location location={location} />
         <Distance distance={distance} setDistance={setDistance} />
