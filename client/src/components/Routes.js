@@ -1,7 +1,7 @@
 import React from "react";
 import { Switch, Route } from "react-router-dom";
 
-import SignIn from "./SignIn";
+import SignIn from "./sign-in/SignIn";
 import Preference from "./preference/Preference";
 import Header from "./Header";
 import Main from "./main/Main";
