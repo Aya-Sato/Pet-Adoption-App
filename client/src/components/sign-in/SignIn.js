@@ -6,7 +6,11 @@ import { FaPaw } from "react-icons/fa";
 import { BsFillChatFill } from "react-icons/bs";
 
 import firebase from "./Authentication";
-import { auth, googleAuthProvider } from "./Authentication";
+import {
+  auth,
+  googleAuthProvider,
+  facebookAuthProvider,
+} from "./Authentication";
 
 import GoogleLogo from "../../assets/google-icon.svg";
 import FacebookLogo from "../../assets/facebook-logo.svg";
@@ -151,7 +155,9 @@ const SignIn = () => {
               />
               LOG IN WITH PHONE NUMBER
             </LoginBtn>
-            <LoginBtn onClick={() => console.log("")}>
+            <LoginBtn
+              onClick={() => auth.signInWithRedirect(facebookAuthProvider)}
+            >
               <img
                 className="facebook"
                 src={FacebookLogo}
