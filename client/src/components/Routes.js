@@ -2,6 +2,8 @@ import React from "react";
 import { Switch, Route } from "react-router-dom";
 
 import SignIn from "./sign-in/SignIn";
+import SignInWithPhone from "./sign-in/SignInWithPhone";
+import Welcome from "./sign-in/Welcome";
 import Preference from "./preference/Preference";
 import Header from "./Header";
 import Main from "./main/Main";
@@ -14,6 +16,12 @@ const Routes = () => {
     <Switch>
       <Route exact path="/">
         <SignIn />
+      </Route>
+      <Route exact path="/sign-in-phone">
+        <SignInWithPhone />
+      </Route>
+      <Route exact path="/welcome">
+        <Welcome />
       </Route>
       <Route exact path="/preference">
         <Preference />
