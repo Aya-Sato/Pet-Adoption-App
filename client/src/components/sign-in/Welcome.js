@@ -1,27 +1,24 @@
 import React from "react";
 import { useHistory } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
 import styled from "styled-components";
 
 import { auth } from "./Authentication";
+import { removeCurrentUser } from "../../actions";
 
-const Welcome = ({ currentUser, setCurrentUser }) => {
+const Welcome = () => {
   const history = useHistory();
+  const dispatch = useDispatch();
+  const currentUser = useSelector((state) => state.currentUser.currentUser);
 
   return (
     <>
-      <div>
-        {currentUser === undefined
-          ? "Welcome to Adopet!"
-          : `Welcome to Adopet, ${currentUser}!`}
-      </div>
+      <div>{`Welcome to Adopet, ${currentUser.name}!`}</div>
       <button
         onClick={() => {
           auth.signOut();
-          if (currentUser === undefined) {
-            history.push("/");
-          } else {
-            setCurrentUser(null);
-          }
+          history.push("/");
+          dispatch(removeCurrentUser());
         }}
       >
         SIGN OUT
