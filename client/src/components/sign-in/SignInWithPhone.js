@@ -1,11 +1,120 @@
 import React, { useEffect, useState } from "react";
+import styled from "styled-components";
 import { useHistory } from "react-router-dom";
 import firebase from "./Authentication";
+import { themeVars } from "../GlobalStyles";
+import CanadianFlag from "../../assets/flag-canada.svg";
 
-const SignInWithPhone = () => {
+const Wrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+`;
+
+const Form = styled.form`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 110px;
+`;
+
+const Heading = styled.h2`
+  font-size: 30px;
+  color: ${themeVars.darkGray};
+  margin-top: 0;
+`;
+
+const InputContainer = styled.div`
+  display: flex;
+  justify-content: center;
+`;
+
+const Flag = styled.img`
+  position: relative;
+  top: 8px;
+  margin-right: 15px;
+`;
+
+const CountryCode = styled.span`
+  font-size: 20px;
+  border-bottom: 2px solid ${themeVars.coralOrange};
+  margin-top: 20px;
+`;
+
+const Input = styled.input`
+  width: 60%;
+  font-size: 20px;
+  border: none;
+  border-bottom: 2px solid ${themeVars.coralOrange};
+  background: ${themeVars.tintedWhite};
+  margin-top: 20px;
+
+  &:focus {
+    outline: none !important;
+  }
+
+  &:focus-visible {
+    outline: 2px solid ${themeVars.yellow};
+  }
+`;
+
+const Recaptcha = styled.div`
+  margin-top: 20px;
+`;
+
+const Caution = styled.p`
+  width: 80%;
+  color: ${themeVars.darkGray};
+  font-size: 15px;
+`;
+
+const SendVerificationBtn = styled.button`
+  color: ${themeVars.white};
+  font-size: 18px;
+  background: ${themeVars.coralOrange};
+  border: none;
+  border-radius: 15px;
+  padding: 10px 20px;
+  margin-top: 20px;
+
+  &:active {
+    transform: scale(1.1);
+  }
+
+  &:focus-visible {
+    outline: 2px solid ${themeVars.yellow};
+  }
+`;
+
+const TopSection = styled.section`
+  width: 100%;
+  height: 10%;
+  position: absolute;
+  top: 0;
+  background: linear-gradient(
+    to top left,
+    ${themeVars.coralOrange} 0%,
+    ${themeVars.yellow} 60%,
+    ${themeVars.teaGreen} 100%
+  );
+`;
+
+const BottomSection = styled.section`
+  width: 100%;
+  height: 10%;
+  position: absolute;
+  bottom: 0;
+  background: linear-gradient(
+    to bottom right,
+    ${themeVars.coralOrange} 0%,
+    ${themeVars.yellow} 60%,
+    ${themeVars.teaGreen} 100%
+  );
+`;
+
+const SignInWithPhone = ({ setCodeResult }) => {
   const [phone, setPhone] = useState();
-  const [verificationCode, setVerificationCode] = useState();
-  const [codeResult, setCodeResult] = useState();
   const [recaptchaVerifier, setRecaptchaVerifier] = useState();
   const history = useHistory();
 
@@ -25,12 +134,8 @@ const SignInWithPhone = () => {
     setPhone(ev.target.value);
   };
 
-  const UpdateVerificationCode = (ev) => {
-    setVerificationCode(ev.target.value);
-  };
-
   const phoneAuth = () => {
-    const phoneNumber = `+${phone}`;
+    const phoneNumber = `+1${phone}`;
     firebase
       .auth()
       .signInWithPhoneNumber(phoneNumber, recaptchaVerifier)
@@ -38,20 +143,7 @@ const SignInWithPhone = () => {
         window.confirmationResult = confirmationResult;
         setCodeResult(confirmationResult);
         alert("Message sent");
-      })
-      .catch(function (error) {
-        alert(error.message);
-      });
-  };
-
-  const codeVerify = () => {
-    const code = `${verificationCode}`;
-    codeResult
-      .confirm(code)
-      .then(function (result) {
-        history.push("./welcome");
-        const user = result.user;
-        console.log(user, "user");
+        history.push("/verification-code");
       })
       .catch(function (error) {
         alert(error.message);
@@ -59,39 +151,27 @@ const SignInWithPhone = () => {
   };
 
   return (
-    <>
-      <form>
-        <div>
-          <label htmlFor="number">My number is</label>
-          <input
-            type="text"
-            id="number"
-            placeholder="+1**********"
-            onChange={UpdatePhoneNumber}
-          />
-          <div id="recaptcha-container"></div>
-        </div>
-        <p>
-          When you tap "Continue", Adopet will send a text with verification
-          code. Message and data rates may apply. The verified phone number can
-          be used to log in. Learn what happens when your number changes.
-        </p>
-        <button type="button" onClick={() => phoneAuth()}>
-          CONTINUE
-        </button>
-      </form>
-      <h3>Enter verification code</h3>
-      <form>
-        <input
-          type="text"
-          id="verificationCode"
-          onChange={UpdateVerificationCode}
-        />
-        <button type="button" onClick={() => codeVerify()}>
-          Verify code
-        </button>
-      </form>
-    </>
+    <Wrapper>
+      <TopSection />
+      <Form>
+        <Heading>My number is</Heading>
+        <InputContainer>
+          <Flag src={CanadianFlag} alt="Canadian flag" />
+          <CountryCode>+1</CountryCode>
+          <Input type="text" id="number" onChange={UpdatePhoneNumber} />
+        </InputContainer>
+        <Recaptcha id="recaptcha-container"></Recaptcha>
+        <Caution>
+          When you tap "Send verification code", Adopet will send a text with
+          verification code. Message and data rates may apply. The verified
+          phone number can be used to log in.
+        </Caution>
+        <SendVerificationBtn type="button" onClick={() => phoneAuth()}>
+          Send verification code
+        </SendVerificationBtn>
+      </Form>
+      <BottomSection />
+    </Wrapper>
   );
 };
 
