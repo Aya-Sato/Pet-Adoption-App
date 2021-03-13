@@ -4,6 +4,7 @@ import { Switch, Route } from "react-router-dom";
 import SignIn from "./sign-in/SignIn";
 import SignInWithPhone from "./sign-in/SignInWithPhone";
 import VerificationCode from "./sign-in/VerificationCode";
+import PersonalInfo from "./sign-in/PersonalInfo";
 import Welcome from "./sign-in/Welcome";
 import Preference from "./preference/Preference";
 import Header from "./Header";
@@ -24,6 +25,9 @@ const Routes = () => {
       </Route>
       <Route exact path="/verification-code">
         <VerificationCode codeResult={codeResult} />
+      </Route>
+      <Route exact path="/personal-info">
+        <PersonalInfo />
       </Route>
       <Route exact path="/welcome">
         <Welcome />
