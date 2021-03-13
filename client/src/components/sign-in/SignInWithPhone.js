@@ -9,14 +9,17 @@ const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
 `;
 
 const Form = styled.form`
+  width: 100%;
+  height: 80%;
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-top: 110px;
+  justify-content: center;
+  position: absolute;
+  top: 10%;
 `;
 
 const Heading = styled.h2`
@@ -77,6 +80,7 @@ const SendVerificationBtn = styled.button`
   border-radius: 15px;
   padding: 10px 20px;
   margin-top: 20px;
+  outline: none;
 
   &:active {
     transform: scale(1.1);

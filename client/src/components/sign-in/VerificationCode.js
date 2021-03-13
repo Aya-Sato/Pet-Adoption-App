@@ -11,17 +11,18 @@ const Wrapper = styled.div`
 
 const Form = styled.form`
   width: 100%;
+  height: 60%;
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
   position: absolute;
-  top: 150px;
+  top: 20%;
 `;
 
 const Heading = styled.h2`
   font-size: 30px;
   color: ${themeVars.darkGray};
-  margin-top: 35px;
 `;
 
 const Input = styled.input`
@@ -49,6 +50,7 @@ const VerifyBtn = styled.button`
   border-radius: 15px;
   padding: 10px 20px;
   margin-top: 30px;
+  outline: none;
 
   &:active {
     transform: scale(1.1);
@@ -98,7 +100,7 @@ const VerificationCode = ({ codeResult }) => {
     codeResult
       .confirm(code)
       .then(function (result) {
-        history.push("./welcome");
+        history.push("./personal-info");
         const user = result.user;
         console.log(user, "user");
       })
