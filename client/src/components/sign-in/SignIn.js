@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
 import styled from "styled-components";
 import { themeVars } from "../GlobalStyles";
 import firebase from "./Authentication";
@@ -8,6 +9,7 @@ import {
   googleAuthProvider,
   facebookAuthProvider,
 } from "./Authentication";
+import { createUser, getUser } from "../../helpers/db-helpers";
 
 import { FaPaw } from "react-icons/fa";
 import { BsFillChatFill } from "react-icons/bs";
@@ -115,15 +117,23 @@ const logoStyle = {
 };
 
 const SignIn = () => {
-  const [currentUser, setCurrentUser] = useState(null);
   const [loading, setLoading] = useState(true);
   const history = useHistory();
+  const dispatch = useDispatch();
+  const currentUser = useSelector((state) => state.currentUser.currentUser);
 
   useEffect(() => {
     firebase.auth().onAuthStateChanged(function (user) {
       if (user) {
         console.log("User logged in", user);
-        setCurrentUser(user.displayName);
+        const userInfo = {
+          userId: user.uid,
+          name: user.displayName,
+          email: user.email,
+          phone: user.phoneNumber,
+        };
+        createUser(userInfo);
+        getUser(dispatch, userInfo.userId);
       } else {
         console.log("User logged out");
       }
@@ -192,9 +202,7 @@ const SignIn = () => {
           </BtnContainer>
         </Wrapper>
       )}
-      {currentUser !== null && (
-        <Welcome currentUser={currentUser} setCurrentUser={setCurrentUser} />
-      )}
+      {currentUser !== null && <Welcome />}
     </>
   );
 };
