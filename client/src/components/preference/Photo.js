@@ -58,12 +58,12 @@ const SliderInput = styled.input`
   }
 `;
 
-const Photo = () => {
+const Photo = ({ register }) => {
   return (
     <Wrapper>
       <Heading>Show pets without photos</Heading>
       <Label>
-        <SliderInput type="checkbox" />
+        <SliderInput type="checkbox" name="photo" ref={register} />
       </Label>
     </Wrapper>
   );

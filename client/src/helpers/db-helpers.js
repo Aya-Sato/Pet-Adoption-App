@@ -39,3 +39,10 @@ export const addUserNameAndEmail = (userId, name, email) => {
 
   return firebase.database().ref().update(updates);
 };
+
+export const addPreference = (userId, preference) => {
+  const updates = {};
+  updates["/users/" + userId + "/preference"] = preference;
+
+  return firebase.database().ref().update(updates);
+};

@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from "react";
+import { useSelector } from "react-redux";
+import { useForm } from "react-hook-form";
 import styled from "styled-components";
 import { themeVars } from "../GlobalStyles";
 import { FaPaw } from "react-icons/fa";
@@ -8,6 +10,8 @@ import Distance from "./Distance";
 import Type from "./Type";
 import Age from "./Age";
 import Photo from "./Photo";
+
+import { addPreference } from "../../helpers/db-helpers";
 
 const FormContainer = styled.div`
   width: 100%;
@@ -25,7 +29,7 @@ const FormContainer = styled.div`
 `;
 
 const Heading = styled.h2`
-  font-size: 20px;
+  font-size: 18px;
   font-weight: normal;
   color: black;
   margin: 10px 15px;
@@ -72,29 +76,47 @@ const SubmitBtn = styled.button`
 `;
 
 const Preference = () => {
-  const [location, setLocation] = useState();
+  const [location, setLocation] = useState({});
   const [distance, setDistance] = useState("300");
+  const { register, handleSubmit } = useForm();
+  const userId = useSelector((state) => state.currentUser.currentUserId);
 
   useEffect(() => {
     fetch("/current_location")
       .then((res) => res.json())
       .then((json) => {
-        setLocation(`${json.data.city}, ${json.data.region_iso_code}`);
+        setLocation({
+          ...location,
+          city: `${json.data.city}, ${json.data.region_iso_code}`,
+          latLong: `${json.data.latitude}, ${json.data.longitude}`,
+        });
       })
       .catch((err) => {
         console.error(err);
       });
   }, []);
 
+  const onSubmit = (data) => {
+    const dataWithLocation = {
+      ...data,
+      location: location.latLong,
+    };
+    addPreference(userId, dataWithLocation);
+  };
+
   return (
     <FormContainer>
       <Heading>Discovery Settings</Heading>
-      <Form>
+      <Form onSubmit={handleSubmit(onSubmit)}>
         <Location location={location} />
-        <Distance distance={distance} setDistance={setDistance} />
-        <Type />
-        <Age />
-        <Photo />
+        <Distance
+          distance={distance}
+          setDistance={setDistance}
+          register={register}
+        />
+        <Type register={register} />
+        <Age register={register} />
+        <Photo register={register} />
         <BtnContainer>
           <SubmitBtn>
             Find my pet{" "}

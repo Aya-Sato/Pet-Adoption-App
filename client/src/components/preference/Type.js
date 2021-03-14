@@ -38,7 +38,7 @@ const Label = styled.label`
   color: ${themeVars.darkGray};
 `;
 
-const Type = () => {
+const Type = ({ register }) => {
   return (
     <Wrapper>
       <Heading>Animal Type</Heading>
@@ -46,14 +46,26 @@ const Type = () => {
         <InputContainer>
           <Label htmlFor="dog" className="container">
             Dogs
-            <input type="checkbox" id="dog" name="type" value="dog" />
+            <input
+              type="checkbox"
+              id="dog"
+              name="type"
+              value="dog"
+              ref={register}
+            />
             <span className="checkmark"></span>
           </Label>
         </InputContainer>
         <InputContainer>
           <Label htmlFor="cat" className="container">
             Cats
-            <input type="checkbox" id="cat" name="type" value="cat" />
+            <input
+              type="checkbox"
+              id="cat"
+              name="type"
+              value="cat"
+              ref={register}
+            />
             <span className="checkmark"></span>
           </Label>
         </InputContainer>

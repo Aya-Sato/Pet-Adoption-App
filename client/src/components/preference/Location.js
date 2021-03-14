@@ -49,7 +49,7 @@ const Location = ({ location }) => {
       <LocationDetails>
         <CurrentLocation>
           <City>My Current Location</City>
-          <City>{location}</City>
+          <City>{location.city}</City>
         </CurrentLocation>
         <IoIosArrowForward
           style={{

@@ -41,7 +41,7 @@ const RangeInput = styled.input`
   margin: 30px 0 15px 0;
 `;
 
-const Distance = ({ distance, setDistance }) => {
+const Distance = ({ distance, setDistance, register }) => {
   const updateDistance = (ev) => {
     setDistance(ev.target.value);
   };
@@ -61,6 +61,8 @@ const Distance = ({ distance, setDistance }) => {
           id="distance"
           className="distance"
           onChange={updateDistance}
+          name="distance"
+          ref={register}
         ></RangeInput>
       </InputContainer>
     </Wrapper>

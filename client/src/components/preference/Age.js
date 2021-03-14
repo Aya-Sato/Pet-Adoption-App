@@ -45,7 +45,7 @@ const Label = styled.label`
   color: ${themeVars.darkGray};
 `;
 
-const Age = () => {
+const Age = ({ register }) => {
   return (
     <Wrapper>
       <Heading>Age</Heading>
@@ -54,14 +54,26 @@ const Age = () => {
           <InputContainer>
             <Label htmlFor="baby" className="container">
               Baby
-              <input type="checkbox" id="baby" name="age" value="baby" />
+              <input
+                type="checkbox"
+                id="baby"
+                name="age"
+                value="baby"
+                ref={register}
+              />
               <span className="checkmark"></span>
             </Label>
           </InputContainer>
           <InputContainer>
             <Label htmlFor="young" className="container">
               Young
-              <input type="checkbox" id="young" name="age" value="young" />
+              <input
+                type="checkbox"
+                id="young"
+                name="age"
+                value="young"
+                ref={register}
+              />
               <span className="checkmark"></span>
             </Label>
           </InputContainer>
@@ -70,14 +82,26 @@ const Age = () => {
           <InputContainer>
             <Label htmlFor="adult" className="container">
               Adult
-              <input type="checkbox" id="adult" name="age" value="adult" />
+              <input
+                type="checkbox"
+                id="adult"
+                name="age"
+                value="adult"
+                ref={register}
+              />
               <span className="checkmark"></span>
             </Label>
           </InputContainer>
           <InputContainer>
             <Label htmlFor="senior" className="container">
               Senior
-              <input type="checkbox" id="senior" name="age" value="senior" />
+              <input
+                type="checkbox"
+                id="senior"
+                name="age"
+                value="senior"
+                ref={register}
+              />
               <span className="checkmark"></span>
             </Label>
           </InputContainer>
