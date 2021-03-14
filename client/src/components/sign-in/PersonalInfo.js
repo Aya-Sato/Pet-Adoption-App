@@ -1,8 +1,12 @@
 import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
 import styled from "styled-components";
 import { themeVars } from "../GlobalStyles";
 import { FaPaw } from "react-icons/fa";
+
+import { updateCurrentUser } from "../../actions";
+import { addUserNameAndEmail } from "../../helpers/db-helpers";
 
 const Wrapper = styled.div`
   display: flex;
@@ -96,6 +100,8 @@ const PersonalInfo = () => {
   const [name, setName] = useState();
   const [email, setEmail] = useState();
   const history = useHistory();
+  const dispatch = useDispatch();
+  const userId = useSelector((state) => state.currentUser.currentUserId);
 
   const updateName = (ev) => {
     setName(ev.target.value);
@@ -129,7 +135,14 @@ const PersonalInfo = () => {
         </LogoContainer>
         <Heading>My email is</Heading>
         <Input type="email" id="email" onChange={updateEmail} />
-        <ContinueBtn type="button" onClick={() => history.push("/welcome")}>
+        <ContinueBtn
+          type="button"
+          onClick={() => {
+            dispatch(updateCurrentUser(name, email));
+            addUserNameAndEmail(userId, name, email);
+            history.push("/welcome");
+          }}
+        >
           Continue
         </ContinueBtn>
       </Form>

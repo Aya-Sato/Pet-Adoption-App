@@ -22,7 +22,7 @@ export const getUser = (dispatch, userId) => {
     .get()
     .then(function (snapshot) {
       if (snapshot.exists()) {
-        dispatch(receiveCurrentUser(snapshot.val()));
+        dispatch(receiveCurrentUser(snapshot.val(), userId));
       } else {
         console.log("No data available");
       }
@@ -30,4 +30,12 @@ export const getUser = (dispatch, userId) => {
     .catch(function (error) {
       console.error(error);
     });
+};
+
+export const addUserNameAndEmail = (userId, name, email) => {
+  const updates = {};
+  updates["/users/" + userId + "/" + "name"] = name;
+  updates["/users/" + userId + "/" + "email"] = email;
+
+  return firebase.database().ref().update(updates);
 };
