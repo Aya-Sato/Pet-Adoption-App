@@ -8,7 +8,6 @@ const Wrapper = styled.div`
   display: flex;
   justify-content: space-between;
   padding: 10px 0;
-  border-top: 1px solid ${themeVars.gray};
   background: ${themeVars.white};
 `;
 
