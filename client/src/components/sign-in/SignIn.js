@@ -125,7 +125,7 @@ const SignIn = () => {
   useEffect(() => {
     firebase.auth().onAuthStateChanged(function (user) {
       if (user) {
-        console.log("User logged in", user);
+        console.log("User logged in");
         const userInfo = {
           userId: user.uid,
           name: user.displayName,

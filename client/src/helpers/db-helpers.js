@@ -34,8 +34,8 @@ export const getUser = (dispatch, userId) => {
 
 export const addUserNameAndEmail = (userId, name, email) => {
   const updates = {};
-  updates["/users/" + userId + "/" + "name"] = name;
-  updates["/users/" + userId + "/" + "email"] = email;
+  updates["/users/" + userId + "/name"] = name;
+  updates["/users/" + userId + "/email"] = email;
 
   return firebase.database().ref().update(updates);
 };

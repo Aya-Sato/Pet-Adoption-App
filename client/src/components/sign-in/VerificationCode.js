@@ -101,8 +101,7 @@ const VerificationCode = ({ codeResult }) => {
       .confirm(code)
       .then(function (result) {
         history.push("./personal-info");
-        const user = result.user;
-        console.log(user, "user");
+        // const user = result.user;
       })
       .catch(function (error) {
         alert(error.message);
