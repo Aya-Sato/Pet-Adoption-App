@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
+import { useHistory } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import styled from "styled-components";
 import { themeVars } from "../GlobalStyles";
@@ -32,9 +33,11 @@ const Heading = styled.h2`
   font-size: 18px;
   font-weight: normal;
   color: black;
-  margin: 10px 15px;
-  padding-bottom: 5px;
+  padding: 25px 15px;
+  margin-bottom: 0;
   text-align: center;
+  background: ${themeVars.white};
+  border-bottom: 1px solid ${themeVars.gray};
 
   span {
     font-size: 25px;
@@ -78,6 +81,7 @@ const SubmitBtn = styled.button`
 const Preference = () => {
   const [location, setLocation] = useState({});
   const [distance, setDistance] = useState("300");
+  const history = useHistory();
   const { register, handleSubmit } = useForm();
   const userId = useSelector((state) => state.currentUser.currentUserId);
 
@@ -102,6 +106,7 @@ const Preference = () => {
       location: location.latLong,
     };
     addPreference(userId, dataWithLocation);
+    history.push("/main");
   };
 
   return (

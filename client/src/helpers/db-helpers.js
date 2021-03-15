@@ -46,3 +46,16 @@ export const addPreference = (userId, preference) => {
 
   return firebase.database().ref().update(updates);
 };
+
+export const getPreference = (userId, preference, setPreference) => {
+  const preferenceRef = firebase
+    .database()
+    .ref("users/" + userId + "/preference");
+  preferenceRef.on("value", (snapshot) => {
+    const data = snapshot.val();
+    setPreference({
+      ...preference,
+      data,
+    });
+  });
+};

@@ -1,9 +1,10 @@
-import React, { useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import { useSelector, useDispatch } from "react-redux";
 
-import { fetchToken, fetchAnimals } from "../../helpers/api-helpers";
 import { isExpired } from "../../reducers/auth-reducer";
+import { fetchToken, fetchAnimals } from "../../helpers/api-helpers";
+import { getPreference } from "../../helpers/db-helpers";
 
 import Buttons from "./Buttons";
 import PetCards from "./PetCards";
@@ -14,14 +15,10 @@ const Wrapper = styled.div`
 `;
 
 const Main = () => {
+  const [preference, setPreference] = useState({});
   const dispatch = useDispatch();
   const accessToken = useSelector((state) => state.auth.token);
-  const preference = {
-    location: "Montreal, Quebec",
-    distance: 500,
-    type: "cat",
-    age: "young",
-  };
+  const userId = useSelector((state) => state.currentUser.currentUserId);
 
   const isTokenExpired = useSelector((state) =>
     isExpired(state.auth.expiresAt)
@@ -31,9 +28,10 @@ const Main = () => {
     if (!accessToken || isTokenExpired) {
       fetchToken(dispatch);
     } else {
+      getPreference(userId, preference, setPreference);
       fetchAnimals(dispatch, accessToken, preference);
     }
-  }, [accessToken, preference]);
+  }, [accessToken]);
 
   return (
     <Wrapper>
