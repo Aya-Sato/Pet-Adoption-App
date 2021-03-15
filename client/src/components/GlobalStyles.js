@@ -9,6 +9,7 @@ export const themeVars = {
   green: "#03C04A",
   purple: "#8510d8",
   gray: "#BEBEBE",
+  mediumGray: "#909090",
   darkGray: "#777777",
 };
 
