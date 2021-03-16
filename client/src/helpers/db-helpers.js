@@ -48,14 +48,27 @@ export const addPreference = (userId, preference) => {
 };
 
 export const getPreference = (userId, preference, setPreference) => {
-  const preferenceRef = firebase
+  firebase
     .database()
-    .ref("users/" + userId + "/preference");
-  preferenceRef.on("value", (snapshot) => {
-    const data = snapshot.val();
-    setPreference({
-      ...preference,
-      data,
+    .ref("users")
+    .child(userId)
+    .child("/preference")
+    .get()
+    .then(function (snapshot) {
+      if (snapshot.exists()) {
+        const data = snapshot.val();
+        setPreference({
+          ...preference,
+          type: data.type,
+          age: data.age.toString(),
+          location: data.location,
+          distance: parseInt(data.distance),
+        });
+      } else {
+        console.log("No data available");
+      }
+    })
+    .catch(function (error) {
+      console.error(error);
     });
-  });
 };
