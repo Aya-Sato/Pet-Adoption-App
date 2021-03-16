@@ -47,7 +47,7 @@ const Type = ({ register }) => {
           <Label htmlFor="dog" className="container">
             Dogs
             <input
-              type="checkbox"
+              type="radio"
               id="dog"
               name="type"
               value="dog"
@@ -60,7 +60,7 @@ const Type = ({ register }) => {
           <Label htmlFor="cat" className="container">
             Cats
             <input
-              type="checkbox"
+              type="radio"
               id="cat"
               name="type"
               value="cat"
