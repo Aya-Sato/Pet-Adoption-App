@@ -5,9 +5,6 @@ import styled from "styled-components";
 import { themeVars } from "../GlobalStyles";
 import { FaPaw } from "react-icons/fa";
 
-import { auth } from "./Authentication";
-import { removeCurrentUser } from "../../actions";
-
 const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
@@ -74,18 +71,8 @@ const Button = styled.button`
   }
 `;
 
-const HiddenBtn = styled.button`
-  background: transparent;
-  border: none;
-  position: absolute;
-  top: 0;
-  right: 0;
-  color: ${themeVars.tintedWhite};
-`;
-
 const Welcome = () => {
   const history = useHistory();
-  const dispatch = useDispatch();
   const currentUser = useSelector((state) => state.currentUser.currentUser);
 
   return (

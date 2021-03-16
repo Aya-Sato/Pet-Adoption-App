@@ -95,6 +95,11 @@ const LoginBtn = styled.button`
     outline: 2px solid ${themeVars.yellow};
   }
 
+  @media (max-width: 320px) {
+    width: 90%;
+    padding-left: 10px;
+  }
+
   .google {
     position: relative;
     left: -48px;
