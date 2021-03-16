@@ -20,18 +20,30 @@ const Main = () => {
   const accessToken = useSelector((state) => state.auth.token);
   const userId = useSelector((state) => state.currentUser.currentUserId);
 
+  // const preference = {
+  //   location: "Montreal, Quebec",
+  //   distance: 500,
+  //   type: "dog",
+  //   age: "young",
+  // };
+
   const isTokenExpired = useSelector((state) =>
     isExpired(state.auth.expiresAt)
   );
 
   useEffect(() => {
+    getPreference(userId, preference, setPreference);
+  }, []);
+
+  useEffect(() => {
     if (!accessToken || isTokenExpired) {
       fetchToken(dispatch);
     } else {
-      getPreference(userId, preference, setPreference);
-      fetchAnimals(dispatch, accessToken, preference);
+      if (preference) {
+        fetchAnimals(dispatch, accessToken, preference);
+      }
     }
-  }, [accessToken]);
+  }, [accessToken, preference]);
 
   return (
     <Wrapper>
