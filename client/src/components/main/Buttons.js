@@ -9,7 +9,7 @@ import { TiArrowBack } from "react-icons/ti";
 const Wrapper = styled.div`
   width: 100vw;
   height: 100px;
-  position: fixed;
+  position: absolute;
   bottom: 0;
   display: flex;
   justify-content: space-around;

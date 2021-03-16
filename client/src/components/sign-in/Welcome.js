@@ -1,6 +1,6 @@
 import React from "react";
 import { useHistory } from "react-router-dom";
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 import styled from "styled-components";
 import { themeVars } from "../GlobalStyles";
 import { FaPaw } from "react-icons/fa";
@@ -125,6 +125,7 @@ const Welcome = () => {
       <Button
         onClick={() => {
           history.push("/preference");
+          window.scrollTo(0, 0);
         }}
       >
         I understand. Let's get started!

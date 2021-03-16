@@ -11,7 +11,8 @@ import PetCards from "./PetCards";
 
 const Wrapper = styled.div`
   width: 100vw;
-  height: calc(100vh - 100px);
+  max-height: calc(100vh - 100px) !important;
+  overflow-y: hidden !important;
 `;
 
 const Main = () => {
@@ -19,13 +20,6 @@ const Main = () => {
   const dispatch = useDispatch();
   const accessToken = useSelector((state) => state.auth.token);
   const userId = useSelector((state) => state.currentUser.currentUserId);
-
-  // const preference = {
-  //   location: "Montreal, Quebec",
-  //   distance: 500,
-  //   type: "dog",
-  //   age: "young",
-  // };
 
   const isTokenExpired = useSelector((state) =>
     isExpired(state.auth.expiresAt)
