@@ -142,16 +142,6 @@ const Welcome = () => {
       >
         I understand. Let's get started!
       </Button>
-      {/* Hidden button for demonstration purpose only */}
-      <HiddenBtn
-        onClick={() => {
-          auth.signOut();
-          history.push("/");
-          dispatch(removeCurrentUser());
-        }}
-      >
-        SIGN OUT
-      </HiddenBtn>
     </Wrapper>
   );
 };
