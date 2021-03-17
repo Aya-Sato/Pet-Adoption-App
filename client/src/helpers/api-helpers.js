@@ -22,7 +22,7 @@ export function fetchToken(dispatch) {
 }
 
 export function fetchAnimals(dispatch, token, preference) {
-  const { type, age, location, distance } = preference;
+  const { type, age, location, distance, photo } = preference;
   const options = {
     headers: {
       Authorization: `Bearer ${token}`,
@@ -34,10 +34,14 @@ export function fetchAnimals(dispatch, token, preference) {
   return fetch(url, options)
     .then((res) => res.json())
     .then((pets) => {
-      const filteredPetsWithPhotos = pets.animals.filter((pet) => {
-        return pet.photos.length > 0;
-      });
-      dispatch(receivePets(filteredPetsWithPhotos));
+      if (photo) {
+        dispatch(receivePets(pets.animals));
+      } else {
+        const filteredPetsWithPhotos = pets.animals.filter((pet) => {
+          return pet.photos.length > 0;
+        });
+        dispatch(receivePets(filteredPetsWithPhotos));
+      }
     })
     .catch((err) => {
       console.error(err);

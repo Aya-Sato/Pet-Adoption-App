@@ -63,6 +63,7 @@ export const getPreference = (userId, preference, setPreference) => {
           age: data.age.toString(),
           location: data.location,
           distance: parseInt(data.distance),
+          photo: data.photo,
         });
       } else {
         console.log("No data available");

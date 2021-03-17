@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import styled from "styled-components";
 import { themeVars } from "../GlobalStyles";
 import { useSelector } from "react-redux";
@@ -7,11 +7,12 @@ import "./PetCards.css";
 
 import LoadingIcon from "../LoadingIcon";
 import Rotate from "../Rotate";
+import Placeholder from "../../assets/no-photo.png";
 
 const CardContainer = styled.div`
   display: flex;
   justify-content: center;
-  margin-top: 100px;
+  position: relative;
 `;
 
 const Card = styled.div`
@@ -55,27 +56,45 @@ const LoadingIconContainer = styled.div`
   display: flex;
   justify-content: center;
   position: relative;
-  top: 250px;
+  top: 150px;
+`;
+
+const Wrapper = styled.div`
+  display: flex;
+  justify-content: center;
+`;
+
+const NoPets = styled.p`
+  color: ${themeVars.darkGray};
 `;
 
 const PetCards = () => {
-  const [photoIndex, setPhotoIndex] = useState(0);
   const petsArr = useSelector((state) => state.pets.pets);
-  const photosForEachPetArr =
-    petsArr &&
-    petsArr.map((pet) => {
-      return pet.photos.map((photo) => {
-        return photo.large;
-      });
-    });
+  const loadingStatus = useSelector((state) => state.pets.status);
 
+  if (loadingStatus === "loading") {
+    return (
+      <LoadingIconContainer>
+        <Rotate>
+          <LoadingIcon />
+        </Rotate>
+      </LoadingIconContainer>
+    );
+  }
   return (
     <>
-      {photosForEachPetArr ? (
+      {petsArr && (
         <CardContainer>
-          {photosForEachPetArr.map((photos, index) => (
+          {petsArr.map((pet, index) => (
             <TinderCard className="swipe" key={index} preventSwipe={["down"]}>
-              <Card style={{ backgroundImage: `url(${photos[photoIndex]})` }}>
+              <Card
+                style={{
+                  backgroundImage:
+                    pet.photos.length > 0
+                      ? `url(${pet.photos[0].large})`
+                      : `url(${Placeholder})`,
+                }}
+              >
                 <TextContainer>
                   <Name>{petsArr[index].name}</Name>
                   <Characteristics>
@@ -87,12 +106,14 @@ const PetCards = () => {
             </TinderCard>
           ))}
         </CardContainer>
-      ) : (
-        <LoadingIconContainer>
-          <Rotate>
-            <LoadingIcon />
-          </Rotate>
-        </LoadingIconContainer>
+      )}
+      {petsArr && petsArr.length === 0 && (
+        <Wrapper>
+          <NoPets>
+            No pets available <br />
+            based on your preference...
+          </NoPets>
+        </Wrapper>
       )}
     </>
   );
