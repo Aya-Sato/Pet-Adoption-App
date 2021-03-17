@@ -40,10 +40,10 @@ const Main = () => {
   }, [accessToken, preference]);
 
   return (
-    <Wrapper>
+    <>
       <PetCards />
       <Buttons />
-    </Wrapper>
+    </>
   );
 };
 

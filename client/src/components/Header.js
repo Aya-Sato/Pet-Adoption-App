@@ -15,8 +15,6 @@ const Wrapper = styled.div`
   display: flex;
   justify-content: space-around;
   align-items: center;
-  position: fixed;
-  top: 0;
 `;
 
 const StyledBtn = styled.button`
