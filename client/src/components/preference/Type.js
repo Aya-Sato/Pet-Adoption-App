@@ -20,6 +20,12 @@ const Heading = styled.h3`
   left: 15px;
   font-weight: normal;
   margin-bottom: 10px;
+
+  span {
+    color: ${themeVars.purple};
+    font-size: 18px;
+    background: ${themeVars.white};
+  }
 `;
 
 const TypeDetails = styled.div`
@@ -38,10 +44,18 @@ const Label = styled.label`
   color: ${themeVars.darkGray};
 `;
 
-const Type = ({ register }) => {
+const RequiredMessage = styled.p`
+  color: ${themeVars.purple};
+  font-size: 16px;
+  text-align: center;
+`;
+
+const Type = ({ register, errors }) => {
   return (
     <Wrapper>
-      <Heading>Animal Type</Heading>
+      <Heading>
+        Animal Type <span> *</span>
+      </Heading>
       <TypeDetails>
         <InputContainer>
           <Label htmlFor="dog" className="container">
@@ -51,7 +65,7 @@ const Type = ({ register }) => {
               id="dog"
               name="type"
               value="dog"
-              ref={register}
+              ref={register({ required: true })}
             />
             <span className="checkmark"></span>
           </Label>
@@ -64,12 +78,15 @@ const Type = ({ register }) => {
               id="cat"
               name="type"
               value="cat"
-              ref={register}
+              ref={register({ required: true })}
             />
             <span className="checkmark"></span>
           </Label>
         </InputContainer>
       </TypeDetails>
+      {errors.type && (
+        <RequiredMessage>This field is required.</RequiredMessage>
+      )}
     </Wrapper>
   );
 };

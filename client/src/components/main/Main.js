@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import styled from "styled-components";
 import { useSelector, useDispatch } from "react-redux";
 
 import { isExpired } from "../../reducers/auth-reducer";
@@ -8,12 +7,6 @@ import { getPreference } from "../../helpers/db-helpers";
 
 import Buttons from "./Buttons";
 import PetCards from "./PetCards";
-
-const Wrapper = styled.div`
-  width: 100vw;
-  max-height: calc(100vh - 100px) !important;
-  overflow-y: hidden !important;
-`;
 
 const Main = () => {
   const [preference, setPreference] = useState({});

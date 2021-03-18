@@ -82,7 +82,7 @@ const Preference = () => {
   const [location, setLocation] = useState({});
   const [distance, setDistance] = useState("300");
   const history = useHistory();
-  const { register, handleSubmit } = useForm();
+  const { register, handleSubmit, errors } = useForm();
   const userId = useSelector((state) => state.currentUser.currentUserId);
 
   useEffect(() => {
@@ -119,8 +119,8 @@ const Preference = () => {
           setDistance={setDistance}
           register={register}
         />
-        <Type register={register} />
-        <Age register={register} />
+        <Type register={register} errors={errors} />
+        <Age register={register} errors={errors} />
         <Photo register={register} />
         <BtnContainer>
           <SubmitBtn>

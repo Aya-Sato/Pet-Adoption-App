@@ -21,6 +21,12 @@ const Heading = styled.h3`
   left: 15px;
   font-weight: normal;
   margin-bottom: 10px;
+
+  span {
+    color: ${themeVars.purple};
+    font-size: 18px;
+    background: ${themeVars.white};
+  }
 `;
 
 const AgeDetails = styled.div`
@@ -45,10 +51,18 @@ const Label = styled.label`
   color: ${themeVars.darkGray};
 `;
 
-const Age = ({ register }) => {
+const RequiredMessage = styled.p`
+  color: ${themeVars.purple};
+  font-size: 16px;
+  text-align: center;
+`;
+
+const Age = ({ register, errors }) => {
   return (
     <Wrapper>
-      <Heading>Age</Heading>
+      <Heading>
+        Age <span> *</span>
+      </Heading>
       <AgeDetails>
         <Row>
           <InputContainer>
@@ -59,7 +73,7 @@ const Age = ({ register }) => {
                 id="baby"
                 name="age"
                 value="baby"
-                ref={register}
+                ref={register({ required: true })}
               />
               <span className="checkmark"></span>
             </Label>
@@ -72,7 +86,7 @@ const Age = ({ register }) => {
                 id="young"
                 name="age"
                 value="young"
-                ref={register}
+                ref={register({ required: true })}
               />
               <span className="checkmark"></span>
             </Label>
@@ -87,7 +101,7 @@ const Age = ({ register }) => {
                 id="adult"
                 name="age"
                 value="adult"
-                ref={register}
+                ref={register({ required: true })}
               />
               <span className="checkmark"></span>
             </Label>
@@ -100,13 +114,14 @@ const Age = ({ register }) => {
                 id="senior"
                 name="age"
                 value="senior"
-                ref={register}
+                ref={register({ required: true })}
               />
               <span className="checkmark"></span>
             </Label>
           </InputContainer>
         </Row>
       </AgeDetails>
+      {errors.age && <RequiredMessage>This field is required.</RequiredMessage>}
     </Wrapper>
   );
 };
