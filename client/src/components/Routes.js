@@ -9,6 +9,7 @@ import Welcome from "./sign-in/Welcome";
 import Preference from "./preference/Preference";
 import Header from "./Header";
 import Main from "./main/Main";
+import Pet from "./main/Pet";
 import Bookmark from "./Bookmark";
 import Message from "./Message";
 import Settings from "./Settings";
@@ -38,6 +39,9 @@ const Routes = () => {
       <Route exact path="/main">
         <Header />
         <Main />
+      </Route>
+      <Route exact path="/pet/:petId">
+        <Pet />
       </Route>
       <Route exact path="/bookmark">
         <Header />

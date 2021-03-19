@@ -1,5 +1,7 @@
-import React from "react";
+import React, { useContext } from "react";
+import { useHistory } from "react-router-dom";
 import styled from "styled-components";
+import { PetContext } from "./PetContext";
 import { themeVars } from "../GlobalStyles";
 import { ImHeart } from "react-icons/im";
 import { RiHeartsFill } from "react-icons/ri";
@@ -35,9 +37,17 @@ const StyledBtn = styled.button`
 `;
 
 const Buttons = () => {
+  const { selectedPetId } = useContext(PetContext);
+  const petId = selectedPetId;
+  const history = useHistory();
+
   return (
     <Wrapper>
-      <StyledBtn>
+      <StyledBtn
+        onClick={() => {
+          history.push(`/pet/:${petId}`);
+        }}
+      >
         <FaInfo
           style={{
             height: "28px",

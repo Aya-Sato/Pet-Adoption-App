@@ -1,5 +1,6 @@
-import React from "react";
+import React, { useContext } from "react";
 import styled from "styled-components";
+import { PetContext } from "./PetContext";
 import { themeVars } from "../GlobalStyles";
 import { useSelector } from "react-redux";
 import TinderCard from "react-tinder-card";
@@ -71,6 +72,11 @@ const NoPets = styled.p`
 const PetCards = () => {
   const petsArr = useSelector((state) => state.pets.pets);
   const loadingStatus = useSelector((state) => state.pets.status);
+  const { setSelectedPetId } = useContext(PetContext);
+
+  const onCardLeftScreen = (id) => {
+    setSelectedPetId(id);
+  };
 
   if (loadingStatus === "loading") {
     return (
@@ -86,7 +92,12 @@ const PetCards = () => {
       {petsArr && (
         <CardContainer>
           {petsArr.map((pet, index) => (
-            <TinderCard className="swipe" key={index} preventSwipe={["down"]}>
+            <TinderCard
+              className="swipe"
+              key={index}
+              onCardLeftScreen={() => onCardLeftScreen(pet.id)}
+              preventSwipe={["down"]}
+            >
               <Card
                 style={{
                   backgroundImage:
