@@ -25,6 +25,7 @@ const Settings = () => {
           auth.signOut();
           history.push("/");
           dispatch(removeCurrentUser());
+          sessionStorage.clear();
         }}
       >
         Log out

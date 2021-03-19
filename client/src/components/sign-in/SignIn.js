@@ -137,6 +137,7 @@ const SignIn = () => {
           email: user.email,
           phone: user.phoneNumber,
         };
+        sessionStorage.setItem("currentUserId", `${user.uid}`);
         createUser(userInfo);
         getUser(dispatch, userInfo.userId);
       } else {

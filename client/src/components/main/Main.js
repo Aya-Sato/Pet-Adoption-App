@@ -12,14 +12,16 @@ const Main = () => {
   const [preference, setPreference] = useState({});
   const dispatch = useDispatch();
   const accessToken = useSelector((state) => state.auth.token);
+  const currentUserIdInSessionStorage = sessionStorage.getItem("currentUserId");
   const userId = useSelector((state) => state.currentUser.currentUserId);
+  const currentUserId = userId ? userId : currentUserIdInSessionStorage;
 
   const isTokenExpired = useSelector((state) =>
     isExpired(state.auth.expiresAt)
   );
 
   useEffect(() => {
-    getPreference(userId, preference, setPreference);
+    getPreference(currentUserId, preference, setPreference);
   }, []);
 
   useEffect(() => {
