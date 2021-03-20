@@ -74,8 +74,8 @@ const PetCards = () => {
   const loadingStatus = useSelector((state) => state.pets.status);
   const { setSelectedPetId } = useContext(PetContext);
 
-  const onCardLeftScreen = (id) => {
-    setSelectedPetId(id);
+  const onCardLeftScreen = (petIndex) => {
+    setSelectedPetId(petsArr[petIndex].id);
   };
 
   if (loadingStatus === "loading") {
@@ -95,7 +95,7 @@ const PetCards = () => {
             <TinderCard
               className="swipe"
               key={index}
-              onCardLeftScreen={() => onCardLeftScreen(pet.id)}
+              onCardLeftScreen={() => onCardLeftScreen(index - 1)}
               preventSwipe={["down"]}
             >
               <Card

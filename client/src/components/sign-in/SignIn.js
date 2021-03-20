@@ -154,7 +154,7 @@ const SignIn = () => {
           display: "flex",
           justifyContent: "center",
           position: "relative",
-          top: "150px",
+          top: "220px",
         }}
       >
         <Rotate>
