@@ -80,6 +80,7 @@ const ShotsCurrent = styled.ul`
 
 const Environment = styled.div`
   color: ${themeVars.mediumGray};
+  margin-bottom: 20px;
 `;
 
 const GoodWith = styled.ul`
@@ -91,6 +92,22 @@ const GoodWith = styled.ul`
 const List = styled.li`
   list-style-type: none;
   margin: 8px 0 0 0;
+`;
+
+const TagContainer = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  width: 80%;
+  justify-content: flex-start;
+  margin: 0 5% 20px 5%;
+`;
+
+const Tag = styled.div`
+  color: ${themeVars.white};
+  background: ${themeVars.coralOrange};
+  border-radius: 15px;
+  padding: 5px 20px;
+  margin-right: 15px;
 `;
 
 const LoadingIconContainer = styled.div`
@@ -264,6 +281,13 @@ const Pet = () => {
               </List>
             </Environment>
           </TextContainer>
+          {pet.tags.length > 0 && (
+            <TagContainer>
+              {pet.tags.map((tag) => {
+                return <Tag>{tag}</Tag>;
+              })}
+            </TagContainer>
+          )}
         </>
       )}
     </>
