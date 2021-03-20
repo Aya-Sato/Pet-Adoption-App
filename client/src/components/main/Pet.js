@@ -11,6 +11,7 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
 import { FiCheck, FiX } from "react-icons/fi";
+import { CgHome } from "react-icons/cg";
 import LoadingIcon from "../LoadingIcon";
 import Rotate from "../Rotate";
 
@@ -35,16 +36,20 @@ const Name = styled.h3`
 
 const Age = styled.div`
   color: ${themeVars.darkGray};
-  font-size: 20px;
-  font-weight: bold;
+  font-size: 18px;
   margin-top: 8px;
 `;
 
 const Characteristics = styled.div`
   color: ${themeVars.darkGray};
-  font-size: 20px;
-  font-weight: bold;
-  margin: 5px 0 8px 0;
+  font-size: 18px;
+  margin: 5px 0;
+`;
+
+const City = styled.div`
+  color: ${themeVars.darkGray};
+  font-size: 16px;
+  margin-bottom: 10px;
 `;
 
 const Attributes = styled.li`
@@ -80,17 +85,12 @@ const Environment = styled.div`
 const GoodWith = styled.ul`
   padding: 0;
   margin-bottom: 8px;
-  font-weight: bold;
+  text-decoration: underline;
 `;
 
 const List = styled.li`
   list-style-type: none;
   margin: 8px 0 0 0;
-`;
-
-const Description = styled.p`
-  color: ${themeVars.mediumGray};
-  min-height: 100px;
 `;
 
 const LoadingIconContainer = styled.div`
@@ -169,6 +169,18 @@ const Pet = () => {
             <Characteristics>
               {`${pet.gender}, ${pet.breeds.primary}`}
             </Characteristics>
+            {pet.contact.address.city && pet.contact.address.state && (
+              <City>
+                <CgHome
+                  style={{
+                    position: "relative",
+                    top: "1.5px",
+                    marginRight: "5px",
+                  }}
+                />
+                {`Located in ${pet.contact.address.city}, ${pet.contact.address.state}`}
+              </City>
+            )}
             <Attributes>
               <SpayedNeutered>
                 {pet.attributes.spayed_neutered ? (
@@ -251,7 +263,6 @@ const Pet = () => {
                 )}
               </List>
             </Environment>
-            <Description>{pet.description}</Description>
           </TextContainer>
         </>
       )}
