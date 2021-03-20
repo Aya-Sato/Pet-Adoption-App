@@ -45,7 +45,7 @@ const Buttons = () => {
     <Wrapper>
       <StyledBtn
         onClick={() => {
-          history.push(`/pet/:${petId}`);
+          history.push(`/pet/${petId}`);
         }}
       >
         <FaInfo

@@ -5,6 +5,9 @@ import {
   requestPets,
   receivePets,
   receivePetsFailed,
+  requestPet,
+  receivePet,
+  receivePetFailed,
 } from "../actions";
 
 export function fetchToken(dispatch) {
@@ -12,7 +15,6 @@ export function fetchToken(dispatch) {
   fetch("/petfinder_access_token")
     .then((res) => res.json())
     .then((json) => {
-      console.log(json, "token");
       dispatch(receiveAccessToken(json.access_token));
     })
     .catch((err) => {
@@ -46,5 +48,25 @@ export function fetchAnimals(dispatch, token, preference) {
     .catch((err) => {
       console.error(err);
       dispatch(receivePetsFailed());
+    });
+}
+
+export function fetchAnimal(dispatch, token, petId) {
+  const options = {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  };
+  const url = `https://api.petfinder.com/v2/animals/${petId}`;
+
+  dispatch(requestPet());
+  return fetch(url, options)
+    .then((res) => res.json())
+    .then((pet) => {
+      dispatch(receivePet(pet.animal, petId));
+    })
+    .catch((err) => {
+      console.error(err);
+      dispatch(receivePetFailed());
     });
 }

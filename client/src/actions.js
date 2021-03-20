@@ -39,3 +39,17 @@ export const updateCurrentUser = (name, email) => ({
 export const removeCurrentUser = () => ({
   type: "REMOVE_CURRENT_USER",
 });
+
+export const requestPet = () => ({
+  type: "REQUEST_PET",
+});
+
+export const receivePet = (pet, petId) => ({
+  type: "RECEIVE_PET",
+  pet,
+  petId,
+});
+
+export const receivePetFailed = () => ({
+  type: "RECEIVE_PET_FAILED",
+});
