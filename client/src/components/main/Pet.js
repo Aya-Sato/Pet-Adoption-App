@@ -1,10 +1,11 @@
 import React, { useContext, useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import { PetContext } from "./PetContext";
 import { useSelector, useDispatch } from "react-redux";
 import styled from "styled-components";
 import { themeVars } from "../GlobalStyles";
 
-import { fetchAnimal } from "../../helpers/api-helpers";
+import { fetchAnimal, fetchOrganization } from "../../helpers/api-helpers";
 
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
@@ -49,7 +50,17 @@ const Characteristics = styled.div`
 const City = styled.div`
   color: ${themeVars.darkGray};
   font-size: 16px;
+  margin-bottom: 5px;
+`;
+
+const Organization = styled.div`
+  color: ${themeVars.darkGray};
+  font-size: 16px;
   margin-bottom: 10px;
+`;
+
+const StyledLink = styled(Link)`
+  color: ${themeVars.darkGray};
 `;
 
 const Attributes = styled.li`
@@ -97,17 +108,44 @@ const List = styled.li`
 const TagContainer = styled.div`
   display: flex;
   flex-wrap: wrap;
-  width: 80%;
+  width: 90%;
   justify-content: flex-start;
   margin: 0 5% 20px 5%;
 `;
 
 const Tag = styled.div`
-  color: ${themeVars.white};
-  background: ${themeVars.coralOrange};
+  color: ${themeVars.coralOrange};
+  background: ${themeVars.white};
+  border: 2px solid ${themeVars.coralOrange};
   border-radius: 15px;
   padding: 5px 20px;
-  margin-right: 15px;
+  margin: 5px 15px 5px 0;
+`;
+
+const BtnContainer = styled.div`
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  border-top: 1px solid ${themeVars.gray};
+`;
+
+const AdoptBtn = styled.button`
+  font-size: 18px;
+  color: ${themeVars.white};
+  background: ${themeVars.coralOrange};
+  padding: 10px 20px;
+  margin: 50px 0;
+  border: none;
+  border-radius: 15px;
+  outline: none;
+
+  &:active {
+    transform: scale(1.1);
+  }
+
+  &:focus-visible {
+    outline: 2px solid ${themeVars.yellow};
+  }
 `;
 
 const LoadingIconContainer = styled.div`
@@ -135,8 +173,12 @@ const Pet = () => {
   const petInfo = useSelector((state) => state.pet.pet);
   const loadingStatus = useSelector((state) => state.pet.status);
   const accessToken = useSelector((state) => state.auth.token);
+  const organizationInfo = useSelector(
+    (state) => state.organization.organization
+  );
   const [petPhotosArr, setPetPhotosArr] = useState([]);
   const [pet, setPet] = useState();
+  const [organizationName, setOrganizationName] = useState();
 
   useEffect(() => {
     fetchAnimal(dispatch, accessToken, selectedPetId);
@@ -152,6 +194,19 @@ const Pet = () => {
       setPet(petInfo);
     }
   }, [petInfo]);
+
+  useEffect(() => {
+    if (pet) {
+      const organizationId = pet.organization_id;
+      fetchOrganization(dispatch, accessToken, organizationId);
+    }
+  }, [pet]);
+
+  useEffect(() => {
+    if (organizationInfo) {
+      setOrganizationName(organizationInfo.name);
+    }
+  }, [organizationInfo]);
 
   const settings = {
     dots: true,
@@ -173,7 +228,7 @@ const Pet = () => {
   }
   return (
     <>
-      {pet && petPhotosArr && (
+      {pet && petPhotosArr && organizationName && (
         <>
           <Slider {...settings}>
             {petPhotosArr.map((photo, index) => {
@@ -198,6 +253,12 @@ const Pet = () => {
                 {`Located in ${pet.contact.address.city}, ${pet.contact.address.state}`}
               </City>
             )}
+            <Organization>
+              Organization:{" "}
+              <StyledLink to={`/organization/${pet.organization_id}`}>
+                {organizationName}
+              </StyledLink>
+            </Organization>
             <Attributes>
               <SpayedNeutered>
                 {pet.attributes.spayed_neutered ? (
@@ -288,6 +349,9 @@ const Pet = () => {
               })}
             </TagContainer>
           )}
+          <BtnContainer>
+            <AdoptBtn>{`Adopt ${pet.name}`}</AdoptBtn>
+          </BtnContainer>
         </>
       )}
     </>

@@ -53,3 +53,17 @@ export const receivePet = (pet, petId) => ({
 export const receivePetFailed = () => ({
   type: "RECEIVE_PET_FAILED",
 });
+
+export const requestOrganization = () => ({
+  type: "REQUEST_ORGANIZATION",
+});
+
+export const receiveOrganization = (organization, organizationId) => ({
+  type: "RECEIVE_ORGANIZATION",
+  organization,
+  organizationId,
+});
+
+export const receiveOrganizationFailed = () => ({
+  type: "RECEIVE_ORGANIZATION_FAILED",
+});

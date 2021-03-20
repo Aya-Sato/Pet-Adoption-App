@@ -8,6 +8,9 @@ import {
   requestPet,
   receivePet,
   receivePetFailed,
+  requestOrganization,
+  receiveOrganization,
+  receiveOrganizationFailed,
 } from "../actions";
 
 export function fetchToken(dispatch) {
@@ -68,5 +71,25 @@ export function fetchAnimal(dispatch, token, petId) {
     .catch((err) => {
       console.error(err);
       dispatch(receivePetFailed());
+    });
+}
+
+export function fetchOrganization(dispatch, token, organizationId) {
+  const options = {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  };
+  const url = `https://api.petfinder.com/v2/organizations/${organizationId}`;
+
+  dispatch(requestOrganization());
+  return fetch(url, options)
+    .then((res) => res.json())
+    .then((organization) => {
+      dispatch(receiveOrganization(organization.organization, organizationId));
+    })
+    .catch((err) => {
+      console.error(err);
+      dispatch(receiveOrganizationFailed());
     });
 }

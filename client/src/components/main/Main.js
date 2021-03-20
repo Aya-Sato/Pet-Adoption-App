@@ -40,7 +40,7 @@ const Main = () => {
         fetchAnimals(dispatch, accessToken, preference);
       }
     }
-  }, [accessToken, preference]);
+  }, [accessToken]);
 
   return (
     <>
