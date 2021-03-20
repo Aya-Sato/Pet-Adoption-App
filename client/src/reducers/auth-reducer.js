@@ -13,9 +13,19 @@ export default function authReducer(state = initialState, action) {
       };
     }
     case "RECEIVE_ACCESS_TOKEN": {
+      let petAccessToken;
+      if (action.token) {
+        petAccessToken = action.token;
+        sessionStorage.setItem("pet_access_token", action.token);
+      } else {
+        const token = sessionStorage.getItem("pet_access_token");
+        if (token) {
+          petAccessToken = token;
+        }
+      }
       return {
         ...state,
-        token: action.token,
+        token: petAccessToken,
         expiresAt: Date.now() + 3600,
         status: "idle",
       };
