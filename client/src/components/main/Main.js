@@ -16,9 +16,7 @@ const Main = () => {
   const petsArr = useSelector((state) => state.pets.pets);
   const { setSelectedPetId } = useContext(PetContext);
 
-  const currentUserIdInSessionStorage = sessionStorage.getItem("currentUserId");
-  const userId = useSelector((state) => state.currentUser.currentUserId);
-  const currentUserId = userId ? userId : currentUserIdInSessionStorage;
+  const currentUserId = useSelector((state) => state.currentUser.currentUserId);
 
   const isTokenExpired = useSelector((state) =>
     isExpired(state.auth.expiresAt)

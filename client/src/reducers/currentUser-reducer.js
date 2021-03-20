@@ -6,10 +6,20 @@ const initialState = {
 export default function currentUserReducer(state = initialState, action) {
   switch (action.type) {
     case "RECEIVE_CURRENT_USER": {
+      let currentUserId;
+      if (action.userId) {
+        currentUserId = action.userId;
+        sessionStorage.setItem("current_user_id", action.userId);
+      } else {
+        const id = sessionStorage.getItem("current_user_id");
+        if (id) {
+          currentUserId = id;
+        }
+      }
       return {
         ...state,
         currentUser: action.currentUser,
-        currentUserId: action.userId,
+        currentUserId: currentUserId,
       };
     }
     case "UPDATE_CURRENT_USER": {
