@@ -73,6 +73,21 @@ const ShotsCurrent = styled.ul`
   padding: 0;
 `;
 
+const Environment = styled.div`
+  color: ${themeVars.mediumGray};
+`;
+
+const GoodWith = styled.ul`
+  padding: 0;
+  margin-bottom: 8px;
+  font-weight: bold;
+`;
+
+const List = styled.li`
+  list-style-type: none;
+  margin: 8px 0 0 0;
+`;
+
 const Description = styled.p`
   color: ${themeVars.mediumGray};
   min-height: 100px;
@@ -200,6 +215,42 @@ const Pet = () => {
                 )}
               </ShotsCurrent>
             </Attributes>
+            <Environment>
+              <GoodWith>Good in a home with:</GoodWith>
+              <List>
+                {pet.environment.children ? (
+                  <div>
+                    <FiCheck style={checkStyle} /> Children
+                  </div>
+                ) : (
+                  <div>
+                    <FiX style={xStyle} /> Children
+                  </div>
+                )}
+              </List>
+              <List>
+                {pet.environment.dogs ? (
+                  <div>
+                    <FiCheck style={checkStyle} /> Dogs
+                  </div>
+                ) : (
+                  <div>
+                    <FiX style={xStyle} /> Dogs
+                  </div>
+                )}
+              </List>
+              <List>
+                {pet.environment.cats ? (
+                  <div>
+                    <FiCheck style={checkStyle} /> Cats
+                  </div>
+                ) : (
+                  <div>
+                    <FiX style={xStyle} /> Cats
+                  </div>
+                )}
+              </List>
+            </Environment>
             <Description>{pet.description}</Description>
           </TextContainer>
         </>
