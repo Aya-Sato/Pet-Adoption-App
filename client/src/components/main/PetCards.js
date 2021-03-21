@@ -6,6 +6,7 @@ import { useSelector } from "react-redux";
 import TinderCard from "react-tinder-card";
 import "./PetCards.css";
 
+import Buttons from "../main/buttons/Buttons";
 import LoadingIcon from "../LoadingIcon";
 import Rotate from "../Rotate";
 import Placeholder from "../../assets/no-photo.png";
@@ -126,6 +127,7 @@ const PetCards = () => {
           </NoPets>
         </Wrapper>
       )}
+      <Buttons />
     </>
   );
 };

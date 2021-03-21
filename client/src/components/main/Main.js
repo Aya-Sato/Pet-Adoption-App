@@ -6,7 +6,6 @@ import { isExpired } from "../../reducers/auth-reducer";
 import { fetchToken, fetchAnimals } from "../../helpers/api-helpers";
 import { getPreference } from "../../helpers/db-helpers";
 
-import Buttons from "./Buttons";
 import PetCards from "./PetCards";
 
 const Main = () => {
@@ -45,7 +44,6 @@ const Main = () => {
   return (
     <>
       <PetCards />
-      <Buttons />
     </>
   );
 };

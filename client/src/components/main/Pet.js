@@ -13,8 +13,10 @@ import "slick-carousel/slick/slick-theme.css";
 
 import { FiCheck, FiX } from "react-icons/fi";
 import { CgHome } from "react-icons/cg";
-import { ImHeart } from "react-icons/im";
-import { TiArrowBack } from "react-icons/ti";
+
+import Dislike from "./buttons/Dislike";
+import Back from "./buttons/Back";
+import Like from "./buttons/Like";
 import LoadingIcon from "../LoadingIcon";
 import Rotate from "../Rotate";
 
@@ -138,7 +140,7 @@ const BtnContainer = styled.div`
     position: fixed;
     bottom: 0;
     display: flex;
-    justify-content: center;
+    justify-content: space-evenly;
     align-items: center;
     backdrop-filter: blur(10px);
     background-color: rgba(244, 249, 249, 0.3);
@@ -154,25 +156,6 @@ const AdoptBtn = styled.button`
   border: none;
   border-radius: 15px;
   outline: none;
-
-  &:active {
-    transform: scale(1.1);
-  }
-
-  &:focus-visible {
-    outline: 2px solid ${themeVars.yellow};
-  }
-`;
-
-const StyledBtn = styled.button`
-  height: 50px;
-  width: 50px;
-  margin: 0 30px;
-  border-radius: 50%;
-  border: none;
-  outline: none;
-  background-color: ${themeVars.white};
-  box-shadow: 0 2px 10px 0 rgba(0, 0, 0, 0.15);
 
   &:active {
     transform: scale(1.1);
@@ -386,35 +369,14 @@ const Pet = () => {
             </TagContainer>
           )}
           <BtnContainer className="adopt">
-            <AdoptBtn>{`Adopt ${pet.name}`}</AdoptBtn>
+            <AdoptBtn onClick={() => history.push("/submit-application")}>
+              {`Adopt ${pet.name}`}
+            </AdoptBtn>
           </BtnContainer>
           <BtnContainer className="action">
-            <StyledBtn
-              onClick={() => {
-                history.push("/main");
-              }}
-            >
-              <TiArrowBack
-                style={{
-                  height: "35px",
-                  width: "35px",
-                  position: "relative",
-                  top: "2px",
-                  fill: `${themeVars.purple}`,
-                }}
-              />
-            </StyledBtn>
-            <StyledBtn>
-              <ImHeart
-                style={{
-                  height: "25px",
-                  width: "25px",
-                  position: "relative",
-                  top: "3px",
-                  fill: `${themeVars.yellow}`,
-                }}
-              />
-            </StyledBtn>
+            <Dislike />
+            <Back />
+            <Like />
           </BtnContainer>
         </>
       )}
