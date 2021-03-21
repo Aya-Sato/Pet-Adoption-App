@@ -6,6 +6,7 @@ import styled from "styled-components";
 import { themeVars } from "../GlobalStyles";
 
 import { fetchAnimal, fetchOrganization } from "../../helpers/api-helpers";
+import { receiveSuperLikedPet } from "../../actions";
 
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
@@ -148,6 +149,7 @@ const BtnContainer = styled.div`
 `;
 
 const AdoptBtn = styled.button`
+  max-width: 80%;
   font-size: 18px;
   color: ${themeVars.white};
   background: ${themeVars.coralOrange};
@@ -369,7 +371,12 @@ const Pet = () => {
             </TagContainer>
           )}
           <BtnContainer className="adopt">
-            <AdoptBtn onClick={() => history.push("/submit-application")}>
+            <AdoptBtn
+              onClick={() => {
+                dispatch(receiveSuperLikedPet(selectedPetId));
+                history.push("/submit-application");
+              }}
+            >
               {`Adopt ${pet.name}`}
             </AdoptBtn>
           </BtnContainer>

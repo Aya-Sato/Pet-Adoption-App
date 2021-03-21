@@ -1,8 +1,11 @@
 import React, { useContext } from "react";
-import { PetContext } from "../PetContext";
+import { useHistory } from "react-router-dom";
+import { useDispatch } from "react-redux";
 import styled from "styled-components";
+import { PetContext } from "../PetContext";
 import { themeVars } from "../../GlobalStyles";
 import { ImHeart } from "react-icons/im";
+import { receiveLikedPet } from "../../../actions";
 
 const StyledBtn = styled.button`
   border-radius: 50%;
@@ -26,10 +29,22 @@ const StyledBtn = styled.button`
 `;
 
 const Like = ({ swipe }) => {
-  const { selectedPetIndex } = useContext(PetContext);
+  const history = useHistory();
+  const dispatch = useDispatch();
+  const { selectedPetIndex, selectedPetId } = useContext(PetContext);
 
   return (
-    <StyledBtn className="big" onClick={() => swipe("right", selectedPetIndex)}>
+    <StyledBtn
+      className="big"
+      onClick={() => {
+        if (document.location.pathname === "/main") {
+          swipe("right", selectedPetIndex);
+        } else {
+          dispatch(receiveLikedPet(selectedPetId));
+          history.push("/main");
+        }
+      }}
+    >
       <ImHeart
         style={{
           height: "25px",

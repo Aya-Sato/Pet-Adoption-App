@@ -1,8 +1,11 @@
 import React, { useContext } from "react";
+import { useHistory } from "react-router-dom";
+import { useDispatch } from "react-redux";
 import styled from "styled-components";
 import { PetContext } from "../PetContext";
 import { themeVars } from "../../GlobalStyles";
 import { ImCross } from "react-icons/im";
+import { receiveDislikedPet } from "../../../actions";
 
 const StyledBtn = styled.button`
   border-radius: 50%;
@@ -26,10 +29,22 @@ const StyledBtn = styled.button`
 `;
 
 const Dislike = ({ swipe }) => {
-  const { selectedPetIndex } = useContext(PetContext);
+  const history = useHistory();
+  const dispatch = useDispatch();
+  const { selectedPetIndex, selectedPetId } = useContext(PetContext);
 
   return (
-    <StyledBtn className="big" onClick={() => swipe("left", selectedPetIndex)}>
+    <StyledBtn
+      className="big"
+      onClick={() => {
+        if (document.location.pathname === "/main") {
+          swipe("left", selectedPetIndex);
+        } else {
+          dispatch(receiveDislikedPet(selectedPetId));
+          history.push("/main");
+        }
+      }}
+    >
       <ImCross
         style={{
           height: "22px",
