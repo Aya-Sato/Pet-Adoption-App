@@ -7,6 +7,7 @@ export const themeVars = {
   yellow: "#FFC30B",
   coralOrange: "#FF704D",
   green: "#03C04A",
+  blue: "#00ace6",
   purple: "#8510d8",
   gray: "#BEBEBE",
   mediumGray: "#909090",

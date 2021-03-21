@@ -3,10 +3,10 @@ import { useHistory } from "react-router-dom";
 import styled from "styled-components";
 import { PetContext } from "./PetContext";
 import { themeVars } from "../GlobalStyles";
-import { ImHeart } from "react-icons/im";
-import { RiHeartsFill } from "react-icons/ri";
+import { ImHeart, ImCross } from "react-icons/im";
 import { FaInfo } from "react-icons/fa";
 import { FiRepeat } from "react-icons/fi";
+import { BsStarFill } from "react-icons/bs";
 
 const Wrapper = styled.div`
   width: 100vw;
@@ -19,13 +19,21 @@ const Wrapper = styled.div`
 `;
 
 const StyledBtn = styled.button`
-  height: 50px;
-  width: 50px;
   border-radius: 50%;
   border: none;
   outline: none;
   background-color: ${themeVars.white};
   box-shadow: 0 2px 10px 0 rgba(0, 0, 0, 0.15);
+
+  &.small {
+    height: 45px;
+    width: 45px;
+  }
+
+  &.big {
+    height: 55px;
+    width: 55px;
+  }
 
   &:active {
     transform: scale(1.1);
@@ -43,44 +51,40 @@ const Buttons = () => {
 
   return (
     <Wrapper>
-      <StyledBtn
-        onClick={() => {
-          history.push(`/pet/${petId}`);
-        }}
-      >
-        <FaInfo
-          style={{
-            height: "26px",
-            width: "26px",
-            position: "relative",
-            top: "2px",
-            fill: `${themeVars.green}`,
-          }}
-        />
-      </StyledBtn>
-      <StyledBtn>
+      <StyledBtn className="small">
         <FiRepeat
           style={{
-            height: "28px",
-            width: "28px",
+            height: "22px",
+            width: "22px",
             position: "relative",
             top: "2px",
             color: `${themeVars.purple}`,
           }}
         />
       </StyledBtn>
-      <StyledBtn>
-        <RiHeartsFill
+      <StyledBtn className="big">
+        <ImCross
           style={{
-            height: "30px",
-            width: "30px",
+            height: "22px",
+            width: "22px",
             position: "relative",
             top: "2px",
-            fill: `${themeVars.coralOrange}`,
+            color: `${themeVars.coralOrange}`,
           }}
         />
       </StyledBtn>
-      <StyledBtn>
+      <StyledBtn className="small">
+        <BsStarFill
+          style={{
+            height: "25px",
+            width: "25px",
+            position: "relative",
+            top: "2px",
+            fill: `${themeVars.blue}`,
+          }}
+        />
+      </StyledBtn>
+      <StyledBtn className="big">
         <ImHeart
           style={{
             height: "25px",
@@ -88,6 +92,22 @@ const Buttons = () => {
             position: "relative",
             top: "3px",
             fill: `${themeVars.yellow}`,
+          }}
+        />
+      </StyledBtn>
+      <StyledBtn
+        className="small"
+        onClick={() => {
+          history.push(`/pet/${petId}`);
+        }}
+      >
+        <FaInfo
+          style={{
+            height: "24px",
+            width: "24px",
+            position: "relative",
+            top: "2px",
+            fill: `${themeVars.green}`,
           }}
         />
       </StyledBtn>

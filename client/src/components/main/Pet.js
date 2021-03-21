@@ -187,7 +187,7 @@ const LoadingIconContainer = styled.div`
   display: flex;
   justify-content: center;
   position: relative;
-  top: 150px;
+  top: 250px;
 `;
 
 const checkStyle = {
