@@ -81,11 +81,14 @@ const PetCards = () => {
 
   if (loadingStatus === "loading") {
     return (
-      <LoadingIconContainer>
-        <Rotate>
-          <LoadingIcon />
-        </Rotate>
-      </LoadingIconContainer>
+      <>
+        <LoadingIconContainer>
+          <Rotate>
+            <LoadingIcon />
+          </Rotate>
+        </LoadingIconContainer>
+        <Buttons styled={{ position: "fixed", bottom: "0" }} />
+      </>
     );
   }
   return (
