@@ -28,7 +28,7 @@ const Main = () => {
   useEffect(() => {
     if (petsArr) {
       setSelectedPetId(petsArr[petsArr.length - 1].id);
-      setSelectedPetIndex(petsArr[petsArr.length - 1]);
+      setSelectedPetIndex(petsArr.indexOf(petsArr[petsArr.length - 1]));
     }
   }, [petsArr]);
 

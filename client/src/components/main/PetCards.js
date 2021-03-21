@@ -1,4 +1,4 @@
-import React, { useContext, useMemo } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import styled from "styled-components";
 import { PetContext } from "./PetContext";
@@ -81,15 +81,17 @@ const PetCards = ({ petsArr }) => {
   const dispatch = useDispatch();
   const loadingStatus = useSelector((state) => state.pets.status);
   const { setSelectedPetId, setSelectedPetIndex } = useContext(PetContext);
+  const [childRefs, setChildRefs] = useState();
 
-  const childRefs = useMemo(
-    () =>
-      petsArr &&
-      Array(petsArr.length)
-        .fill(0)
-        .map((i) => React.createRef()),
-    []
-  );
+  useEffect(() => {
+    if (petsArr) {
+      setChildRefs(
+        Array(petsArr.length)
+          .fill(0)
+          .map((i) => React.createRef())
+      );
+    }
+  }, [petsArr]);
 
   const swiped = (direction, petId) => {
     if (direction === "left") {
