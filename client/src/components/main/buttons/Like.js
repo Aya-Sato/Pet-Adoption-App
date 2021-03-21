@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useContext } from "react";
+import { PetContext } from "../PetContext";
 import styled from "styled-components";
 import { themeVars } from "../../GlobalStyles";
 import { ImHeart } from "react-icons/im";
@@ -24,9 +25,11 @@ const StyledBtn = styled.button`
   }
 `;
 
-const Like = () => {
+const Like = ({ swipe }) => {
+  const { selectedPetIndex } = useContext(PetContext);
+
   return (
-    <StyledBtn className="big">
+    <StyledBtn className="big" onClick={() => swipe("right", selectedPetIndex)}>
       <ImHeart
         style={{
           height: "25px",

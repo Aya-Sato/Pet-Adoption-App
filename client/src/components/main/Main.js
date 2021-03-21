@@ -13,7 +13,7 @@ const Main = () => {
   const dispatch = useDispatch();
   const accessToken = useSelector((state) => state.auth.token);
   const petsArr = useSelector((state) => state.pets.pets);
-  const { setSelectedPetId } = useContext(PetContext);
+  const { setSelectedPetId, setSelectedPetIndex } = useContext(PetContext);
 
   const currentUserId = useSelector((state) => state.currentUser.currentUserId);
 
@@ -28,6 +28,7 @@ const Main = () => {
   useEffect(() => {
     if (petsArr) {
       setSelectedPetId(petsArr[petsArr.length - 1].id);
+      setSelectedPetIndex(petsArr[petsArr.length - 1]);
     }
   }, [petsArr]);
 
@@ -43,7 +44,7 @@ const Main = () => {
 
   return (
     <>
-      <PetCards />
+      <PetCards petsArr={petsArr} />
     </>
   );
 };

@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useContext } from "react";
+import { PetContext } from "../PetContext";
 import styled from "styled-components";
 import { themeVars } from "../../GlobalStyles";
 import { BsStarFill } from "react-icons/bs";
@@ -24,9 +25,11 @@ const StyledBtn = styled.button`
   }
 `;
 
-const SuperLike = () => {
+const SuperLike = ({ swipe }) => {
+  const { selectedPetIndex } = useContext(PetContext);
+
   return (
-    <StyledBtn className="small">
+    <StyledBtn className="small" onClick={() => swipe("up", selectedPetIndex)}>
       <BsStarFill
         style={{
           height: "25px",

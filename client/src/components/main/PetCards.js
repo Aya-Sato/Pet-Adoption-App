@@ -1,4 +1,5 @@
-import React, { useContext } from "react";
+import React, { useContext, useMemo } from "react";
+import { useDispatch } from "react-redux";
 import styled from "styled-components";
 import { PetContext } from "./PetContext";
 import { themeVars } from "../GlobalStyles";
@@ -10,6 +11,12 @@ import Buttons from "../main/buttons/Buttons";
 import LoadingIcon from "../LoadingIcon";
 import Rotate from "../Rotate";
 import Placeholder from "../../assets/no-photo.png";
+
+import {
+  receiveLikedPet,
+  receiveSuperLikedPet,
+  receiveDislikedPet,
+} from "../../actions";
 
 const CardContainer = styled.div`
   display: flex;
@@ -70,13 +77,37 @@ const NoPets = styled.p`
   color: ${themeVars.darkGray};
 `;
 
-const PetCards = () => {
-  const petsArr = useSelector((state) => state.pets.pets);
+const PetCards = ({ petsArr }) => {
+  const dispatch = useDispatch();
   const loadingStatus = useSelector((state) => state.pets.status);
-  const { setSelectedPetId } = useContext(PetContext);
+  const { setSelectedPetId, setSelectedPetIndex } = useContext(PetContext);
+
+  const childRefs = useMemo(
+    () =>
+      petsArr &&
+      Array(petsArr.length)
+        .fill(0)
+        .map((i) => React.createRef()),
+    []
+  );
+
+  const swiped = (direction, petId) => {
+    if (direction === "left") {
+      dispatch(receiveDislikedPet(petId));
+    } else if (direction === "right") {
+      dispatch(receiveLikedPet(petId));
+    } else if (direction === "up") {
+      dispatch(receiveSuperLikedPet(petId));
+    }
+  };
+
+  const swipe = (dir, petIndex) => {
+    childRefs[petIndex].current.swipe(dir);
+  };
 
   const onCardLeftScreen = (petIndex) => {
     setSelectedPetId(petsArr[petIndex].id);
+    setSelectedPetIndex(petIndex);
   };
 
   if (loadingStatus === "loading") {
@@ -100,7 +131,9 @@ const PetCards = () => {
               className="swipe"
               key={index}
               onCardLeftScreen={() => onCardLeftScreen(index - 1)}
-              preventSwipe={["down"]}
+              preventSwipe={["down", "up"]} //There is a bug with the package - had to add "up" to make superLike work.
+              ref={childRefs && childRefs[index]}
+              onSwipe={(dir) => swiped(dir, pet.id)}
             >
               <Card
                 style={{
@@ -130,7 +163,7 @@ const PetCards = () => {
           </NoPets>
         </Wrapper>
       )}
-      <Buttons />
+      <Buttons swipe={swipe} />
     </>
   );
 };

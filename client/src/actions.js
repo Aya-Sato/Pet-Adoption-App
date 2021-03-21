@@ -24,6 +24,25 @@ export const receivePetsFailed = () => ({
   type: "RECEIVE_PETS_FAILED",
 });
 
+export const receiveLikedPet = (likedPet) => ({
+  type: "RECEIVE_LIKED_PET",
+  likedPet,
+});
+
+export const receiveSuperLikedPet = (superLikedPet) => ({
+  type: "RECEIVE_SUPERLIKED_PET",
+  superLikedPet,
+});
+
+export const receiveDislikedPet = (dislikedPet) => ({
+  type: "RECEIVE_DISLIKED_PET",
+  dislikedPet,
+});
+
+export const removeSwipedPets = () => ({
+  type: "REMOVE_SWIPED_PETS",
+});
+
 export const receiveCurrentUser = (currentUser, userId) => ({
   type: "RECEIVE_CURRENT_USER",
   currentUser,

@@ -364,7 +364,7 @@ const Pet = () => {
           {pet.tags.length > 0 && (
             <TagContainer>
               {pet.tags.map((tag) => {
-                return <Tag>{tag}</Tag>;
+                return <Tag key={tag}>{tag}</Tag>;
               })}
             </TagContainer>
           )}

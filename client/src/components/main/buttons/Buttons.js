@@ -17,13 +17,13 @@ const Wrapper = styled.div`
   align-items: center;
 `;
 
-const Buttons = () => {
+const Buttons = ({ swipe }) => {
   return (
     <Wrapper>
       <Repeat />
-      <Dislike />
-      <SuperLike />
-      <Like />
+      <Dislike swipe={swipe} />
+      <SuperLike swipe={swipe} />
+      <Like swipe={swipe} />
       <Info />
     </Wrapper>
   );

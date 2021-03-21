@@ -1,5 +1,6 @@
-import React from "react";
+import React, { useContext } from "react";
 import styled from "styled-components";
+import { PetContext } from "../PetContext";
 import { themeVars } from "../../GlobalStyles";
 import { ImCross } from "react-icons/im";
 
@@ -24,9 +25,11 @@ const StyledBtn = styled.button`
   }
 `;
 
-const Dislike = () => {
+const Dislike = ({ swipe }) => {
+  const { selectedPetIndex } = useContext(PetContext);
+
   return (
-    <StyledBtn className="big">
+    <StyledBtn className="big" onClick={() => swipe("left", selectedPetIndex)}>
       <ImCross
         style={{
           height: "22px",
