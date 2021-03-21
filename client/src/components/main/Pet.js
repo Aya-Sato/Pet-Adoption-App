@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import { PetContext } from "./PetContext";
 import { useSelector, useDispatch } from "react-redux";
 import styled from "styled-components";
@@ -13,6 +13,8 @@ import "slick-carousel/slick/slick-theme.css";
 
 import { FiCheck, FiX } from "react-icons/fi";
 import { CgHome } from "react-icons/cg";
+import { ImHeart } from "react-icons/im";
+import { TiArrowBack } from "react-icons/ti";
 import LoadingIcon from "../LoadingIcon";
 import Rotate from "../Rotate";
 
@@ -97,7 +99,7 @@ const Environment = styled.div`
 const GoodWith = styled.ul`
   padding: 0;
   margin-bottom: 8px;
-  text-decoration: underline;
+  color: ${themeVars.darkGray};
 `;
 
 const List = styled.li`
@@ -123,10 +125,24 @@ const Tag = styled.div`
 `;
 
 const BtnContainer = styled.div`
-  width: 100%;
+  width: 100vw;
   display: flex;
   justify-content: center;
-  border-top: 1px solid ${themeVars.gray};
+
+  &.adopt {
+    border-top: 1px solid ${themeVars.gray};
+  }
+
+  &.action {
+    height: 100px;
+    position: fixed;
+    bottom: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    backdrop-filter: blur(10px);
+    background-color: rgba(244, 249, 249, 0.3);
+  }
 `;
 
 const AdoptBtn = styled.button`
@@ -134,10 +150,29 @@ const AdoptBtn = styled.button`
   color: ${themeVars.white};
   background: ${themeVars.coralOrange};
   padding: 10px 20px;
-  margin: 50px 0;
+  margin: 50px 0 150px 0;
   border: none;
   border-radius: 15px;
   outline: none;
+
+  &:active {
+    transform: scale(1.1);
+  }
+
+  &:focus-visible {
+    outline: 2px solid ${themeVars.yellow};
+  }
+`;
+
+const StyledBtn = styled.button`
+  height: 50px;
+  width: 50px;
+  margin: 0 30px;
+  border-radius: 50%;
+  border: none;
+  outline: none;
+  background-color: ${themeVars.white};
+  box-shadow: 0 2px 10px 0 rgba(0, 0, 0, 0.15);
 
   &:active {
     transform: scale(1.1);
@@ -169,6 +204,7 @@ const xStyle = {
 
 const Pet = () => {
   const dispatch = useDispatch();
+  const history = useHistory();
   const { selectedPetId } = useContext(PetContext);
   const petInfo = useSelector((state) => state.pet.pet);
   const loadingStatus = useSelector((state) => state.pet.status);
@@ -349,8 +385,36 @@ const Pet = () => {
               })}
             </TagContainer>
           )}
-          <BtnContainer>
+          <BtnContainer className="adopt">
             <AdoptBtn>{`Adopt ${pet.name}`}</AdoptBtn>
+          </BtnContainer>
+          <BtnContainer className="action">
+            <StyledBtn
+              onClick={() => {
+                history.push("/main");
+              }}
+            >
+              <TiArrowBack
+                style={{
+                  height: "35px",
+                  width: "35px",
+                  position: "relative",
+                  top: "2px",
+                  fill: `${themeVars.purple}`,
+                }}
+              />
+            </StyledBtn>
+            <StyledBtn>
+              <ImHeart
+                style={{
+                  height: "25px",
+                  width: "25px",
+                  position: "relative",
+                  top: "3px",
+                  fill: `${themeVars.yellow}`,
+                }}
+              />
+            </StyledBtn>
           </BtnContainer>
         </>
       )}

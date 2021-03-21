@@ -6,7 +6,7 @@ import { themeVars } from "../GlobalStyles";
 import { ImHeart } from "react-icons/im";
 import { RiHeartsFill } from "react-icons/ri";
 import { FaInfo } from "react-icons/fa";
-import { TiArrowBack } from "react-icons/ti";
+import { FiRepeat } from "react-icons/fi";
 
 const Wrapper = styled.div`
   width: 100vw;
@@ -50,8 +50,8 @@ const Buttons = () => {
       >
         <FaInfo
           style={{
-            height: "28px",
-            width: "28px",
+            height: "26px",
+            width: "26px",
             position: "relative",
             top: "2px",
             fill: `${themeVars.green}`,
@@ -59,13 +59,13 @@ const Buttons = () => {
         />
       </StyledBtn>
       <StyledBtn>
-        <TiArrowBack
+        <FiRepeat
           style={{
-            height: "35px",
-            width: "35px",
+            height: "28px",
+            width: "28px",
             position: "relative",
             top: "2px",
-            fill: `${themeVars.purple}`,
+            color: `${themeVars.purple}`,
           }}
         />
       </StyledBtn>
