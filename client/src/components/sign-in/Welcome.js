@@ -116,7 +116,7 @@ const Welcome = () => {
       </Rules>
       <SubHeading>Adoption Fee</SubHeading>
       <Rules>
-        The adoption fee will very in costs depending on the shelters and
+        The adoption fee will vary in costs depending on the shelters and
         rescues. Superliking an animal will prompt you to make{" "}
         <span>a deposit of $50</span> along with your application. The deposit
         is non-refundable, but it will count towards the adoption fee.
