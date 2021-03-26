@@ -1,11 +1,12 @@
 import React, { useContext } from "react";
 import { useHistory } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import styled from "styled-components";
 import { PetContext } from "../PetContext";
 import { themeVars } from "../../GlobalStyles";
 import { ImHeart } from "react-icons/im";
 import { receiveLikedPet } from "../../../actions";
+import { addLikedPet } from "../../../helpers/db-helpers";
 
 const StyledBtn = styled.button`
   border-radius: 50%;
@@ -32,6 +33,7 @@ const Like = ({ swipe }) => {
   const history = useHistory();
   const dispatch = useDispatch();
   const { selectedPetIndex, selectedPetId } = useContext(PetContext);
+  const userId = useSelector((state) => state.currentUser.currentUserId);
 
   return (
     <StyledBtn
@@ -41,6 +43,7 @@ const Like = ({ swipe }) => {
           swipe("right", selectedPetIndex);
         } else {
           dispatch(receiveLikedPet(selectedPetId));
+          addLikedPet(userId, selectedPetId);
           history.push("/main");
         }
       }}

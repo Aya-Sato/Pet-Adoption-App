@@ -18,6 +18,12 @@ import {
   receiveDislikedPet,
 } from "../../actions";
 
+import {
+  addLikedPet,
+  addSuperLikedPet,
+  addDislikedPet,
+} from "../../helpers/db-helpers";
+
 const CardContainer = styled.div`
   display: flex;
   justify-content: center;
@@ -80,6 +86,7 @@ const NoPets = styled.p`
 const PetCards = ({ petsArr }) => {
   const dispatch = useDispatch();
   const loadingStatus = useSelector((state) => state.pets.status);
+  const userId = useSelector((state) => state.currentUser.currentUserId);
   const { setSelectedPetId, setSelectedPetIndex } = useContext(PetContext);
   const [childRefs, setChildRefs] = useState();
 
@@ -96,10 +103,13 @@ const PetCards = ({ petsArr }) => {
   const swiped = (direction, petId) => {
     if (direction === "left") {
       dispatch(receiveDislikedPet(petId));
+      addDislikedPet(userId, petId);
     } else if (direction === "right") {
       dispatch(receiveLikedPet(petId));
+      addLikedPet(userId, petId);
     } else if (direction === "up") {
       dispatch(receiveSuperLikedPet(petId));
+      addSuperLikedPet(userId, petId);
     }
   };
 

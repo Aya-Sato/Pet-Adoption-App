@@ -47,6 +47,29 @@ export const addPreference = (userId, preference) => {
   return firebase.database().ref().update(updates);
 };
 
+export const addLikedPet = (userId, likedPetId) => {
+  const updates = {};
+  updates["/users/" + userId + "/liked/" + likedPetId] = likedPetId;
+
+  return firebase.database().ref().update(updates);
+};
+
+export const addSuperLikedPet = (userId, superLikedPetId) => {
+  const updates = {};
+  updates[
+    "/users/" + userId + "/superLiked/" + superLikedPetId
+  ] = superLikedPetId;
+
+  return firebase.database().ref().update(updates);
+};
+
+export const addDislikedPet = (userId, dislikedPetId) => {
+  const updates = {};
+  updates["/users/" + userId + "/disliked/" + dislikedPetId] = dislikedPetId;
+
+  return firebase.database().ref().update(updates);
+};
+
 export const getPreference = (userId, preference, setPreference) => {
   firebase
     .database()
