@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { useHistory } from "react-router-dom";
+import { useDispatch } from "react-redux";
 import firebase from "./Authentication";
 import { themeVars } from "../GlobalStyles";
 import CanadianFlag from "../../assets/flag-canada.svg";
+import { receiveCurrentUser } from "../../actions";
 
 const Wrapper = styled.div`
   display: flex;
@@ -121,6 +123,7 @@ const SignInWithPhone = ({ setCodeResult }) => {
   const [phone, setPhone] = useState();
   const [recaptchaVerifier, setRecaptchaVerifier] = useState();
   const history = useHistory();
+  const dispatch = useDispatch();
 
   useEffect(() => {
     setRecaptchaVerifier(
@@ -140,6 +143,7 @@ const SignInWithPhone = ({ setCodeResult }) => {
 
   const phoneAuth = () => {
     const phoneNumber = `+1${phone}`;
+    dispatch(receiveCurrentUser({ phone: phoneNumber }));
     firebase
       .auth()
       .signInWithPhoneNumber(phoneNumber, recaptchaVerifier)

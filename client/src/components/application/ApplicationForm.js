@@ -222,7 +222,7 @@ export const ApplicationForm = () => {
             required
           />
           <Input
-            type="number"
+            type="text"
             id="phone"
             placeholder="Phone number"
             onChange={(ev) => {
