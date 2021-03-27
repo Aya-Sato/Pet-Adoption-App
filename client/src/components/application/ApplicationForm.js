@@ -73,9 +73,10 @@ const Diposit = styled.p`
 `;
 
 const ButtonsWrapper = styled.div`
-  width: 100%;
+  width: 70%;
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+  align-content: center;
   margin: 30px 0 80px 0;
 `;
 
@@ -88,6 +89,10 @@ const Button = styled.button`
   padding: 10px 20px;
   margin-top: 30px;
   outline: none;
+
+  &.back {
+    margin-top: 20px;
+  }
 
   &:active {
     transform: scale(1.1);
@@ -302,6 +307,15 @@ export const ApplicationForm = () => {
           </CardElementWrapper>
           <ButtonsWrapper>
             <Button>Submit Application</Button>
+            <Button
+              className="back"
+              onClick={(ev) => {
+                ev.preventDefault();
+                history.push(`/pet/${petId}`);
+              }}
+            >
+              {`Back to ${petName}`}
+            </Button>
           </ButtonsWrapper>
         </Form>
       </Wrapper>
