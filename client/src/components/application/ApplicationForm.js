@@ -92,6 +92,10 @@ const Button = styled.button`
 
   &.back {
     margin-top: 20px;
+    color: ${themeVars.coralOrange};
+    background: ${themeVars.white};
+    padding: 8px 16px;
+    border: 2px solid ${themeVars.coralOrange};
   }
 
   &:active {
@@ -311,10 +315,10 @@ export const ApplicationForm = () => {
               className="back"
               onClick={(ev) => {
                 ev.preventDefault();
-                history.push(`/pet/${petId}`);
+                history.push(`/main`);
               }}
             >
-              {`Back to ${petName}`}
+              Maybe later...
             </Button>
           </ButtonsWrapper>
         </Form>
