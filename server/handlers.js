@@ -42,4 +42,31 @@ const getCurrentLocation = (req, res) => {
     });
 };
 
-module.exports = { getToken, getCurrentLocation };
+const handleDiposit = async (req, res) => {
+  const stripe = require("stripe")(process.env.STRIPE_SECRET_TEST);
+
+  console.log("route reached", req.body);
+  let { amount, id } = req.body;
+  console.log("amount and id", amount, id);
+  try {
+    const payment = await stripe.paymentIntents.create({
+      amount: amount,
+      currency: "CAD",
+      payment_method: id,
+      confirm: true,
+    });
+    console.log("payment", payment);
+    res.json({
+      message: "Payment Successful",
+      success: true,
+    });
+  } catch (error) {
+    console.log("error", error);
+    res.json({
+      message: "Payment Failed",
+      success: false,
+    });
+  }
+};
+
+module.exports = { getToken, getCurrentLocation, handleDiposit };

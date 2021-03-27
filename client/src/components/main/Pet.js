@@ -375,6 +375,7 @@ const Pet = () => {
               onClick={() => {
                 dispatch(receiveSuperLikedPet(selectedPetId));
                 history.push("/submit-application");
+                window.scrollTo(0, 0);
               }}
             >
               {`Adopt ${pet.name}`}
