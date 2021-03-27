@@ -39,6 +39,17 @@ export const receiveDislikedPet = (dislikedPet) => ({
   dislikedPet,
 });
 
+export const receiveSwipedPets = (
+  likedPetsArr,
+  superLikedPetsArr,
+  dislikedPetsArr
+) => ({
+  type: "RECEIVE_SWIPED_PETS",
+  likedPetsArr,
+  superLikedPetsArr,
+  dislikedPetsArr,
+});
+
 export const removeSwipedPets = () => ({
   type: "REMOVE_SWIPED_PETS",
 });

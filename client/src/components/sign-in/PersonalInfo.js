@@ -8,7 +8,7 @@ import { FaPaw } from "react-icons/fa";
 import { updateCurrentUser } from "../../actions";
 import { addUserNameAndEmail } from "../../helpers/db-helpers";
 import { PreferenceContext } from "../preference/PreferenceContext";
-import { getPreference } from "../../helpers/db-helpers";
+import { getPreference, getSwipedPets } from "../../helpers/db-helpers";
 
 const Wrapper = styled.div`
   display: flex;
@@ -109,6 +109,7 @@ const PersonalInfo = () => {
   useEffect(() => {
     if (userId) {
       getPreference(userId, preference, setPreference);
+      getSwipedPets(dispatch, userId);
     }
   }, [userId]);
 

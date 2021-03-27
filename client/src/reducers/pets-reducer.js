@@ -63,6 +63,14 @@ export default function petsReducer(state = initialState, action) {
         disliked: [...state.disliked, action.dislikedPet],
       };
     }
+    case "RECEIVE_SWIPED_PETS": {
+      return {
+        ...state,
+        liked: [...state.liked, ...action.likedPetsArr],
+        superLiked: [...state.superLiked, ...action.superLikedPetsArr],
+        disliked: [...state.disliked, ...action.dislikedPetsArr],
+      };
+    }
     case "REMOVE_SWIPED_PETS": {
       return {
         ...state,

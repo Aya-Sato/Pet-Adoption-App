@@ -1,6 +1,6 @@
 import firebase from "../components/sign-in/Authentication";
 
-import { receiveCurrentUser } from "../actions";
+import { receiveCurrentUser, receiveSwipedPets } from "../actions";
 
 export const createUser = (userInfo) => {
   const { userId, name, email, phone } = userInfo;
@@ -92,6 +92,35 @@ export const getPreference = (userId, preference, setPreference) => {
           distance: parseInt(data.distance),
           photo: data.photo,
         });
+      } else {
+        console.log("No data available");
+      }
+    })
+    .catch(function (error) {
+      console.error(error);
+    });
+};
+
+export const getSwipedPets = (dispatch, userId) => {
+  firebase
+    .database()
+    .ref("preferences")
+    .child(userId)
+    .get()
+    .then(function (snapshot) {
+      if (snapshot.exists()) {
+        const data = snapshot.val();
+        console.log(data);
+        const liked = data.liked;
+        const superLiked = data.superLiked;
+        const disliked = data.disliked;
+        const likedPetsArr = liked ? Object.keys(liked) : [];
+        const superLikedPetsArr = superLiked ? Object.keys(superLiked) : [];
+        const dislikedPetsArr = disliked ? Object.keys(disliked) : [];
+
+        dispatch(
+          receiveSwipedPets(likedPetsArr, superLikedPetsArr, dislikedPetsArr)
+        );
       } else {
         console.log("No data available");
       }
