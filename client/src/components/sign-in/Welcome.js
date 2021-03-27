@@ -1,9 +1,11 @@
-import React from "react";
+import React, { useEffect, useContext } from "react";
 import { useHistory } from "react-router-dom";
 import { useSelector } from "react-redux";
 import styled from "styled-components";
 import { themeVars } from "../GlobalStyles";
 import { FaPaw } from "react-icons/fa";
+import { PreferenceContext } from "../preference/PreferenceContext";
+import { getPreference } from "../../helpers/db-helpers";
 
 const Wrapper = styled.div`
   display: flex;
@@ -74,6 +76,18 @@ const Button = styled.button`
 const Welcome = () => {
   const history = useHistory();
   const currentUser = useSelector((state) => state.currentUser.currentUser);
+  const currentUserId = useSelector((state) => state.currentUser.currentUserId);
+  const { preference, setPreference } = useContext(PreferenceContext);
+
+  useEffect(() => {
+    getPreference(currentUserId, preference, setPreference);
+  }, [currentUserId]);
+
+  useEffect(() => {
+    if (Object.keys(preference).length > 0) {
+      history.push("/main");
+    }
+  }, [preference]);
 
   return (
     <Wrapper>

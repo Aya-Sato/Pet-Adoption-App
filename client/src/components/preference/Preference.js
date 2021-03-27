@@ -12,7 +12,7 @@ import Type from "./Type";
 import Age from "./Age";
 import Photo from "./Photo";
 
-import { addPreference } from "../../helpers/db-helpers";
+import { createPreference } from "../../helpers/db-helpers";
 
 const FormContainer = styled.div`
   width: 100%;
@@ -105,7 +105,7 @@ const Preference = () => {
       ...data,
       location: location.latLong,
     };
-    addPreference(userId, dataWithLocation);
+    createPreference(userId, dataWithLocation);
     history.push("/main");
   };
 

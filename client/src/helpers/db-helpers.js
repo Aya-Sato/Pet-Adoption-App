@@ -40,16 +40,18 @@ export const addUserNameAndEmail = (userId, name, email) => {
   return firebase.database().ref().update(updates);
 };
 
-export const addPreference = (userId, preference) => {
-  const updates = {};
-  updates["/users/" + userId + "/preference"] = preference;
+export const createPreference = (userId, preference) => {
+  const userRef = firebase
+    .database()
+    .ref("preferences/" + userId + "/preference");
+  const userPreference = preference;
 
-  return firebase.database().ref().update(updates);
+  userRef.set(userPreference);
 };
 
 export const addLikedPet = (userId, likedPetId) => {
   const updates = {};
-  updates["/users/" + userId + "/liked/" + likedPetId] = likedPetId;
+  updates["/preferences/" + userId + "/liked/" + likedPetId] = likedPetId;
 
   return firebase.database().ref().update(updates);
 };
@@ -57,7 +59,7 @@ export const addLikedPet = (userId, likedPetId) => {
 export const addSuperLikedPet = (userId, superLikedPetId) => {
   const updates = {};
   updates[
-    "/users/" + userId + "/superLiked/" + superLikedPetId
+    "/preferences/" + userId + "/superLiked/" + superLikedPetId
   ] = superLikedPetId;
 
   return firebase.database().ref().update(updates);
@@ -65,7 +67,9 @@ export const addSuperLikedPet = (userId, superLikedPetId) => {
 
 export const addDislikedPet = (userId, dislikedPetId) => {
   const updates = {};
-  updates["/users/" + userId + "/disliked/" + dislikedPetId] = dislikedPetId;
+  updates[
+    "/preferences/" + userId + "/disliked/" + dislikedPetId
+  ] = dislikedPetId;
 
   return firebase.database().ref().update(updates);
 };
@@ -73,9 +77,9 @@ export const addDislikedPet = (userId, dislikedPetId) => {
 export const getPreference = (userId, preference, setPreference) => {
   firebase
     .database()
-    .ref("users")
+    .ref("preferences")
     .child(userId)
-    .child("/preference")
+    .child("preference")
     .get()
     .then(function (snapshot) {
       if (snapshot.exists()) {

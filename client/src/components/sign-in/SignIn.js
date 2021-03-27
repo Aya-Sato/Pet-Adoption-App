@@ -18,8 +18,6 @@ import FacebookLogo from "../../assets/facebook-logo.svg";
 import LoadingIcon from "../LoadingIcon";
 import Rotate from "../Rotate";
 
-import Welcome from "./Welcome";
-
 const Wrapper = styled.div`
   width: 100vw;
   height: 100vh;
@@ -146,6 +144,12 @@ const SignIn = () => {
     });
   }, []);
 
+  useEffect(() => {
+    if (currentUser !== null) {
+      history.push("/welcome");
+    }
+  }, [currentUser]);
+
   if (loading) {
     return (
       <div
@@ -207,7 +211,6 @@ const SignIn = () => {
           </BtnContainer>
         </Wrapper>
       )}
-      {currentUser !== null && <Welcome />}
     </>
   );
 };
