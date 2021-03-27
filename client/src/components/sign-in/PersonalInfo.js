@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import styled from "styled-components";
@@ -7,6 +7,8 @@ import { FaPaw } from "react-icons/fa";
 
 import { updateCurrentUser } from "../../actions";
 import { addUserNameAndEmail } from "../../helpers/db-helpers";
+import { PreferenceContext } from "../preference/PreferenceContext";
+import { getPreference } from "../../helpers/db-helpers";
 
 const Wrapper = styled.div`
   display: flex;
@@ -102,6 +104,19 @@ const PersonalInfo = () => {
   const history = useHistory();
   const dispatch = useDispatch();
   const userId = useSelector((state) => state.currentUser.currentUserId);
+  const { preference, setPreference } = useContext(PreferenceContext);
+
+  useEffect(() => {
+    if (userId) {
+      getPreference(userId, preference, setPreference);
+    }
+  }, [userId]);
+
+  useEffect(() => {
+    if (Object.keys(preference).length > 0) {
+      history.push("/main");
+    }
+  }, [preference]);
 
   const updateName = (ev) => {
     setName(ev.target.value);
