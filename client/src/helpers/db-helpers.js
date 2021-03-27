@@ -3,12 +3,13 @@ import firebase from "../components/sign-in/Authentication";
 import { receiveCurrentUser, receiveSwipedPets } from "../actions";
 
 export const createUser = (userInfo) => {
-  const { userId, name, email, phone } = userInfo;
+  const { userId, name, email, phone, userPhoto } = userInfo;
   const userRef = firebase.database().ref("users/" + userId);
   const user = {
     name,
     email,
     phone,
+    userPhoto,
   };
 
   userRef.set(user);
@@ -110,7 +111,6 @@ export const getSwipedPets = (dispatch, userId) => {
     .then(function (snapshot) {
       if (snapshot.exists()) {
         const data = snapshot.val();
-        console.log(data);
         const liked = data.liked;
         const superLiked = data.superLiked;
         const disliked = data.disliked;

@@ -134,6 +134,7 @@ const SignIn = () => {
           name: user.displayName,
           email: user.email,
           phone: user.phoneNumber,
+          userPhoto: user.photoURL,
         };
         createUser(userInfo);
         getUser(dispatch, userInfo.userId);
