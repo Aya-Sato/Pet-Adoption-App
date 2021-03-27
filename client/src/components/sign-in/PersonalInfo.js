@@ -104,20 +104,6 @@ const PersonalInfo = () => {
   const history = useHistory();
   const dispatch = useDispatch();
   const userId = useSelector((state) => state.currentUser.currentUserId);
-  const { preference, setPreference } = useContext(PreferenceContext);
-
-  useEffect(() => {
-    if (userId) {
-      getPreference(userId, preference, setPreference);
-      getSwipedPets(dispatch, userId);
-    }
-  }, [userId]);
-
-  useEffect(() => {
-    if (Object.keys(preference).length > 0) {
-      history.push("/main");
-    }
-  }, [preference]);
 
   const updateName = (ev) => {
     setName(ev.target.value);
