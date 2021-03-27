@@ -1,8 +1,11 @@
 import React, { useContext } from "react";
+import { useHistory } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
 import { PetContext } from "../PetContext";
 import styled from "styled-components";
 import { themeVars } from "../../GlobalStyles";
 import { BsStarFill } from "react-icons/bs";
+import { fetchAnimal } from "../../../helpers/api-helpers";
 
 const StyledBtn = styled.button`
   border-radius: 50%;
@@ -26,10 +29,25 @@ const StyledBtn = styled.button`
 `;
 
 const SuperLike = ({ swipe }) => {
+  const history = useHistory();
+  const dispatch = useDispatch();
   const { selectedPetIndex } = useContext(PetContext);
+  const { selectedPetId } = useContext(PetContext);
+  const petId = selectedPetId;
+  const accessToken = useSelector((state) => state.auth.token);
 
   return (
-    <StyledBtn className="small" onClick={() => swipe("up", selectedPetIndex)}>
+    <StyledBtn
+      className="small"
+      onClick={() => {
+        swipe("up", selectedPetIndex);
+        fetchAnimal(dispatch, accessToken, petId);
+        setTimeout(() => {
+          history.push("/submit-application");
+          window.scrollTo(0, 0);
+        }, 2000);
+      }}
+    >
       <BsStarFill
         style={{
           height: "25px",

@@ -193,7 +193,7 @@ export const ApplicationForm = () => {
             required
           />
           <Input
-            type="number"
+            type="text"
             id="pet-id"
             placeholder="Pet ID"
             onChange={(ev) => {
