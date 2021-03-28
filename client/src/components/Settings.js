@@ -138,7 +138,12 @@ const Settings = () => {
           <BtnLabel>LOG OUT</BtnLabel>
         </BtnContainer>
         <BtnContainer>
-          <StyledBtn className="big">
+          <StyledBtn
+            className="big"
+            onClick={() => {
+              history.push("/preference");
+            }}
+          >
             <IoMdSettings
               style={{
                 height: "35px",
@@ -152,7 +157,12 @@ const Settings = () => {
           <BtnLabel>SETTINGS</BtnLabel>
         </BtnContainer>
         <BtnContainer>
-          <StyledBtn className="small">
+          <StyledBtn
+            className="small"
+            onClick={() => {
+              history.push("/credits");
+            }}
+          >
             <CgNotes
               style={{
                 height: "23px",

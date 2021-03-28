@@ -22,9 +22,7 @@ const Main = () => {
   );
 
   useEffect(() => {
-    if (Object.keys(preference).length === 0) {
-      getPreference(currentUserId, preference, setPreference);
-    }
+    getPreference(currentUserId, preference, setPreference);
   }, []);
 
   useEffect(() => {
