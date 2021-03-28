@@ -22,7 +22,7 @@ const Heading = styled.h3`
   margin-bottom: 10px;
 
   span {
-    color: ${themeVars.purple};
+    color: ${themeVars.green};
     font-size: 18px;
     background: ${themeVars.white};
   }
@@ -45,7 +45,7 @@ const Label = styled.label`
 `;
 
 const RequiredMessage = styled.p`
-  color: ${themeVars.purple};
+  color: ${themeVars.green};
   font-size: 16px;
   text-align: center;
 `;

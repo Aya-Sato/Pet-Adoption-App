@@ -19,7 +19,7 @@ const LogoContainer = styled.div`
 
 const WelcomeUser = styled.h2`
   color: ${themeVars.darkGray};
-  font-size: 18px;
+  font-size: 22px;
   text-align: center;
   margin: 0;
 `;
@@ -33,22 +33,23 @@ const Heading = styled.h3`
 
 const SubHeading = styled.h4`
   color: ${themeVars.darkGray};
-  font-size: 16px;
+  font-size: 17px;
   margin: 35px 0 5px 0;
 `;
 
 const Rules = styled.p`
   width: 80%;
   color: ${themeVars.mediumGray};
-  font-size: 14px;
+  font-size: 15px;
   margin: 0;
 
   span {
-    color: ${themeVars.coralOrange};
+    color: ${themeVars.green};
   }
 `;
 
 const Catchline = styled.div`
+  font-size: 18px;
   color: ${themeVars.coralOrange};
   font-weight: bold;
   margin: 35px 0 30px 0;
@@ -76,7 +77,6 @@ const Button = styled.button`
 const Welcome = () => {
   const history = useHistory();
   const dispatch = useDispatch();
-  const currentUser = useSelector((state) => state.currentUser.currentUser);
   const currentUserId = useSelector((state) => state.currentUser.currentUserId);
   const { preference, setPreference } = useContext(PreferenceContext);
 
@@ -109,10 +109,7 @@ const Welcome = () => {
           }}
         />
       </LogoContainer>
-      <WelcomeUser>
-        Welcome to Adopet, <br />
-        {`${currentUser.name}!`}
-      </WelcomeUser>
+      <WelcomeUser>Welcome to Adopet</WelcomeUser>
       <Heading>House rules and tips to help you:</Heading>
       <SubHeading>Application</SubHeading>
       <Rules>
@@ -144,7 +141,7 @@ const Welcome = () => {
           window.scrollTo(0, 0);
         }}
       >
-        I understand. Let's get started!
+        I understand
       </Button>
     </Wrapper>
   );
