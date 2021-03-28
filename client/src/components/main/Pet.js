@@ -21,6 +21,11 @@ import Like from "./buttons/Like";
 import LoadingIcon from "../LoadingIcon";
 import Rotate from "../Rotate";
 
+const Wrapper = styled.div`
+  height: 100vh;
+  overflow: scroll;
+`;
+
 const Img = styled.img`
   width: 100%;
   height: 80vh;
@@ -248,7 +253,7 @@ const Pet = () => {
     );
   }
   return (
-    <>
+    <Wrapper>
       {pet && petPhotosArr && organizationName && (
         <>
           <Slider {...settings}>
@@ -388,7 +393,7 @@ const Pet = () => {
           </BtnContainer>
         </>
       )}
-    </>
+    </Wrapper>
   );
 };
 
