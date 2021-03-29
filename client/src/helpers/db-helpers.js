@@ -114,9 +114,19 @@ export const getSwipedPets = (dispatch, userId) => {
         const liked = data.liked;
         const superLiked = data.superLiked;
         const disliked = data.disliked;
-        const likedPetsArr = liked ? Object.keys(liked) : [];
-        const superLikedPetsArr = superLiked ? Object.keys(superLiked) : [];
-        const dislikedPetsArr = disliked ? Object.keys(disliked) : [];
+        const convertStringToNum = (arr) => {
+          return arr.map((str) => parseInt(str));
+        };
+
+        const likedPetsArr = liked
+          ? convertStringToNum(Object.keys(liked))
+          : [];
+        const superLikedPetsArr = superLiked
+          ? convertStringToNum(Object.keys(superLiked))
+          : [];
+        const dislikedPetsArr = disliked
+          ? convertStringToNum(Object.keys(disliked))
+          : [];
 
         dispatch(
           receiveSwipedPets(likedPetsArr, superLikedPetsArr, dislikedPetsArr)

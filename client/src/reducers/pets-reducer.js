@@ -46,29 +46,45 @@ export default function petsReducer(state = initialState, action) {
       };
     }
     case "RECEIVE_LIKED_PET": {
-      return {
-        ...state,
-        liked: [...state.liked, action.likedPet],
-      };
+      if (state.liked.indexOf(action.likedPet) === -1) {
+        return {
+          ...state,
+          liked: [...state.liked, action.likedPet],
+        };
+      }
     }
     case "RECEIVE_SUPERLIKED_PET": {
-      return {
-        ...state,
-        superLiked: [...state.superLiked, action.superLikedPet],
-      };
+      if (state.superLiked.indexOf(action.superLikedPet) === -1) {
+        return {
+          ...state,
+          superLiked: [...state.superLiked, action.superLikedPet],
+        };
+      }
     }
     case "RECEIVE_DISLIKED_PET": {
-      return {
-        ...state,
-        disliked: [...state.disliked, action.dislikedPet],
-      };
+      if (state.disliked.indexOf(action.dislikedPet) === -1) {
+        return {
+          ...state,
+          disliked: [...state.disliked, action.dislikedPet],
+        };
+      }
     }
     case "RECEIVE_SWIPED_PETS": {
+      const filteredLikedPetsArr = action.likedPetsArr.filter(
+        (petId) => state.liked.indexOf(petId) === -1
+      );
+      const filteredSuperLikedPetsArr = action.superLikedPetsArr.filter(
+        (petId) => state.suerLiked.indexOf(petId) === -1
+      );
+      const filteredDislikedPetsArr = action.dislikedPetsArr.filter(
+        (petId) => state.disliked.indexOf(petId) === -1
+      );
+
       return {
         ...state,
-        liked: [...state.liked, ...action.likedPetsArr],
-        superLiked: [...state.superLiked, ...action.superLikedPetsArr],
-        disliked: [...state.disliked, ...action.dislikedPetsArr],
+        liked: [...state.liked, ...filteredLikedPetsArr],
+        superLiked: [...state.superLiked, ...filteredSuperLikedPetsArr],
+        disliked: [...state.disliked, ...filteredDislikedPetsArr],
       };
     }
     case "REMOVE_SWIPED_PETS": {
