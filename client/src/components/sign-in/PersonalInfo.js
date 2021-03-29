@@ -1,4 +1,4 @@
-import React, { useState, useContext, useEffect } from "react";
+import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import styled from "styled-components";
@@ -7,8 +7,6 @@ import { FaPaw } from "react-icons/fa";
 
 import { updateCurrentUser } from "../../actions";
 import { addUserNameAndEmail } from "../../helpers/db-helpers";
-import { PreferenceContext } from "../preference/PreferenceContext";
-import { getPreference, getSwipedPets } from "../../helpers/db-helpers";
 
 const Wrapper = styled.div`
   display: flex;
