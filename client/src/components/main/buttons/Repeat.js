@@ -1,7 +1,12 @@
-import React from "react";
+import React, { useContext } from "react";
+import { useSelector, useDispatch } from "react-redux";
 import styled from "styled-components";
 import { themeVars } from "../../GlobalStyles";
 import { FiRepeat } from "react-icons/fi";
+import { removeDislikedPets } from "../../../actions";
+import { fetchAnimals } from "../../../helpers/api-helpers";
+import { PreferenceContext } from "../../preference/PreferenceContext";
+import { deleteDislikedPets } from "../../../helpers/db-helpers";
 
 const StyledBtn = styled.button`
   border-radius: 50%;
@@ -25,8 +30,20 @@ const StyledBtn = styled.button`
 `;
 
 const Repeat = () => {
+  const dispatch = useDispatch();
+  const accessToken = useSelector((state) => state.auth.token);
+  const userId = useSelector((state) => state.currentUser.currentUserId);
+  const { preference } = useContext(PreferenceContext);
+
   return (
-    <StyledBtn className="small">
+    <StyledBtn
+      className="small"
+      onClick={() => {
+        deleteDislikedPets(userId);
+        dispatch(removeDislikedPets());
+        fetchAnimals(dispatch, accessToken, preference);
+      }}
+    >
       <FiRepeat
         style={{
           height: "22px",

@@ -139,3 +139,10 @@ export const getSwipedPets = (dispatch, userId) => {
       console.error(error);
     });
 };
+
+export const deleteDislikedPets = (userId) => {
+  firebase
+    .database()
+    .ref("/preferences/" + userId + "/disliked")
+    .remove();
+};

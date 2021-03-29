@@ -87,11 +87,9 @@ export default function petsReducer(state = initialState, action) {
         disliked: [...state.disliked, ...filteredDislikedPetsArr],
       };
     }
-    case "REMOVE_SWIPED_PETS": {
+    case "REMOVE_DISLIKED_PETS": {
       return {
         ...state,
-        liked: [],
-        superLiked: [],
         disliked: [],
       };
     }

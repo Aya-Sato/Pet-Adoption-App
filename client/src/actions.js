@@ -50,8 +50,8 @@ export const receiveSwipedPets = (
   dislikedPetsArr,
 });
 
-export const removeSwipedPets = () => ({
-  type: "REMOVE_SWIPED_PETS",
+export const removeDislikedPets = () => ({
+  type: "REMOVE_DISLIKED_PETS",
 });
 
 export const receiveCurrentUser = (currentUser, userId) => ({
