@@ -3,11 +3,12 @@ import { useHistory } from "react-router-dom";
 import styled from "styled-components";
 import { themeVars } from "../GlobalStyles";
 import { PetContext } from "../main/PetContext";
+import { AiOutlineCloseCircle } from "react-icons/ai";
 
 const Wrapper = styled.div`
   width: 100%;
   display: flex;
-  justify-content: start;
+  justify-content: space-between;
   margin: 4px 0;
   box-shadow: 0 2px 10px 0 rgba(0, 0, 0, 0.15);
   border-radius: 8px;
@@ -47,6 +48,21 @@ const Breeds = styled.div`
   color: ${themeVars.darkGray};
 `;
 
+const StyledBtn = styled.button`
+  height: 25px;
+  width: 25px;
+  position: relative;
+  top: 8px;
+  right: 8px;
+  border: none;
+  background: none;
+  outline: none;
+
+  &:focus-visible {
+    outline: 2px solid ${themeVars.yellow};
+  }
+`;
+
 const SuperLikedPet = ({ pet }) => {
   const history = useHistory();
   const { setSelectedPetId } = useContext(PetContext);
@@ -54,19 +70,35 @@ const SuperLikedPet = ({ pet }) => {
   return (
     <>
       <Wrapper
+        tabIndex="0"
+        aria-label="view selected pet"
         onClick={() => {
           setSelectedPetId(pet.id);
           history.push(`/pet/${pet.id}`);
         }}
       >
-        <Image src={pet.photos[0].medium} alt="Super Liked pet" />
-        <PetInfoContainer>
-          <Name>{pet.name}</Name>
-          <Row>
-            <Gender>{pet.gender}, </Gender>
-            <Breeds> {pet.breeds.primary}</Breeds>
-          </Row>
-        </PetInfoContainer>
+        <div style={{ display: "flex" }}>
+          <Image src={pet.photos[0].medium} alt="Super Liked pet" />
+          <PetInfoContainer>
+            <Name>{pet.name}</Name>
+            <Row>
+              <Gender>{pet.gender}, </Gender>
+              <Breeds> {pet.breeds.primary}</Breeds>
+            </Row>
+          </PetInfoContainer>
+        </div>
+        <StyledBtn>
+          <AiOutlineCloseCircle
+            style={{
+              color: `${themeVars.green}`,
+              height: "22px",
+              width: "22px",
+              position: "relative",
+              top: "-1px",
+              right: "4px",
+            }}
+          />
+        </StyledBtn>
       </Wrapper>
     </>
   );
