@@ -118,7 +118,7 @@ const Welcome = () => {
           Liking the animal does not garantee the availability of the animals.
         </span>{" "}
         If you see a dog or a cat you're interested in, make sure you're ready
-        to fill out and submit the application quickly by superliking.
+        to fill out and submit the application quickly by Super Liking.
       </Rules>
       <SubHeading>Age and Valid Identification</SubHeading>
       <Rules>
@@ -130,7 +130,7 @@ const Welcome = () => {
       <SubHeading>Adoption Fee</SubHeading>
       <Rules>
         The adoption fee will vary in costs depending on the shelters and
-        rescues. Superliking an animal will prompt you to make{" "}
+        rescues. Super Liking an animal will prompt you to make{" "}
         <span>a deposit of $50</span> along with your application. The deposit
         is non-refundable, but it will count towards the adoption fee.
       </Rules>

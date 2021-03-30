@@ -97,3 +97,13 @@ export const receiveOrganization = (organization, organizationId) => ({
 export const receiveOrganizationFailed = () => ({
   type: "RECEIVE_ORGANIZATION_FAILED",
 });
+
+export const receiveLikedPetInfo = (likedPetObj) => ({
+  type: "RECEIVE_LIKED_PET_INFO",
+  likedPetObj,
+});
+
+export const receiveSuperLikedPetInfo = (superLikedPetObj) => ({
+  type: "RECEIVE_SUPERLIKED_PET_INFO",
+  superLikedPetObj,
+});

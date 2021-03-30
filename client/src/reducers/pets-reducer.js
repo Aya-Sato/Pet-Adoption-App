@@ -1,5 +1,7 @@
 const initialState = {
   pets: null,
+  likedPetsInfo: [],
+  superLikedPetsInfo: [],
   status: "idle",
   liked: [],
   superLiked: [],
@@ -74,7 +76,7 @@ export default function petsReducer(state = initialState, action) {
         (petId) => state.liked.indexOf(petId) === -1
       );
       const filteredSuperLikedPetsArr = action.superLikedPetsArr.filter(
-        (petId) => state.suerLiked.indexOf(petId) === -1
+        (petId) => state.superLiked.indexOf(petId) === -1
       );
       const filteredDislikedPetsArr = action.dislikedPetsArr.filter(
         (petId) => state.disliked.indexOf(petId) === -1
@@ -92,6 +94,37 @@ export default function petsReducer(state = initialState, action) {
         ...state,
         disliked: [],
       };
+    }
+    case "RECEIVE_LIKED_PET_INFO": {
+      const likedPetsIdsArr = state.likedPetsInfo.map((petObj) => {
+        return petObj.id;
+      });
+      if (
+        action.likedPetObj &&
+        likedPetsIdsArr.indexOf(action.likedPetObj.id) === -1
+      ) {
+        return {
+          ...state,
+          likedPetsInfo: [...state.likedPetsInfo, action.likedPetObj],
+        };
+      }
+    }
+    case "RECEIVE_SUPERLIKED_PET_INFO": {
+      const superLikedPetIdsArr = state.superLikedPetsInfo.map((petObj) => {
+        return petObj.id;
+      });
+      if (
+        action.superLikedPetObj &&
+        superLikedPetIdsArr.indexOf(action.superLikedPetObj.id) === -1
+      ) {
+        return {
+          ...state,
+          superLikedPetsInfo: [
+            ...state.superLikedPetsInfo,
+            action.superLikedPetObj,
+          ],
+        };
+      }
     }
     default: {
       return state;
