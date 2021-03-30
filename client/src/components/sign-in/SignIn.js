@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useHistory } from "react-router-dom";
+import { useHistory, useLocation } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import styled from "styled-components";
 import { themeVars } from "../GlobalStyles";
@@ -123,7 +123,13 @@ const SignIn = () => {
   const [loading, setLoading] = useState(true);
   const history = useHistory();
   const dispatch = useDispatch();
+  const location = useLocation();
   const currentUser = useSelector((state) => state.currentUser.currentUser);
+
+  const { from } = location.state || { from: { pathname: "/" } };
+  const login = () => {
+    history.replace(from);
+  };
 
   useEffect(() => {
     firebase.auth().onAuthStateChanged(function (user) {
@@ -183,12 +189,20 @@ const SignIn = () => {
               <span>Cookies Policy</span>.
             </Policy>
             <LoginBtn
-              onClick={() => auth.signInWithRedirect(googleAuthProvider)}
+              onClick={() => {
+                auth.signInWithRedirect(googleAuthProvider);
+                login();
+              }}
             >
               <img className="google" src={GoogleLogo} alt="Google logo" />
               LOG IN WITH GOOGLE
             </LoginBtn>
-            <LoginBtn onClick={() => history.push("/sign-in-phone")}>
+            <LoginBtn
+              onClick={() => {
+                history.push("/sign-in-phone");
+                login();
+              }}
+            >
               <BsFillChatFill
                 style={{
                   fontSize: "16px",
@@ -201,7 +215,10 @@ const SignIn = () => {
               LOG IN WITH PHONE NUMBER
             </LoginBtn>
             <LoginBtn
-              onClick={() => auth.signInWithRedirect(facebookAuthProvider)}
+              onClick={() => {
+                auth.signInWithRedirect(facebookAuthProvider);
+                login();
+              }}
             >
               <img
                 className="facebook"

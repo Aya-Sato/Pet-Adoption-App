@@ -1,5 +1,7 @@
 import React, { useState } from "react";
-import { Switch, Route } from "react-router-dom";
+import { Switch, Route, Redirect } from "react-router-dom";
+
+import PrivateRoute from "./PrivateRoute";
 
 import SignIn from "./sign-in/SignIn";
 import SignInWithPhone from "./sign-in/SignInWithPhone";
@@ -10,16 +12,23 @@ import Preference from "./preference/Preference";
 import Header from "./Header";
 import Main from "./main/Main";
 import Pet from "./main/Pet";
-import Bookmark from "./Bookmark";
+import StripeContainer from "../components/application/StripeContainer";
+import Confirmation from "../components/application/Confirmation";
+import Organization from "./organization/Organization";
+import Bookmark from "./bookmark/Bookmark";
 import Message from "./Message";
 import Settings from "./Settings";
+import NotFound from "./NotFound";
 
 const Routes = () => {
   const [codeResult, setCodeResult] = useState();
   return (
     <Switch>
-      <Route exact path="/">
+      <Route exact path={["/", "/login"]}>
         <SignIn />
+      </Route>
+      <Route path="/not-found">
+        <NotFound />
       </Route>
       <Route exact path="/sign-in-phone">
         <SignInWithPhone setCodeResult={setCodeResult} />
@@ -30,30 +39,42 @@ const Routes = () => {
       <Route exact path="/personal-info">
         <PersonalInfo />
       </Route>
-      <Route exact path="/welcome">
+      <PrivateRoute exact path="/welcome">
         <Welcome />
-      </Route>
-      <Route exact path="/preference">
+      </PrivateRoute>
+      <PrivateRoute exact path="/preference">
         <Preference />
-      </Route>
-      <Route exact path="/main">
+      </PrivateRoute>
+      <PrivateRoute exact path="/main">
         <Header />
         <Main />
-      </Route>
-      <Route exact path="/pet/:petId">
+      </PrivateRoute>
+      <PrivateRoute exact path="/pet/:petId">
         <Pet />
-      </Route>
-      <Route exact path="/bookmark">
+      </PrivateRoute>
+      <PrivateRoute exact path="/submit-application">
+        <StripeContainer />
+      </PrivateRoute>
+      <PrivateRoute exact path="/application-confirmation">
+        <Confirmation />
+      </PrivateRoute>
+      <PrivateRoute exact path="/organization/:organizationId">
+        <Organization />
+      </PrivateRoute>
+      <PrivateRoute exact path="/bookmark">
         <Header />
         <Bookmark />
-      </Route>
-      <Route exact path="/message">
+      </PrivateRoute>
+      <PrivateRoute exact path="/message">
         <Header />
         <Message />
-      </Route>
-      <Route exact path="/settings">
+      </PrivateRoute>
+      <PrivateRoute exact path="/settings">
         <Header />
         <Settings />
+      </PrivateRoute>
+      <Route path="/">
+        <Redirect to="/not-found" />
       </Route>
     </Switch>
   );
