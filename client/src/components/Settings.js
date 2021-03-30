@@ -7,6 +7,7 @@ import { auth } from "../components/sign-in/Authentication";
 import { removeCurrentUser } from "../actions";
 import { PreferenceContext } from "./preference/PreferenceContext";
 
+import DefaultProfilePhoto from "../assets/default-profile.png";
 import { IoMdSettings } from "react-icons/io";
 import { RiLogoutCircleRLine } from "react-icons/ri";
 import { CgNotes } from "react-icons/cg";
@@ -177,7 +178,11 @@ const Settings = () => {
 
   return (
     <Wrapper>
-      <UserPhoto src={currentUser.userPhoto} />
+      <UserPhoto
+        src={
+          currentUser.userPhoto ? currentUser.userPhoto : DefaultProfilePhoto
+        }
+      />
       <UserName>{currentUser.name}</UserName>
       <BtnsContainer>
         <BtnContainer>
