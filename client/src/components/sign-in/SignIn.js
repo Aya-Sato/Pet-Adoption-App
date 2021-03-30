@@ -200,7 +200,6 @@ const SignIn = () => {
             <LoginBtn
               onClick={() => {
                 history.push("/sign-in-phone");
-                login();
               }}
             >
               <BsFillChatFill
