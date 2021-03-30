@@ -114,18 +114,16 @@ const Welcome = () => {
       <SubHeading>Application</SubHeading>
       <Rules>
         Most shelters and rescues take applications on a first-come basis.{" "}
-        <span>
-          Liking the animal does not garantee the availability of the animals.
-        </span>{" "}
-        If you see a dog or a cat you're interested in, make sure you're ready
-        to fill out and submit the application quickly by Super Liking.
+        <span>Liking animals does not guarantee their availability.</span> If
+        you see a dog or a cat you're interested in, make sure you're ready to
+        fill out and submit the application quickly by Super Liking.
       </Rules>
       <SubHeading>Age and Valid Identification</SubHeading>
       <Rules>
         Most shelters and rescues will require you to be at least{" "}
-        <span>18 years old</span> to adopt a pet. In order to verify your age,
-        you'll need to provide valid identification to shelter or rescue staff
-        prior to adoption.
+        <span>18 years old</span> to adopt a pet. To verify your age, you'll
+        need to provide valid identification to shelter or rescue staff prior to
+        adoption.
       </Rules>
       <SubHeading>Adoption Fee</SubHeading>
       <Rules>
