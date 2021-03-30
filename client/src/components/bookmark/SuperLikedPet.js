@@ -1,7 +1,8 @@
-import React from "react";
+import React, { useContext } from "react";
 import { useHistory } from "react-router-dom";
 import styled from "styled-components";
 import { themeVars } from "../GlobalStyles";
+import { PetContext } from "../main/PetContext";
 
 const Wrapper = styled.div`
   width: 100%;
@@ -48,11 +49,13 @@ const Breeds = styled.div`
 
 const SuperLikedPet = ({ pet }) => {
   const history = useHistory();
+  const { setSelectedPetId } = useContext(PetContext);
 
   return (
     <>
       <Wrapper
         onClick={() => {
+          setSelectedPetId(pet.id);
           history.push(`/pet/${pet.id}`);
         }}
       >
