@@ -143,6 +143,7 @@ const SignIn = () => {
       }
       setLoading(false);
     });
+    return () => setLoading(true);
   }, []);
 
   useEffect(() => {
