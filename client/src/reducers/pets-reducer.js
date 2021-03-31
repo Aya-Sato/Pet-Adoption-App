@@ -23,8 +23,11 @@ export default function petsReducer(state = initialState, action) {
         const alreadySwipedPets = [...state.liked]
           .concat([...state.superLiked])
           .concat([...state.disliked]);
+        const alreadySwipedPetIdsArr = alreadySwipedPets.map((pet) => {
+          return pet.id;
+        });
         const filteredPets = action.pets.filter((pet) => {
-          return alreadySwipedPets.indexOf(pet.id) === -1;
+          return alreadySwipedPetIdsArr.indexOf(pet.id) === -1;
         });
         return {
           ...state,

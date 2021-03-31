@@ -111,16 +111,13 @@ export const getSwipedPets = (dispatch, userId) => {
     .then(function (snapshot) {
       if (snapshot.exists()) {
         const data = snapshot.val();
-        const liked = data.liked;
-        const superLiked = data.superLiked;
-        const disliked = data.disliked;
-        // const convertStringToNum = (arr) => {
-        //   return arr.map((str) => parseInt(str));
-        // };
+        const liked = data.liked && data.liked;
+        const superLiked = data.superLiked && data.superLiked;
+        const disliked = data.disliked && data.disliked;
 
-        const likedPetsArr = liked ? liked : [];
-        const superLikedPetsArr = superLiked ? superLiked : [];
-        const dislikedPetsArr = disliked ? disliked : [];
+        const likedPetsArr = liked ? Object.values(liked) : [];
+        const superLikedPetsArr = superLiked ? Object.values(superLiked) : [];
+        const dislikedPetsArr = disliked ? Object.values(disliked) : [];
 
         dispatch(
           receiveSwipedPets(likedPetsArr, superLikedPetsArr, dislikedPetsArr)
