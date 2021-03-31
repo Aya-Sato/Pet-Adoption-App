@@ -1,9 +1,11 @@
 import React, { useContext } from "react";
 import { useHistory } from "react-router-dom";
+import { useDispatch } from "react-redux";
 import styled from "styled-components";
 import { themeVars } from "../GlobalStyles";
 import { PetContext } from "../main/PetContext";
 import { AiOutlineCloseCircle } from "react-icons/ai";
+import { removeSuperLikedPet } from "../../actions";
 
 const Wrapper = styled.div`
   width: 100%;
@@ -65,7 +67,8 @@ const StyledBtn = styled.button`
 
 const SuperLikedPet = ({ pet }) => {
   const history = useHistory();
-  const { setSelectedPetId, setActionBtnsEnabled } = useContext(PetContext);
+  const dispatch = useDispatch();
+  const { setSelectedPet, setActionBtnsEnabled } = useContext(PetContext);
 
   return (
     <>
@@ -74,7 +77,7 @@ const SuperLikedPet = ({ pet }) => {
         aria-label="view selected pet"
         onClick={() => {
           setActionBtnsEnabled(false);
-          setSelectedPetId(pet.id);
+          setSelectedPet(pet);
           history.push(`/pet/${pet.id}`);
         }}
       >
@@ -88,7 +91,12 @@ const SuperLikedPet = ({ pet }) => {
             </Row>
           </PetInfoContainer>
         </div>
-        <StyledBtn>
+        <StyledBtn
+          onClick={(ev) => {
+            ev.stopPropagation();
+            dispatch(removeSuperLikedPet(pet));
+          }}
+        >
           <AiOutlineCloseCircle
             style={{
               color: `${themeVars.green}`,

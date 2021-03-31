@@ -87,7 +87,7 @@ const PetCards = ({ petsArr }) => {
   const dispatch = useDispatch();
   const loadingStatus = useSelector((state) => state.pets.status);
   const userId = useSelector((state) => state.currentUser.currentUserId);
-  const { setSelectedPetId, setSelectedPetIndex } = useContext(PetContext);
+  const { setSelectedPet, setSelectedPetIndex } = useContext(PetContext);
   const [childRefs, setChildRefs] = useState();
 
   useEffect(() => {
@@ -100,16 +100,16 @@ const PetCards = ({ petsArr }) => {
     }
   }, [petsArr]);
 
-  const swiped = (direction, petId) => {
+  const swiped = (direction, pet) => {
     if (direction === "left") {
-      dispatch(receiveDislikedPet(petId));
-      addDislikedPet(userId, petId);
+      dispatch(receiveDislikedPet(pet));
+      addDislikedPet(userId, pet);
     } else if (direction === "right") {
-      dispatch(receiveLikedPet(petId));
-      addLikedPet(userId, petId);
+      dispatch(receiveLikedPet(pet));
+      addLikedPet(userId, pet);
     } else if (direction === "up") {
-      dispatch(receiveSuperLikedPet(petId));
-      addSuperLikedPet(userId, petId);
+      dispatch(receiveSuperLikedPet(pet));
+      addSuperLikedPet(userId, pet);
     }
   };
 
@@ -118,7 +118,7 @@ const PetCards = ({ petsArr }) => {
   };
 
   const onCardLeftScreen = (petIndex) => {
-    setSelectedPetId(petsArr[petIndex].id);
+    setSelectedPet(petsArr[petIndex]);
     setSelectedPetIndex(petIndex);
   };
 
@@ -145,7 +145,7 @@ const PetCards = ({ petsArr }) => {
               onCardLeftScreen={() => onCardLeftScreen(index - 1)}
               preventSwipe={["down", "up"]} //There is a bug with the package - had to add "up" to make superLike work.
               ref={childRefs && childRefs[index]}
-              onSwipe={(dir) => swiped(dir, pet.id)}
+              onSwipe={(dir) => swiped(dir, pet)}
             >
               <Card
                 style={{

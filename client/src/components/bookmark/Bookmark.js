@@ -1,14 +1,10 @@
-import React, { useEffect } from "react";
+import React from "react";
 import styled from "styled-components";
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 import { themeVars } from "../GlobalStyles";
 
 import LikedPet from "./LikedPet";
 import SuperLikedPet from "./SuperLikedPet";
-import {
-  fetchLikedAnimals,
-  fetchSuperLikedAnimals,
-} from "../../helpers/api-helpers";
 
 const Wrapper = styled.div`
   width: 100vw;
@@ -55,35 +51,13 @@ const Bookmark = () => {
   const alreadySuperLikedPetsArr = alreadySuperLikedPets
     ? alreadySuperLikedPets
     : [];
-  const likedPetsInfo = useSelector((state) => state.pets.likedPetsInfo);
-  const superLikedPetsInfo = useSelector(
-    (state) => state.pets.superLikedPetsInfo
-  );
-  const dispatch = useDispatch();
-  const accessToken = useSelector((state) => state.auth.token);
-
-  useEffect(() => {
-    if (alreadyLikedPetsArr.length > 0) {
-      alreadyLikedPetsArr.forEach((petId) => {
-        fetchLikedAnimals(dispatch, accessToken, petId);
-      });
-    }
-  }, [alreadyLikedPetsArr]);
-
-  useEffect(() => {
-    if (alreadySuperLikedPetsArr.length > 0) {
-      alreadySuperLikedPetsArr.forEach((petId) => {
-        fetchSuperLikedAnimals(dispatch, accessToken, petId);
-      });
-    }
-  }, [alreadySuperLikedPetsArr]);
 
   return (
     <Wrapper>
       <LikedContainer>
         <Heading>Liked Pets</Heading>
-        {likedPetsInfo &&
-          likedPetsInfo.map((pet) => {
+        {alreadyLikedPetsArr.length > 0 &&
+          alreadyLikedPetsArr.map((pet) => {
             return <LikedPet pet={pet} key={pet.id} />;
           })}
         {alreadyLikedPetsArr.length === 0 && (
@@ -92,8 +66,8 @@ const Bookmark = () => {
       </LikedContainer>
       <SuperLikedContainer>
         <Heading>Super Liked Pets</Heading>
-        {superLikedPetsInfo &&
-          superLikedPetsInfo.map((pet) => {
+        {alreadySuperLikedPetsArr.length > 0 &&
+          alreadySuperLikedPetsArr.map((pet) => {
             return <SuperLikedPet pet={pet} key={pet.id} />;
           })}
         {alreadySuperLikedPetsArr.length === 0 && (

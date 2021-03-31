@@ -11,8 +11,6 @@ import {
   requestOrganization,
   receiveOrganization,
   receiveOrganizationFailed,
-  receiveLikedPetInfo,
-  receiveSuperLikedPetInfo,
 } from "../actions";
 
 export function fetchToken(dispatch) {
@@ -73,42 +71,6 @@ export function fetchAnimal(dispatch, token, petId) {
     .catch((err) => {
       console.error(err);
       dispatch(receivePetFailed());
-    });
-}
-
-export function fetchLikedAnimals(dispatch, token, likedPetId) {
-  const options = {
-    headers: {
-      Authorization: `Bearer ${token}`,
-    },
-  };
-  const url = `https://api.petfinder.com/v2/animals/${likedPetId}`;
-
-  return fetch(url, options)
-    .then((res) => res.json())
-    .then((pet) => {
-      dispatch(receiveLikedPetInfo(pet.animal));
-    })
-    .catch((err) => {
-      console.error(err);
-    });
-}
-
-export function fetchSuperLikedAnimals(dispatch, token, superLikedPetId) {
-  const options = {
-    headers: {
-      Authorization: `Bearer ${token}`,
-    },
-  };
-  const url = `https://api.petfinder.com/v2/animals/${superLikedPetId}`;
-
-  return fetch(url, options)
-    .then((res) => res.json())
-    .then((pet) => {
-      dispatch(receiveSuperLikedPetInfo(pet.animal));
-    })
-    .catch((err) => {
-      console.error(err);
     });
 }
 

@@ -5,6 +5,7 @@ import styled from "styled-components";
 import { themeVars } from "../GlobalStyles";
 import { PetContext } from "../main/PetContext";
 import { AiOutlineCloseCircle } from "react-icons/ai";
+import { removeLikedPet } from "../../actions";
 
 const Wrapper = styled.div`
   width: 100%;
@@ -62,7 +63,8 @@ const StyledBtn = styled.button`
 
 const LikedPet = ({ pet }) => {
   const history = useHistory();
-  const { setSelectedPetId, setActionBtnsEnabled } = useContext(PetContext);
+  const dispatch = useDispatch();
+  const { setSelectedPet, setActionBtnsEnabled } = useContext(PetContext);
 
   return (
     <>
@@ -71,7 +73,7 @@ const LikedPet = ({ pet }) => {
         aria-label="view selected pet"
         onClick={() => {
           setActionBtnsEnabled(false);
-          setSelectedPetId(pet.id);
+          setSelectedPet(pet);
           history.push(`/pet/${pet.id}`);
         }}
       >
@@ -85,7 +87,12 @@ const LikedPet = ({ pet }) => {
             </Row>
           </PetInfoContainer>
         </div>
-        <StyledBtn>
+        <StyledBtn
+          onClick={(ev) => {
+            ev.stopPropagation();
+            dispatch(removeLikedPet(pet));
+          }}
+        >
           <AiOutlineCloseCircle
             style={{
               color: `${themeVars.green}`,

@@ -50,27 +50,27 @@ export const createPreference = (userId, preference) => {
   userRef.set(userPreference);
 };
 
-export const addLikedPet = (userId, likedPetId) => {
+export const addLikedPet = (userId, likedPet) => {
   const updates = {};
-  updates["/preferences/" + userId + "/liked/" + likedPetId] = likedPetId;
+  updates["/preferences/" + userId + "/liked/" + likedPet.id] = likedPet;
 
   return firebase.database().ref().update(updates);
 };
 
-export const addSuperLikedPet = (userId, superLikedPetId) => {
+export const addSuperLikedPet = (userId, superLikedPet) => {
   const updates = {};
   updates[
-    "/preferences/" + userId + "/superLiked/" + superLikedPetId
-  ] = superLikedPetId;
+    "/preferences/" + userId + "/superLiked/" + superLikedPet.id
+  ] = superLikedPet;
 
   return firebase.database().ref().update(updates);
 };
 
-export const addDislikedPet = (userId, dislikedPetId) => {
+export const addDislikedPet = (userId, dislikedPet) => {
   const updates = {};
   updates[
-    "/preferences/" + userId + "/disliked/" + dislikedPetId
-  ] = dislikedPetId;
+    "/preferences/" + userId + "/disliked/" + dislikedPet.id
+  ] = dislikedPet;
 
   return firebase.database().ref().update(updates);
 };
@@ -114,19 +114,13 @@ export const getSwipedPets = (dispatch, userId) => {
         const liked = data.liked;
         const superLiked = data.superLiked;
         const disliked = data.disliked;
-        const convertStringToNum = (arr) => {
-          return arr.map((str) => parseInt(str));
-        };
+        // const convertStringToNum = (arr) => {
+        //   return arr.map((str) => parseInt(str));
+        // };
 
-        const likedPetsArr = liked
-          ? convertStringToNum(Object.keys(liked))
-          : [];
-        const superLikedPetsArr = superLiked
-          ? convertStringToNum(Object.keys(superLiked))
-          : [];
-        const dislikedPetsArr = disliked
-          ? convertStringToNum(Object.keys(disliked))
-          : [];
+        const likedPetsArr = liked ? liked : [];
+        const superLikedPetsArr = superLiked ? superLiked : [];
+        const dislikedPetsArr = disliked ? disliked : [];
 
         dispatch(
           receiveSwipedPets(likedPetsArr, superLikedPetsArr, dislikedPetsArr)

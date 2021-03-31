@@ -27,8 +27,8 @@ const StyledBtn = styled.button`
 `;
 
 const Info = () => {
-  const { selectedPetId } = useContext(PetContext);
-  const petId = selectedPetId;
+  const { selectedPet } = useContext(PetContext);
+  const petId = selectedPet && selectedPet.id;
   const history = useHistory();
 
   return (

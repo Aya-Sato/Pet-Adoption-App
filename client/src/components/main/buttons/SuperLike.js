@@ -32,8 +32,8 @@ const SuperLike = ({ swipe }) => {
   const history = useHistory();
   const dispatch = useDispatch();
   const { selectedPetIndex } = useContext(PetContext);
-  const { selectedPetId } = useContext(PetContext);
-  const petId = selectedPetId;
+  const { selectedPet } = useContext(PetContext);
+  const petId = selectedPet && selectedPet.id;
   const accessToken = useSelector((state) => state.auth.token);
 
   return (

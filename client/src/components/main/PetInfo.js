@@ -192,7 +192,7 @@ const xStyle = {
 const PetInfo = () => {
   const dispatch = useDispatch();
   const history = useHistory();
-  const { selectedPetId } = useContext(PetContext);
+  const { selectedPet } = useContext(PetContext);
   const petInfo = useSelector((state) => state.pet.pet);
   const loadingStatus = useSelector((state) => state.pet.status);
   const accessToken = useSelector((state) => state.auth.token);
@@ -204,7 +204,7 @@ const PetInfo = () => {
   const [organizationName, setOrganizationName] = useState();
 
   useEffect(() => {
-    fetchAnimal(dispatch, accessToken, selectedPetId);
+    fetchAnimal(dispatch, accessToken, selectedPet.id);
   }, []);
 
   useEffect(() => {
@@ -375,7 +375,7 @@ const PetInfo = () => {
           <BtnContainer className="adopt">
             <AdoptBtn
               onClick={() => {
-                dispatch(receiveSuperLikedPet(selectedPetId));
+                dispatch(receiveSuperLikedPet(selectedPet));
                 history.push("/submit-application");
                 window.scrollTo(0, 0);
               }}

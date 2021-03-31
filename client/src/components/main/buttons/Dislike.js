@@ -32,7 +32,7 @@ const StyledBtn = styled.button`
 const Dislike = ({ swipe }) => {
   const history = useHistory();
   const dispatch = useDispatch();
-  const { selectedPetIndex, selectedPetId } = useContext(PetContext);
+  const { selectedPetIndex, selectedPet } = useContext(PetContext);
   const userId = useSelector((state) => state.currentUser.currentUserId);
 
   return (
@@ -42,8 +42,8 @@ const Dislike = ({ swipe }) => {
         if (document.location.pathname === "/main") {
           swipe("left", selectedPetIndex);
         } else {
-          dispatch(receiveDislikedPet(selectedPetId));
-          addDislikedPet(userId, selectedPetId);
+          dispatch(receiveDislikedPet(selectedPet));
+          addDislikedPet(userId, selectedPet);
           history.push("/main");
         }
       }}

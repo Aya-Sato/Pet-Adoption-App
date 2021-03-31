@@ -14,7 +14,7 @@ const Main = () => {
   const accessToken = useSelector((state) => state.auth.token);
   const petsArr = useSelector((state) => state.pets.pets);
   const currentUserId = useSelector((state) => state.currentUser.currentUserId);
-  const { setSelectedPetId, setSelectedPetIndex } = useContext(PetContext);
+  const { setSelectedPet, setSelectedPetIndex } = useContext(PetContext);
   const { preference, setPreference } = useContext(PreferenceContext);
 
   const isTokenExpired = useSelector((state) =>
@@ -27,7 +27,7 @@ const Main = () => {
 
   useEffect(() => {
     if (petsArr) {
-      setSelectedPetId(petsArr[petsArr.length - 1].id);
+      setSelectedPet(petsArr[petsArr.length - 1]);
       setSelectedPetIndex(petsArr.indexOf(petsArr[petsArr.length - 1]));
     }
   }, [petsArr]);
