@@ -1,8 +1,9 @@
-import React from "react";
+import React, { useContext } from "react";
 import { useHistory } from "react-router-dom";
 import styled from "styled-components";
 import { themeVars } from "../../GlobalStyles";
 import { TiArrowBack } from "react-icons/ti";
+import { PetContext } from "../PetContext";
 
 const StyledBtn = styled.button`
   border-radius: 50%;
@@ -27,11 +28,13 @@ const StyledBtn = styled.button`
 
 const Back = () => {
   const history = useHistory();
+  const { setActionBtnsEnabled } = useContext(PetContext);
 
   return (
     <StyledBtn
       className="big"
       onClick={() => {
+        setActionBtnsEnabled(true);
         history.push("/main");
       }}
     >

@@ -5,6 +5,7 @@ export const PetContext = createContext();
 export const PetProvider = ({ children }) => {
   const [selectedPetId, setSelectedPetId] = useState();
   const [selectedPetIndex, setSelectedPetIndex] = useState();
+  const [actionBtnsEnabled, setActionBtnsEnabled] = useState(true);
 
   return (
     <PetContext.Provider
@@ -13,6 +14,8 @@ export const PetProvider = ({ children }) => {
         setSelectedPetId,
         selectedPetIndex,
         setSelectedPetIndex,
+        actionBtnsEnabled,
+        setActionBtnsEnabled,
       }}
     >
       {children}

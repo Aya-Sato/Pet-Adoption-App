@@ -65,7 +65,7 @@ const StyledBtn = styled.button`
 
 const SuperLikedPet = ({ pet }) => {
   const history = useHistory();
-  const { setSelectedPetId } = useContext(PetContext);
+  const { setSelectedPetId, setActionBtnsEnabled } = useContext(PetContext);
 
   return (
     <>
@@ -73,6 +73,7 @@ const SuperLikedPet = ({ pet }) => {
         tabIndex="0"
         aria-label="view selected pet"
         onClick={() => {
+          setActionBtnsEnabled(false);
           setSelectedPetId(pet.id);
           history.push(`/pet/${pet.id}`);
         }}
