@@ -1,11 +1,12 @@
 import React, { useContext } from "react";
 import { useHistory } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import styled from "styled-components";
 import { themeVars } from "../GlobalStyles";
 import { PetContext } from "../main/PetContext";
 import { AiOutlineCloseCircle } from "react-icons/ai";
 import { removeLikedPet } from "../../actions";
+import { deleteLikedPet } from "../../helpers/db-helpers";
 
 const Wrapper = styled.div`
   width: 100%;
@@ -65,6 +66,7 @@ const LikedPet = ({ pet }) => {
   const history = useHistory();
   const dispatch = useDispatch();
   const { setSelectedPet, setActionBtnsEnabled } = useContext(PetContext);
+  const userId = useSelector((state) => state.currentUser.currentUserId);
 
   return (
     <>
@@ -91,6 +93,7 @@ const LikedPet = ({ pet }) => {
           onClick={(ev) => {
             ev.stopPropagation();
             dispatch(removeLikedPet(pet));
+            deleteLikedPet(userId, pet.id);
           }}
         >
           <AiOutlineCloseCircle

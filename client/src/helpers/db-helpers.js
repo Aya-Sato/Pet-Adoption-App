@@ -137,3 +137,17 @@ export const deleteDislikedPets = (userId) => {
     .ref("/preferences/" + userId + "/disliked")
     .remove();
 };
+
+export const deleteLikedPet = (userId, petId) => {
+  firebase
+    .database()
+    .ref("/preferences/" + userId + "/liked/" + petId)
+    .remove();
+};
+
+export const deleteSuperLikedPet = (userId, petId) => {
+  firebase
+    .database()
+    .ref("/preferences/" + userId + "/superLiked/" + petId)
+    .remove();
+};
