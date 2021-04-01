@@ -21,7 +21,7 @@ const Image = styled.img`
   height: 60px;
   width: 60px;
   border-radius: 50%;
-  margin: 10px 30px;
+  margin: 10px 30px 10px 20px;
 `;
 
 const PetInfoContainer = styled.div`
