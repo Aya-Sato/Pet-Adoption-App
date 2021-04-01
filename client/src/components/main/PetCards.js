@@ -143,7 +143,7 @@ const PetCards = ({ petsArr }) => {
               className="swipe"
               key={index}
               onCardLeftScreen={() => onCardLeftScreen(index - 1)}
-              preventSwipe={["down", "up"]} //There is a bug with the package - had to add "up" to make superLike work.
+              preventSwipe={["down"]}
               ref={childRefs && childRefs[index]}
               onSwipe={(dir) => swiped(dir, pet)}
             >
