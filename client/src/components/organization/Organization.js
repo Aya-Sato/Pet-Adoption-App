@@ -60,6 +60,8 @@ const MapContainer = styled.div`
   top: 120px;
 `;
 
+const AddressContainer = styled.div``;
+
 const loadGoogleMapScript = (callback) => {
   if (
     typeof window.google === "object" &&
@@ -102,15 +104,17 @@ const Organization = () => {
             {org.address.city}, {org.address.state}
           </City>
           <MapContainer>
-            {!loadMap ? <div>Loading...</div> : <Map address={org.address} />}
+            {loadMap && <Map address={org.address} />}
           </MapContainer>
-          <Address>{org.address.address1}</Address>
-          {org.address.address2 && <Address>{org.address.address2}</Address>}
-          <Address>{org.address.city}</Address>
-          <Address>
-            {org.address.state}, {org.address.postcode}
-          </Address>
-          <Address>{org.address.country}</Address>
+          <AddressContainer>
+            <Address>{org.address.address1}</Address>
+            {org.address.address2 && <Address>{org.address.address2}</Address>}
+            <Address>{org.address.city}</Address>
+            <Address>
+              {org.address.state}, {org.address.postcode}
+            </Address>
+            <Address>{org.address.country}</Address>
+          </AddressContainer>
         </Wrapper>
       )}
     </>

@@ -22,13 +22,18 @@ const Map = ({ address }) => {
   }, []);
 
   useEffect(() => {
-    googleMap = initGoogleMap();
-    createMarker();
-  }, []);
+    if (latitude && longitude) {
+      googleMap = initGoogleMap();
+      createMarker();
+    }
+  }, [latitude, longitude]);
 
   const initGoogleMap = () => {
     return new window.google.maps.Map(googleMapRef.current, {
-      center: { lat: latitude, lng: longitude },
+      center: {
+        lat: parseFloat(latitude),
+        lng: parseFloat(longitude),
+      },
       zoom: 8,
       backgroundColor: "transparent !important",
     });
@@ -36,7 +41,10 @@ const Map = ({ address }) => {
 
   const createMarker = () =>
     new window.google.maps.Marker({
-      position: { lat: latitude, lng: longitude },
+      position: {
+        lat: parseFloat(latitude),
+        lng: parseFloat(longitude),
+      },
       map: googleMap,
     });
 
