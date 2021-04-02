@@ -17,7 +17,6 @@ export const themeVars = {
 const GlobalStyles = createGlobalStyle`
     html,
     body,
-    div,
     span {
         margin: 0;
         padding: 0;

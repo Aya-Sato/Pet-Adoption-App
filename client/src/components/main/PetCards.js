@@ -28,6 +28,7 @@ const CardContainer = styled.div`
   display: flex;
   justify-content: center;
   position: relative;
+  background: ${themeVars.tintedWhite};
 `;
 
 const Card = styled.div`
@@ -39,6 +40,7 @@ const Card = styled.div`
   border-radius: 15px;
   background-size: cover;
   background-position: center;
+  background: ${themeVars.tintedWhite};
 `;
 
 const TextContainer = styled.div`

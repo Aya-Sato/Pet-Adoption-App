@@ -120,6 +120,7 @@ const CreditsContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  background: ${themeVars.tintedWhite};
 `;
 
 const CreditsHeading = styled.h2`
@@ -261,6 +262,7 @@ const Settings = () => {
           <UL>
             <LI>PetFinder API</LI>
             <LI>Abstract IP Geolocation API</LI>
+            <LI>Google Maps JavaScript API</LI>
             <LI>Stripe API</LI>
           </UL>
           <SubHeading>{`Authentication & Database:`}</SubHeading>
