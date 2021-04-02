@@ -102,7 +102,7 @@ const Organization = () => {
             {org.address.city}, {org.address.state}
           </City>
           <MapContainer>
-            {!loadMap ? <div>Loading...</div> : <Map />}
+            {!loadMap ? <div>Loading...</div> : <Map address={org.address} />}
           </MapContainer>
           <Address>{org.address.address1}</Address>
           {org.address.address2 && <Address>{org.address.address2}</Address>}

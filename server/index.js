@@ -5,7 +5,12 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const morgan = require("morgan");
 const cors = require("cors");
-const { getToken, getCurrentLocation, handleDiposit } = require("./handlers");
+const {
+  getToken,
+  getCurrentLocation,
+  handleDiposit,
+  getLatLng,
+} = require("./handlers");
 
 express()
   .use(morgan("tiny"))
@@ -19,6 +24,8 @@ express()
   .get("/current_location", getCurrentLocation)
 
   .post("/stripe/charge", cors(), handleDiposit)
+
+  .get("/organization/:city", getLatLng)
 
   // this is our catch all endpoint.
   .get("*", (req, res) => {

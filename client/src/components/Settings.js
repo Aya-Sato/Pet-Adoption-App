@@ -263,6 +263,7 @@ const Settings = () => {
             <LI>PetFinder API</LI>
             <LI>Abstract IP Geolocation API</LI>
             <LI>Google Maps JavaScript API</LI>
+            <LI>OpenCage Data API</LI>
             <LI>Stripe API</LI>
           </UL>
           <SubHeading>{`Authentication & Database:`}</SubHeading>

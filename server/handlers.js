@@ -2,6 +2,7 @@
 
 const fetch = require("isomorphic-fetch");
 require("dotenv").config();
+const opencage = require("opencage-api-client");
 
 const getToken = (req, res, next) => {
   const clientId = process.env.PETFINDER_CLIENT_ID;
@@ -69,4 +70,22 @@ const handleDiposit = async (req, res) => {
   }
 };
 
-module.exports = { getToken, getCurrentLocation, handleDiposit };
+const getLatLng = async (req, res) => {
+  const city = req.params.city;
+  const requestObj = {
+    q: city,
+    key: process.env.OPENCAGE_API_KEY,
+  };
+
+  return opencage
+    .geocode(requestObj)
+    .then((data) => {
+      res.status(200).json({ data: data.results[0].geometry });
+    })
+    .catch((error) => {
+      console.log("error", error.message);
+      res.status(404).json({ status: 404, message: "No lat/lng found" });
+    });
+};
+
+module.exports = { getToken, getCurrentLocation, handleDiposit, getLatLng };

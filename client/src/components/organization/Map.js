@@ -1,11 +1,25 @@
-import React, { useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import styled from "styled-components";
 
-const Wrapper = styled.div``;
+const Wrapper = styled.div`
+  margin-bottom: 50px;
+`;
 
-const Map = () => {
+const Map = ({ address }) => {
+  const [latitude, setLatitude] = useState();
+  const [longitude, setLongitude] = useState();
   const googleMapRef = useRef(null);
   let googleMap = null;
+  const city = address.city;
+
+  useEffect(() => {
+    fetch(`/organization/${city}`)
+      .then((res) => res.json())
+      .then((json) => {
+        setLatitude(json.data.lat);
+        setLongitude(json.data.lng);
+      });
+  }, []);
 
   useEffect(() => {
     googleMap = initGoogleMap();
@@ -14,7 +28,7 @@ const Map = () => {
 
   const initGoogleMap = () => {
     return new window.google.maps.Map(googleMapRef.current, {
-      center: { lat: -34.397, lng: 150.644 },
+      center: { lat: latitude, lng: longitude },
       zoom: 8,
       backgroundColor: "transparent !important",
     });
@@ -22,7 +36,7 @@ const Map = () => {
 
   const createMarker = () =>
     new window.google.maps.Marker({
-      position: { lat: -34.397, lng: 150.644 },
+      position: { lat: latitude, lng: longitude },
       map: googleMap,
     });
 
