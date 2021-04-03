@@ -6,6 +6,7 @@ import { ImLocation } from "react-icons/im";
 import { CgHome } from "react-icons/cg";
 import { HiOutlineMail } from "react-icons/hi";
 import { ImPhone } from "react-icons/im";
+import Back from "../main/buttons/Back";
 
 import Map from "./Map";
 const { REACT_APP_map_apiKey } = process.env;
@@ -94,7 +95,7 @@ const EmailContainer = styled.div`
 `;
 
 const Email = styled.div`
-  margin: 0 0 80px 50px;
+  margin-left: 50px;
 
   a {
     color: ${themeVars.darkGray};
@@ -108,6 +109,14 @@ const SubHeading = styled.h3`
   text-align: left;
   margin: 30px 0 10px 30px;
   color: ${themeVars.green};
+`;
+
+const BtnContainer = styled.div`
+  height: 120px;
+  position: relative;
+  top: 120px;
+  margin-top: 50px;
+  padding-top: 40px;
 `;
 
 const loadGoogleMapScript = (callback) => {
@@ -187,6 +196,9 @@ const Organization = () => {
               <a href={`mailto:${org.email}`}>{org.email}</a>
             </Email>
           </EmailContainer>
+          <BtnContainer>
+            <Back />
+          </BtnContainer>
         </Wrapper>
       )}
     </>

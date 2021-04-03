@@ -1,5 +1,6 @@
 import React, { useContext } from "react";
 import { useHistory } from "react-router-dom";
+import { useSelector } from "react-redux";
 import styled from "styled-components";
 import { themeVars } from "../../GlobalStyles";
 import { TiArrowBack } from "react-icons/ti";
@@ -28,14 +29,23 @@ const StyledBtn = styled.button`
 
 const Back = () => {
   const history = useHistory();
-  const { setActionBtnsEnabled } = useContext(PetContext);
+  const { setActionBtnsEnabled, selectedPet } = useContext(PetContext);
+  const organizationId = useSelector(
+    (state) => state.organization.organizationId
+  );
 
   return (
     <StyledBtn
       className="big"
       onClick={() => {
-        setActionBtnsEnabled(true);
-        history.push("/main");
+        if (document.location.pathname === `/pet/${selectedPet.id}`) {
+          setActionBtnsEnabled(true);
+          history.push("/main");
+        } else if (
+          document.location.pathname === `/organization/${organizationId}`
+        ) {
+          history.push(`/pet/${selectedPet.id}`);
+        }
       }}
     >
       <TiArrowBack
