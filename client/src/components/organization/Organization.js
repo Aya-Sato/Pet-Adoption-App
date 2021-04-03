@@ -80,6 +80,10 @@ const PhoneContainer = styled.div`
 
 const Phone = styled.div`
   margin-left: 50px;
+
+  a {
+    color: ${themeVars.darkGray};
+  }
 `;
 
 const EmailContainer = styled.div`
@@ -91,6 +95,10 @@ const EmailContainer = styled.div`
 
 const Email = styled.div`
   margin: 0 0 80px 50px;
+
+  a {
+    color: ${themeVars.darkGray};
+  }
 `;
 
 const SubHeading = styled.h3`
@@ -164,7 +172,9 @@ const Organization = () => {
               />{" "}
               Phone Number:
             </SubHeading>
-            <Phone>{org.phone}</Phone>
+            <Phone>
+              <a href={`tel:${org.phone}`}>{org.phone}</a>
+            </Phone>
           </PhoneContainer>
           <EmailContainer>
             <SubHeading>
@@ -173,7 +183,9 @@ const Organization = () => {
               />{" "}
               Email:
             </SubHeading>
-            <Email>{org.email}</Email>
+            <Email>
+              <a href={`mailto:${org.email}`}>{org.email}</a>
+            </Email>
           </EmailContainer>
         </Wrapper>
       )}
