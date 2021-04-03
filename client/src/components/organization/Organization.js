@@ -3,6 +3,9 @@ import { useSelector } from "react-redux";
 import styled from "styled-components";
 import { themeVars } from "../GlobalStyles";
 import { ImLocation } from "react-icons/im";
+import { CgHome } from "react-icons/cg";
+import { HiOutlineMail } from "react-icons/hi";
+import { ImPhone } from "react-icons/im";
 
 import Map from "./Map";
 const { REACT_APP_map_apiKey } = process.env;
@@ -22,12 +25,14 @@ const Image = styled.img`
   top: 75px;
 `;
 
-const Name = styled.div`
+const Name = styled.h2`
   position: relative;
   top: 100px;
   color: ${themeVars.darkGray};
   font-size: 22px;
+  font-weight: normal;
   text-align: center;
+  margin: 0;
 `;
 
 const City = styled.div`
@@ -35,11 +40,6 @@ const City = styled.div`
   top: 100px;
   margin-top: 15px;
   color: ${themeVars.darkGray};
-`;
-
-const Address = styled.div`
-  position: relative;
-  top: 100px;
 `;
 
 const TopSection = styled.section`
@@ -60,7 +60,47 @@ const MapContainer = styled.div`
   top: 120px;
 `;
 
-const AddressContainer = styled.div``;
+const AddressContainer = styled.div`
+  width: 100%;
+  position: relative;
+  top: 120px;
+  color: ${themeVars.darkGray};
+`;
+
+const Address = styled.div`
+  margin-left: 50px;
+`;
+
+const PhoneContainer = styled.div`
+  width: 100%;
+  position: relative;
+  top: 120px;
+  color: ${themeVars.darkGray};
+`;
+
+const Phone = styled.div`
+  margin-left: 50px;
+`;
+
+const EmailContainer = styled.div`
+  width: 100%;
+  position: relative;
+  top: 120px;
+  color: ${themeVars.darkGray};
+`;
+
+const Email = styled.div`
+  margin: 0 0 80px 50px;
+`;
+
+const SubHeading = styled.h3`
+  width: 100%;
+  font-size: 18px;
+  font-weight: normal;
+  text-align: left;
+  margin: 30px 0 10px 30px;
+  color: ${themeVars.green};
+`;
 
 const loadGoogleMapScript = (callback) => {
   if (
@@ -107,14 +147,34 @@ const Organization = () => {
             {loadMap && <Map address={org.address} />}
           </MapContainer>
           <AddressContainer>
-            <Address>{org.address.address1}</Address>
+            <SubHeading>
+              <CgHome style={{ position: "relative", top: "1px" }} /> Address:
+            </SubHeading>
+            {org.address.address1 && <Address>{org.address.address1}</Address>}
             {org.address.address2 && <Address>{org.address.address2}</Address>}
-            <Address>{org.address.city}</Address>
             <Address>
-              {org.address.state}, {org.address.postcode}
+              {org.address.city}, {org.address.state}, {org.address.postcode},{" "}
+              {org.address.country}
             </Address>
-            <Address>{org.address.country}</Address>
           </AddressContainer>
+          <PhoneContainer>
+            <SubHeading>
+              <ImPhone
+                style={{ fontSize: "16px", position: "relative", top: "1px" }}
+              />{" "}
+              Phone Number:
+            </SubHeading>
+            <Phone>{org.phone}</Phone>
+          </PhoneContainer>
+          <EmailContainer>
+            <SubHeading>
+              <HiOutlineMail
+                style={{ fontSize: "19px", position: "relative", top: "3px" }}
+              />{" "}
+              Email:
+            </SubHeading>
+            <Email>{org.email}</Email>
+          </EmailContainer>
         </Wrapper>
       )}
     </>

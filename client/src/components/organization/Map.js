@@ -1,10 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import styled from "styled-components";
 
-const Wrapper = styled.div`
-  margin-bottom: 50px;
-`;
-
 const Map = ({ address }) => {
   const [latitude, setLatitude] = useState();
   const [longitude, setLongitude] = useState();
@@ -48,11 +44,7 @@ const Map = ({ address }) => {
       map: googleMap,
     });
 
-  return (
-    <Wrapper>
-      <div ref={googleMapRef} style={{ width: "100vw", height: "300px" }} />
-    </Wrapper>
-  );
+  return <div ref={googleMapRef} style={{ width: "100vw", height: "300px" }} />;
 };
 
 export default Map;
