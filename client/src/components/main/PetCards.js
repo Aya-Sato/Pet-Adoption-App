@@ -83,6 +83,11 @@ const Wrapper = styled.div`
 
 const NoPets = styled.p`
   color: ${themeVars.darkGray};
+  font-size: 18px;
+  text-align: center;
+  width: 95%;
+  position: relative;
+  top: 120px;
 `;
 
 const PetCards = ({ petsArr }) => {
@@ -171,10 +176,7 @@ const PetCards = ({ petsArr }) => {
       )}
       {petsArr && petsArr.length === 0 && (
         <Wrapper>
-          <NoPets>
-            No pets available <br />
-            based on your preference...
-          </NoPets>
+          <NoPets>No pets available based on your preference...</NoPets>
         </Wrapper>
       )}
       <Buttons swipe={swipe} />
