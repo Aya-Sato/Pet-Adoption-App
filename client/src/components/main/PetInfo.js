@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
-import { Link, useHistory } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import { PetContext } from "./PetContext";
 import { useSelector, useDispatch } from "react-redux";
 import styled from "styled-components";
@@ -73,8 +73,9 @@ const Organization = styled.div`
   margin-bottom: 10px;
 `;
 
-const StyledLink = styled(Link)`
+const StyledLink = styled.div`
   color: ${themeVars.darkGray};
+  text-decoration: underline;
 `;
 
 const Attributes = styled.li`
@@ -292,7 +293,12 @@ const PetInfo = () => {
             )}
             <Organization>
               Organization:{" "}
-              <StyledLink to={`/organization/${pet.organization_id}`}>
+              <StyledLink
+                onClick={() => {
+                  history.push(`/organization/${pet.organization_id}`);
+                  window.scrollTo(0, 0);
+                }}
+              >
                 {organizationName}
               </StyledLink>
             </Organization>
