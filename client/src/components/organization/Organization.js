@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
+import { useHistory } from "react-router-dom";
 import styled from "styled-components";
 import { themeVars } from "../GlobalStyles";
 import { ImLocation } from "react-icons/im";
@@ -103,6 +104,19 @@ const Email = styled.div`
   }
 `;
 
+const MessageContainer = styled.div`
+  display: flex;
+  margin-top: 15px;
+`;
+
+const Message = styled.div`
+  color: ${themeVars.darkGray};
+
+  span {
+    text-decoration: underline;
+  }
+`;
+
 const SubHeading = styled.h3`
   width: 100%;
   font-size: 18px;
@@ -137,6 +151,7 @@ const loadGoogleMapScript = (callback) => {
 const Organization = () => {
   const [loadMap, setLoadMap] = useState(false);
   const org = useSelector((state) => state.organization.organization);
+  const history = useHistory();
 
   useEffect(() => {
     loadGoogleMapScript(() => {
@@ -187,6 +202,7 @@ const Organization = () => {
             </SubHeading>
             <Phone>
               <a href={`tel:${org.phone}`}>{org.phone}</a>
+              {!org.phone && <div>Not available</div>}
             </Phone>
           </PhoneContainer>
           <EmailContainer>
@@ -198,6 +214,20 @@ const Organization = () => {
             </SubHeading>
             <Email>
               <a href={`mailto:${org.email}`}>{org.email}</a>
+              {!org.email && <div>Not available</div>}
+              <MessageContainer>
+                <Message>
+                  Or{" "}
+                  <span
+                    onClick={() => {
+                      history.push(`/contact/${org.id}`);
+                      window.scrollTo(0, 0);
+                    }}
+                  >
+                    Message via Adopet
+                  </span>
+                </Message>
+              </MessageContainer>
             </Email>
           </EmailContainer>
           <BtnContainer>

@@ -15,6 +15,7 @@ import Pet from "./main/Pet";
 import StripeContainer from "../components/application/StripeContainer";
 import Confirmation from "../components/application/Confirmation";
 import Organization from "./organization/Organization";
+import Contact from "./organization/Contact";
 import Bookmark from "./bookmark/Bookmark";
 import Message from "./Message";
 import Settings from "./Settings";
@@ -60,6 +61,9 @@ const Routes = () => {
       </PrivateRoute>
       <PrivateRoute exact path="/organization/:organizationId">
         <Organization />
+      </PrivateRoute>
+      <PrivateRoute exact path="/contact/:organizationId">
+        <Contact />
       </PrivateRoute>
       <PrivateRoute exact path="/bookmark">
         <Header />
