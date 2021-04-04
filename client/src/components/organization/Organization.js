@@ -7,6 +7,7 @@ import { CgHome } from "react-icons/cg";
 import { HiOutlineMail } from "react-icons/hi";
 import { ImPhone } from "react-icons/im";
 import Back from "../main/buttons/Back";
+import DefaultProfilePhoto from "../../assets/default-profile.png";
 
 import Map from "./Map";
 const { REACT_APP_map_apiKey } = process.env;
@@ -148,7 +149,10 @@ const Organization = () => {
       {org && (
         <Wrapper>
           <TopSection />
-          <Image src={org.photos[0].large} alt="company logo" />
+          <Image
+            src={org.photos[0] ? org.photos[0].large : DefaultProfilePhoto}
+            alt="company logo"
+          />
           <Name>{org.name}</Name>
           <City>
             <ImLocation
