@@ -19,8 +19,15 @@ import LoadingIcon from "../LoadingIcon";
 import Rotate from "../Rotate";
 
 const Wrapper = styled.div`
-  height: 100vh;
-  overflow: scroll;
+  .available {
+    height: 100vh;
+    overflow: scroll;
+  }
+
+  .not-available {
+    display: flex;
+    justify-content: center;
+  }
 `;
 
 const Img = styled.img`
@@ -177,6 +184,13 @@ const LoadingIconContainer = styled.div`
   top: 250px;
 `;
 
+const NotAvailable = styled.p`
+  color: ${themeVars.darkGray};
+  font-size: 18px;
+  position: relative;
+  top: 150px;
+`;
+
 const checkStyle = {
   color: `${themeVars.coralOrange}`,
   position: "relative",
@@ -250,7 +264,7 @@ const PetInfo = () => {
     );
   }
   return (
-    <Wrapper>
+    <Wrapper className="available">
       {pet && petPhotosArr && organizationName && (
         <>
           <Slider {...settings}>
@@ -384,6 +398,11 @@ const PetInfo = () => {
             </AdoptBtn>
           </BtnContainer>
         </>
+      )}
+      {!pet && (
+        <Wrapper className="not-available">
+          <NotAvailable>This animal is no longer available...</NotAvailable>
+        </Wrapper>
       )}
     </Wrapper>
   );
