@@ -6,7 +6,7 @@ const Map = ({ address }) => {
   const [longitude, setLongitude] = useState();
   const googleMapRef = useRef(null);
   let googleMap = null;
-  const city = address.city;
+  const city = `${address.city}, ${address.state}, ${address.country}`;
 
   useEffect(() => {
     fetch(`/organization/${city}`)
