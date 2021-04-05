@@ -1,7 +1,8 @@
-import React, { useState } from "react";
+import React, { useContext } from "react";
+import { HeaderContext } from "./HeaderContext";
 import { useHistory } from "react-router-dom";
 import styled from "styled-components";
-import { themeVars } from "./GlobalStyles";
+import { themeVars } from "../GlobalStyles";
 import { FaPaw } from "react-icons/fa";
 import {
   BsFillChatDotsFill,
@@ -32,8 +33,8 @@ const StyledBtn = styled.button`
 `;
 
 const Header = () => {
-  const [active, setActive] = useState("main");
   const history = useHistory();
+  const { active, setActive } = useContext(HeaderContext);
 
   return (
     <Wrapper>

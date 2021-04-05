@@ -9,7 +9,7 @@ import VerificationCode from "./sign-in/VerificationCode";
 import PersonalInfo from "./sign-in/PersonalInfo";
 import Welcome from "./sign-in/Welcome";
 import Preference from "./preference/Preference";
-import Header from "./Header";
+import Header from "./header/Header";
 import Main from "./main/Main";
 import Pet from "./main/Pet";
 import StripeContainer from "../components/application/StripeContainer";
