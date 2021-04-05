@@ -68,14 +68,16 @@ const City = styled.div`
 `;
 
 const Organization = styled.div`
+  display: flex;
   color: ${themeVars.darkGray};
   font-size: 16px;
   margin-bottom: 10px;
 `;
 
-const StyledLink = styled.div`
+const StyledLink = styled.span`
   color: ${themeVars.darkGray};
   text-decoration: underline;
+  padding-left: 6px;
 `;
 
 const Attributes = styled.li`
@@ -292,7 +294,7 @@ const PetInfo = () => {
               </City>
             )}
             <Organization>
-              Organization:{" "}
+              Organization:
               <StyledLink
                 onClick={() => {
                   history.push(`/organization/${pet.organization_id}`);

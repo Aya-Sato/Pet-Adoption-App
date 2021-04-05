@@ -131,7 +131,7 @@ const BtnContainer = styled.div`
   position: relative;
   top: 120px;
   margin-top: 50px;
-  padding-top: 40px;
+  padding-top: 30px;
 `;
 
 const loadGoogleMapScript = (callback) => {
@@ -215,19 +215,21 @@ const Organization = () => {
             <Email>
               <a href={`mailto:${org.email}`}>{org.email}</a>
               {!org.email && <div>Not available</div>}
-              <MessageContainer>
-                <Message>
-                  Or{" "}
-                  <span
-                    onClick={() => {
-                      history.push(`/contact/${org.id}`);
-                      window.scrollTo(0, 0);
-                    }}
-                  >
-                    Message via Adopet
-                  </span>
-                </Message>
-              </MessageContainer>
+              {org.email && (
+                <MessageContainer>
+                  <Message>
+                    Or{" "}
+                    <span
+                      onClick={() => {
+                        history.push(`/contact/${org.id}`);
+                        window.scrollTo(0, 0);
+                      }}
+                    >
+                      Message via Adopet
+                    </span>
+                  </Message>
+                </MessageContainer>
+              )}
             </Email>
           </EmailContainer>
           <BtnContainer>
