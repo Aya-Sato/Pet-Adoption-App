@@ -1,10 +1,14 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
+import { HeaderContext } from "../header/HeaderContext";
+import { useHistory } from "react-router-dom";
 import { useSelector } from "react-redux";
+import { useForm } from "react-hook-form";
 import styled from "styled-components";
 import { themeVars } from "../GlobalStyles";
 
 import Rotate from "../Rotate";
 import LoadingIcon from "../LoadingIcon";
+import { createMessage } from "../../helpers/db-helpers";
 
 const Wrapper = styled.div`
   width: 100%;
@@ -114,11 +118,15 @@ const BottomSection = styled.section`
 `;
 
 const Contact = () => {
+  const history = useHistory();
+  const { setActive } = useContext(HeaderContext);
   const currentUser = useSelector((state) => state.currentUser.currentUser);
+  const currentUserId = useSelector((state) => state.currentUser.currentUserId);
   const org = useSelector((state) => state.organization.organization);
-  const [sender, setSender] = useState();
-  const [recipient, setRecipient] = useState();
-  const [message, setMessage] = useState();
+  const [sender, setSender] = useState("");
+  const [recipient, setRecipient] = useState("");
+  const [message, setMessage] = useState("");
+  const { register, handleSubmit } = useForm();
 
   useEffect(() => {
     if (currentUser) {
@@ -130,7 +138,7 @@ const Contact = () => {
     if (org) {
       setRecipient(org.name);
     }
-  });
+  }, [org]);
 
   const updateSender = (ev) => {
     setSender(ev.target.value);
@@ -144,13 +152,24 @@ const Contact = () => {
     setMessage(ev.target.value);
   };
 
+  const onSubmit = (data) => {
+    const message = {
+      ...data,
+      recipientEmail: org.email,
+    };
+    const userId = currentUserId;
+    createMessage(userId, message);
+    setActive("message");
+    history.push("/message");
+  };
+
   return (
     <div>
       <TopSection />
       {currentUser && org && (
         <Wrapper>
           <Heading>Message</Heading>
-          <Form>
+          <Form onSubmit={handleSubmit(onSubmit)}>
             <InputContainer>
               <Label htmlFor="sender">Sender: </Label>
               <Input
@@ -159,6 +178,7 @@ const Contact = () => {
                 name="sender"
                 value={sender}
                 onChange={updateSender}
+                ref={register({ required: true })}
               />
             </InputContainer>
             <InputContainer>
@@ -169,6 +189,7 @@ const Contact = () => {
                 name="recipient"
                 value={recipient}
                 onChange={updateRecipient}
+                ref={register({ required: true })}
               />
             </InputContainer>
             <InputContainer>
@@ -179,6 +200,7 @@ const Contact = () => {
                 name="message"
                 value={message}
                 onChange={updateMessage}
+                ref={register({ required: true })}
               />
             </InputContainer>
             <BtnContainer>

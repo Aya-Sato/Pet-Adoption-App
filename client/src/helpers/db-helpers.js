@@ -151,3 +151,26 @@ export const deleteSuperLikedPet = (userId, petId) => {
     .ref("/preferences/" + userId + "/superLiked/" + petId)
     .remove();
 };
+
+export const createMessage = (userId, message) => {
+  const org = message.recipient;
+
+  firebase
+    .database()
+    .ref("messages")
+    .child(userId)
+    .get()
+    .then(function (snapshot) {
+      if (!snapshot.exists()) {
+        const userRef = firebase
+          .database()
+          .ref("messages/" + userId + `/${org}`);
+        const userMessage = message;
+        userRef.set(userMessage);
+      } else {
+        const updates = {};
+        updates["/messages/" + userId + `/${org}`] = message;
+        return firebase.database().ref().update(updates);
+      }
+    });
+};
