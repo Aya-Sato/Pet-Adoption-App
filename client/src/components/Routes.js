@@ -18,7 +18,7 @@ import Organization from "./organization/Organization";
 import Contact from "./organization/Contact";
 import Bookmark from "./bookmark/Bookmark";
 import Message from "./Message";
-import Settings from "./Settings";
+import Settings from "./settings/Settings";
 import NotFound from "./NotFound";
 
 const Routes = () => {

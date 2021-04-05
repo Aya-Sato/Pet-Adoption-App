@@ -2,12 +2,12 @@ import React, { useState, useContext } from "react";
 import { useHistory } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import styled from "styled-components";
-import { themeVars } from "./GlobalStyles";
-import { auth } from "../components/sign-in/Authentication";
-import { removeCurrentUser } from "../actions";
-import { PreferenceContext } from "./preference/PreferenceContext";
+import { themeVars } from "../GlobalStyles";
+import { auth } from "../sign-in/Authentication";
+import { removeCurrentUser } from "../../actions";
+import { PreferenceContext } from "../preference/PreferenceContext";
 
-import DefaultProfilePhoto from "../assets/default-profile.png";
+import DefaultProfilePhoto from "../../assets/default-profile.png";
 import { IoMdSettings } from "react-icons/io";
 import { RiLogoutCircleRLine } from "react-icons/ri";
 import { CgNotes } from "react-icons/cg";
