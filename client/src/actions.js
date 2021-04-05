@@ -107,3 +107,16 @@ export const receiveOrganization = (organization, organizationId) => ({
 export const receiveOrganizationFailed = () => ({
   type: "RECEIVE_ORGANIZATION_FAILED",
 });
+
+export const requestMessages = () => ({
+  type: "REQUEST_MESSAGES",
+});
+
+export const receiveMessages = (messages) => ({
+  type: "RECEIVE_MESSAGES",
+  messages,
+});
+
+export const receiveMessagesFailed = () => ({
+  type: "RECEIVE_MESSAGES_FAILED",
+});

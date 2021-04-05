@@ -5,6 +5,7 @@ import pets from "./pets-reducer";
 import pet from "./pet-reducer";
 import currentUser from "./currentUser-reducer";
 import organization from "./organization-reducer";
+import messages from "./messages-reducer";
 
 export default combineReducers({
   auth,
@@ -12,4 +13,5 @@ export default combineReducers({
   pet,
   currentUser,
   organization,
+  messages,
 });

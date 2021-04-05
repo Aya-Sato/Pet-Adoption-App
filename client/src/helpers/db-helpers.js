@@ -1,6 +1,12 @@
 import firebase from "../components/sign-in/Authentication";
 
-import { receiveCurrentUser, receiveSwipedPets } from "../actions";
+import {
+  receiveCurrentUser,
+  receiveSwipedPets,
+  requestMessages,
+  receiveMessages,
+  receiveMessagesFailed,
+} from "../actions";
 
 export const createUser = (userInfo) => {
   const { userId, name, email, phone, userPhoto } = userInfo;
@@ -168,21 +174,41 @@ export const createMessage = (userId, message) => {
       if (!snapshot.exists()) {
         const userRef = firebase
           .database()
-          .ref("messages/" + userId + `/${org}` + "/0");
+          .ref("messages/" + userId + `/${org}/0`);
         const userMessage = message;
         userRef.set(userMessage);
       } else {
         const data = snapshot.val();
         if (!data[org]) {
           const updates = {};
-          updates["/messages/" + userId + `/${org}` + "/0"] = message;
+          updates["/messages/" + userId + `/${org}/0`] = message;
           return firebase.database().ref().update(updates);
         } else {
           const num = Object.keys(data[org]).length;
           const updates = {};
-          updates["/messages/" + userId + `/${org}` + `/${num}`] = message;
+          updates["/messages/" + userId + `/${org}/${num}`] = message;
           return firebase.database().ref().update(updates);
         }
       }
+    });
+};
+
+export const getMessages = (dispatch, userId) => {
+  dispatch(requestMessages());
+  firebase
+    .database()
+    .ref("messages")
+    .child(userId)
+    .get()
+    .then(function (snapshot) {
+      if (snapshot.exists()) {
+        dispatch(receiveMessages(snapshot.val()));
+      } else {
+        console.log("No data available");
+      }
+    })
+    .catch(function (error) {
+      console.error(error);
+      dispatch(receiveMessagesFailed());
     });
 };
