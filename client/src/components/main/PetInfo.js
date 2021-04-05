@@ -407,7 +407,7 @@ const PetInfo = () => {
           </BtnContainer>
         </>
       )}
-      {!pet && (
+      {!loadingStatus === "loading" && !pet && (
         <Wrapper className="not-available">
           <NotAvailable>This animal is no longer available...</NotAvailable>
         </Wrapper>
