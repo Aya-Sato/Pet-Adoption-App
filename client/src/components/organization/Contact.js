@@ -67,20 +67,27 @@ const InputContainer = styled.div`
 const BtnContainer = styled.div`
   width: 100vw;
   display: flex;
-  flex-direction: column;
-  align-items: center;
+  justify-content: center;
   margin-bottom: 30px;
 `;
 
-const SendBtn = styled.button`
+const Btn = styled.button`
   color: ${themeVars.white};
   font-size: 18px;
   background: ${themeVars.coralOrange};
   border: none;
   border-radius: 15px;
   padding: 10px 20px;
-  margin-top: 30px;
+  margin: 30px 10px 0 10px;
   outline: none;
+
+  &.back {
+    color: ${themeVars.coralOrange};
+    background: ${themeVars.white};
+    border: 2px solid ${themeVars.coralOrange};
+    border-radius: 15px;
+    padding: 8px 16px;
+  }
 
   &:active {
     transform: scale(1.1);
@@ -204,7 +211,16 @@ const Contact = () => {
               />
             </InputContainer>
             <BtnContainer>
-              <SendBtn>Send</SendBtn>
+              <Btn>Send</Btn>
+              <Btn
+                className="back"
+                onClick={(ev) => {
+                  ev.preventDefault();
+                  history.push(`/organization/${org.id}`);
+                }}
+              >
+                Back
+              </Btn>
             </BtnContainer>
           </Form>
         </Wrapper>
