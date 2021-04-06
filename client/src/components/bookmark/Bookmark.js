@@ -35,7 +35,7 @@ const Heading = styled.h2`
     ${themeVars.teaGreen} 100%
   );
   color: ${themeVars.white};
-  font-size: 20px;
+  font-size: 18px;
   padding: 15px;
   margin: 4px 0;
 `;

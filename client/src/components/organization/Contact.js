@@ -159,15 +159,15 @@ const Contact = () => {
     setMessage(ev.target.value);
   };
 
-  const onSubmit = (data) => {
+  const onSubmit = async (data) => {
     const message = {
       ...data,
       recipientEmail: org.email,
       recipientPhoto: org.photos[0] ? org.photos[0].large : null,
     };
     const userId = currentUserId;
-    createMessage(userId, message);
     setActive("message");
+    await createMessage(userId, message);
     history.push("/message");
   };
 
@@ -212,7 +212,6 @@ const Contact = () => {
               />
             </InputContainer>
             <BtnContainer>
-              <Btn>Send</Btn>
               <Btn
                 className="back"
                 onClick={(ev) => {
@@ -222,6 +221,7 @@ const Contact = () => {
               >
                 Back
               </Btn>
+              <Btn>Send</Btn>
             </BtnContainer>
           </Form>
         </Wrapper>

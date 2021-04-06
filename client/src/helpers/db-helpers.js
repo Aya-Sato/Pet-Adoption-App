@@ -158,7 +158,7 @@ export const deleteSuperLikedPet = (userId, petId) => {
     .remove();
 };
 
-export const createMessage = (userId, message) => {
+export const createMessage = async (userId, message) => {
   const orgArr = message.recipient.split("");
   const newOrgArr = orgArr.filter((letter) => {
     return letter !== ".";
@@ -169,12 +169,12 @@ export const createMessage = (userId, message) => {
     time: Date.now(),
   };
 
-  firebase
+  return firebase
     .database()
     .ref("messages")
     .child(userId)
     .get()
-    .then(function (snapshot) {
+    .then(async (snapshot) => {
       if (!snapshot.exists()) {
         const userRef = firebase
           .database()
@@ -186,12 +186,12 @@ export const createMessage = (userId, message) => {
         if (!data[org]) {
           const updates = {};
           updates["/messages/" + userId + `/${org}/0`] = newMessage;
-          return firebase.database().ref().update(updates);
+          await firebase.database().ref().update(updates);
         } else {
           const num = Object.keys(data[org]).length;
           const updates = {};
           updates["/messages/" + userId + `/${org}/${num}`] = newMessage;
-          return firebase.database().ref().update(updates);
+          await firebase.database().ref().update(updates);
         }
       }
     });
