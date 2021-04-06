@@ -233,7 +233,7 @@ const PetInfo = () => {
       );
       setPet(petInfo);
     }
-  }, [petInfo]);
+  }, [loadingStatus, petInfo]);
 
   useEffect(() => {
     if (pet) {
@@ -407,7 +407,7 @@ const PetInfo = () => {
           </BtnContainer>
         </>
       )}
-      {!loadingStatus === "loading" && !pet && (
+      {loadingStatus === "idle" && !pet && (
         <Wrapper className="not-available">
           <NotAvailable>This animal is no longer available...</NotAvailable>
         </Wrapper>
