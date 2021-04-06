@@ -163,6 +163,7 @@ const Contact = () => {
     const message = {
       ...data,
       recipientEmail: org.email,
+      recipientPhoto: org.photos[0] ? org.photos[0].large : null,
     };
     const userId = currentUserId;
     createMessage(userId, message);

@@ -164,6 +164,10 @@ export const createMessage = (userId, message) => {
     return letter !== ".";
   });
   const org = newOrgArr.join("");
+  const newMessage = {
+    ...message,
+    time: Date.now(),
+  };
 
   firebase
     .database()
@@ -175,18 +179,18 @@ export const createMessage = (userId, message) => {
         const userRef = firebase
           .database()
           .ref("messages/" + userId + `/${org}/0`);
-        const userMessage = message;
+        const userMessage = newMessage;
         userRef.set(userMessage);
       } else {
         const data = snapshot.val();
         if (!data[org]) {
           const updates = {};
-          updates["/messages/" + userId + `/${org}/0`] = message;
+          updates["/messages/" + userId + `/${org}/0`] = newMessage;
           return firebase.database().ref().update(updates);
         } else {
           const num = Object.keys(data[org]).length;
           const updates = {};
-          updates["/messages/" + userId + `/${org}/${num}`] = message;
+          updates["/messages/" + userId + `/${org}/${num}`] = newMessage;
           return firebase.database().ref().update(updates);
         }
       }
