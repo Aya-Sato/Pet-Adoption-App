@@ -3,10 +3,12 @@ import { useSelector, useDispatch } from "react-redux";
 import styled from "styled-components";
 import { themeVars } from "../GlobalStyles";
 import { getMessages } from "../../helpers/db-helpers";
+import { removeMessage } from "../../actions";
 
 import LoadingIcon from "../LoadingIcon";
 import Rotate from "../Rotate";
 import DefaultProfilePhoto from "../../assets/default-profile.png";
+import { AiOutlineCloseCircle } from "react-icons/ai";
 
 import moment from "moment";
 
@@ -20,7 +22,7 @@ const MessagesContainer = styled.div`
   width: 100%;
   display: flex;
   justify-content: space-between;
-  margin: 4px 0;
+  margin: 8px 0;
   box-shadow: 0 2px 10px 0 rgba(0, 0, 0, 0.15);
   border-radius: 8px;
 `;
@@ -49,18 +51,35 @@ const Image = styled.img`
 const MessageContainer = styled.div`
   display: flex;
   flex-direction: column;
+  width: calc(100vw - 110px);
 `;
 
 const Time = styled.div`
   font-size: 14px;
   color: ${themeVars.darkGray};
-  margin: 5px 0;
+  margin: 15px 0 5px 0;
 `;
 
 const Text = styled.p`
   font-size: 16px;
-  margin: 5px 0 10px 0;
-  width: 65vw;
+  margin: 5px 0 15px 0;
+  padding-right: 10px;
+  width: 100%;
+`;
+
+const StyledBtn = styled.button`
+  height: 25px;
+  width: 25px;
+  position: relative;
+  top: 8px;
+  right: 8px;
+  border: none;
+  background: none;
+  outline: none;
+
+  &:focus-visible {
+    outline: 2px solid ${themeVars.yellow};
+  }
 `;
 
 const LoadingIconContainer = styled.div`
@@ -99,32 +118,61 @@ const Message = () => {
     return (
       <Wrapper>
         {messagesArr.map((messageArr, index) => {
-          return (
-            <div key={index}>
-              <Heading>{messageArr[0].recipient}</Heading>
-              {messageArr.map((message) => {
-                const date = moment(message.time).format("lll");
-                return (
-                  <MessagesContainer key={message.time}>
-                    <div style={{ display: "flex" }}>
-                      <Image
-                        src={
-                          message.recipientPhoto
-                            ? message.recipientPhoto
-                            : DefaultProfilePhoto
-                        }
-                        alt="organization logo"
-                      />
-                      <MessageContainer>
-                        <Time>{date}</Time>
-                        <Text>{message.message}</Text>
-                      </MessageContainer>
-                    </div>
-                  </MessagesContainer>
-                );
-              })}
-            </div>
-          );
+          if (messageArr) {
+            return (
+              <div key={index}>
+                <Heading>{messageArr[0].recipient}</Heading>
+                {messageArr.map((message) => {
+                  const date = moment(message.time).format("lll");
+                  return (
+                    <MessagesContainer key={message.time}>
+                      <div
+                        style={{
+                          display: "flex",
+                          justifyContent: "space-between",
+                        }}
+                      >
+                        <Image
+                          src={
+                            message.recipientPhoto
+                              ? message.recipientPhoto
+                              : DefaultProfilePhoto
+                          }
+                          alt="organization logo"
+                        />
+                        <MessageContainer>
+                          <div
+                            style={{
+                              display: "flex",
+                              width: "100%",
+                              justifyContent: "space-between",
+                            }}
+                          >
+                            <Time>{date}</Time>
+                            <StyledBtn
+                              onClick={() => {
+                                dispatch(removeMessage(message));
+                                // deleteLikedPet(userId, pet.id);
+                              }}
+                            >
+                              <AiOutlineCloseCircle
+                                style={{
+                                  color: `${themeVars.green}`,
+                                  height: "22px",
+                                  width: "22px",
+                                }}
+                              />
+                            </StyledBtn>
+                          </div>
+                          <Text>{message.message}</Text>
+                        </MessageContainer>
+                      </div>
+                    </MessagesContainer>
+                  );
+                })}
+              </div>
+            );
+          }
         })}
       </Wrapper>
     );

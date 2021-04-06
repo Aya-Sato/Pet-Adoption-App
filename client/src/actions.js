@@ -120,3 +120,8 @@ export const receiveMessages = (messages) => ({
 export const receiveMessagesFailed = () => ({
   type: "RECEIVE_MESSAGES_FAILED",
 });
+
+export const removeMessage = (message) => ({
+  type: "REMOVE_MESSAGE",
+  message,
+});
