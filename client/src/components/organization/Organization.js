@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import styled from "styled-components";
@@ -7,8 +7,8 @@ import { ImLocation } from "react-icons/im";
 import { CgHome } from "react-icons/cg";
 import { HiOutlineMail } from "react-icons/hi";
 import { ImPhone } from "react-icons/im";
-import Back from "../main/buttons/Back";
 import DefaultProfilePhoto from "../../assets/default-profile.png";
+import { PetContext } from "../main/PetContext";
 
 import Map from "./Map";
 const { REACT_APP_map_apiKey } = process.env;
@@ -134,6 +134,24 @@ const BtnContainer = styled.div`
   padding-top: 30px;
 `;
 
+const Btn = styled.button`
+  font-size: 18px;
+  color: ${themeVars.coralOrange};
+  background: ${themeVars.white};
+  border-radius: 15px;
+  border: 2px solid ${themeVars.coralOrange};
+  outline: none;
+  padding: 8px 16px;
+
+  &:active {
+    transform: scale(1.1);
+  }
+
+  &:focus-visible {
+    outline: 2px solid ${themeVars.yellow};
+  }
+`;
+
 const loadGoogleMapScript = (callback) => {
   if (
     typeof window.google === "object" &&
@@ -152,6 +170,7 @@ const Organization = () => {
   const [loadMap, setLoadMap] = useState(false);
   const org = useSelector((state) => state.organization.organization);
   const history = useHistory();
+  const { selectedPet } = useContext(PetContext);
 
   useEffect(() => {
     loadGoogleMapScript(() => {
@@ -233,7 +252,13 @@ const Organization = () => {
             </Email>
           </EmailContainer>
           <BtnContainer>
-            <Back />
+            <Btn
+              onClick={() => {
+                history.push(`/pet/${selectedPet.id}`);
+              }}
+            >
+              Back
+            </Btn>
           </BtnContainer>
         </Wrapper>
       )}

@@ -30,7 +30,9 @@ const StyledBtn = styled.button`
 
 const Back = () => {
   const history = useHistory();
-  const { setActionBtnsEnabled, selectedPet } = useContext(PetContext);
+  const { setActionBtnsEnabled, actionBtnsEnabled, selectedPet } = useContext(
+    PetContext
+  );
   const { setActive } = useContext(HeaderContext);
   const organizationId = useSelector(
     (state) => state.organization.organizationId
@@ -40,14 +42,19 @@ const Back = () => {
     <StyledBtn
       className="big"
       onClick={() => {
-        if (document.location.pathname === `/pet/${selectedPet.id}`) {
-          setActionBtnsEnabled(true);
+        if (
+          document.location.pathname === `/pet/${selectedPet.id}` &&
+          actionBtnsEnabled
+        ) {
           setActive("main");
           history.push("/main");
         } else if (
-          document.location.pathname === `/organization/${organizationId}`
+          document.location.pathname === `/pet/${selectedPet.id}` &&
+          !actionBtnsEnabled
         ) {
-          history.push(`/pet/${selectedPet.id}`);
+          setActionBtnsEnabled(true);
+          setActive("bookmark");
+          history.push("/bookmark");
         }
       }}
     >
