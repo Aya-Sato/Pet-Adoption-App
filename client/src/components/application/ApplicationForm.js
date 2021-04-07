@@ -1,10 +1,11 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { useSelector } from "react-redux";
 import styled from "styled-components";
 import { themeVars } from "../GlobalStyles";
 import { CardElement, useStripe, useElements } from "@stripe/react-stripe-js";
 import axios from "axios";
 import { useHistory } from "react-router";
+import { HeaderContext } from "../header/HeaderContext";
 
 const Wrapper = styled.div`
   width: 100vw;
@@ -110,6 +111,7 @@ const Button = styled.button`
 const CardElementWrapper = styled.div``;
 
 export const ApplicationForm = () => {
+  const { setActive } = useContext(HeaderContext);
   const currentUser = useSelector((state) => state.currentUser.currentUser);
   const pet = useSelector((state) => state.pet.pet);
   const [name, setName] = useState(currentUser.name ? currentUser.name : "");
@@ -315,6 +317,7 @@ export const ApplicationForm = () => {
               className="back"
               onClick={(ev) => {
                 ev.preventDefault();
+                setActive("main");
                 history.push(`/main`);
               }}
             >

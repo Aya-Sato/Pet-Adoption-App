@@ -1,8 +1,9 @@
-import React from "react";
+import React, { useContext } from "react";
 import { useHistory } from "react-router-dom";
 import styled from "styled-components";
 import { themeVars } from "../GlobalStyles";
 import { FaPaw } from "react-icons/fa";
+import { HeaderContext } from "../header/HeaderContext";
 
 const Wrapper = styled.div`
   display: flex;
@@ -82,6 +83,7 @@ const BottomSection = styled.section`
 
 const Confirmation = () => {
   const history = useHistory();
+  const { setActive } = useContext(HeaderContext);
 
   return (
     <>
@@ -113,6 +115,7 @@ const Confirmation = () => {
         </Message>
         <BackBtn
           onClick={() => {
+            setActive("main");
             history.push("/main");
           }}
         >

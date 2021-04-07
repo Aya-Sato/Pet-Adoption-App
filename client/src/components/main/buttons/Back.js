@@ -5,6 +5,7 @@ import styled from "styled-components";
 import { themeVars } from "../../GlobalStyles";
 import { TiArrowBack } from "react-icons/ti";
 import { PetContext } from "../PetContext";
+import { HeaderContext } from "../../header/HeaderContext";
 
 const StyledBtn = styled.button`
   border-radius: 50%;
@@ -30,6 +31,7 @@ const StyledBtn = styled.button`
 const Back = () => {
   const history = useHistory();
   const { setActionBtnsEnabled, selectedPet } = useContext(PetContext);
+  const { setActive } = useContext(HeaderContext);
   const organizationId = useSelector(
     (state) => state.organization.organizationId
   );
@@ -40,6 +42,7 @@ const Back = () => {
       onClick={() => {
         if (document.location.pathname === `/pet/${selectedPet.id}`) {
           setActionBtnsEnabled(true);
+          setActive("main");
           history.push("/main");
         } else if (
           document.location.pathname === `/organization/${organizationId}`
