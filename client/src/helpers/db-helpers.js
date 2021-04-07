@@ -220,11 +220,11 @@ export const getMessages = (dispatch, userId) => {
         dispatch(receiveMessages(snapshot.val()));
       } else {
         console.log("No data available");
+        dispatch(receiveMessagesFailed());
       }
     })
     .catch(function (error) {
       console.error(error);
-      dispatch(receiveMessagesFailed());
     });
 };
 

@@ -89,6 +89,13 @@ const LoadingIconContainer = styled.div`
   top: 180px;
 `;
 
+const NoMessage = styled.p`
+  color: ${themeVars.darkGray};
+  font-size: 18px;
+  position: relative;
+  top: 150px;
+`;
+
 const Message = () => {
   const dispatch = useDispatch();
   const userId = useSelector((state) => state.currentUser.currentUserId);
@@ -105,7 +112,7 @@ const Message = () => {
     }
   }, [userId]);
 
-  if (messageStatus === "loading" && !messages) {
+  if (messageStatus === "loading") {
     return (
       <LoadingIconContainer>
         <Rotate>
@@ -174,10 +181,29 @@ const Message = () => {
             );
           }
         })}
+        {(messageStatus === "error" || Object.keys(messages).length === 0) && (
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "center",
+            }}
+          >
+            <NoMessage>There is no message to show...</NoMessage>
+          </div>
+        )}
       </Wrapper>
     );
-  } else {
-    return <div></div>;
+  } else if (!messages) {
+    return (
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "center",
+        }}
+      >
+        <NoMessage>There is no message to show...</NoMessage>
+      </div>
+    );
   }
 };
 
