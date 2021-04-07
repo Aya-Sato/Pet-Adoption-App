@@ -179,18 +179,29 @@ export const createMessage = async (userId, message) => {
         const userRef = firebase
           .database()
           .ref("messages/" + userId + `/${org}/0`);
-        const userMessage = newMessage;
+        const userMessage = {
+          ...newMessage,
+          id: 0,
+        };
         userRef.set(userMessage);
       } else {
         const data = snapshot.val();
         if (!data[org]) {
           const updates = {};
-          updates["/messages/" + userId + `/${org}/0`] = newMessage;
+          const userMessage = {
+            ...newMessage,
+            id: 0,
+          };
+          updates["/messages/" + userId + `/${org}/0`] = userMessage;
           await firebase.database().ref().update(updates);
         } else {
           const num = Object.keys(data[org]).length;
           const updates = {};
-          updates["/messages/" + userId + `/${org}/${num}`] = newMessage;
+          const userMessage = {
+            ...newMessage,
+            id: num,
+          };
+          updates["/messages/" + userId + `/${org}/${num}`] = userMessage;
           await firebase.database().ref().update(updates);
         }
       }
@@ -215,4 +226,18 @@ export const getMessages = (dispatch, userId) => {
       console.error(error);
       dispatch(receiveMessagesFailed());
     });
+};
+
+export const deleteMessage = (message, userId) => {
+  const orgArr = message.recipient.split("");
+  const newOrgArr = orgArr.filter((letter) => {
+    return letter !== ".";
+  });
+  const org = newOrgArr.join("");
+  const id = message.id;
+
+  firebase
+    .database()
+    .ref("/messages/" + userId + `/${org}/${id}`)
+    .remove();
 };

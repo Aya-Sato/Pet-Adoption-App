@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import styled from "styled-components";
 import { themeVars } from "../GlobalStyles";
-import { getMessages } from "../../helpers/db-helpers";
+import { getMessages, deleteMessage } from "../../helpers/db-helpers";
 import { removeMessage } from "../../actions";
 
 import LoadingIcon from "../LoadingIcon";
@@ -86,7 +86,7 @@ const LoadingIconContainer = styled.div`
   display: flex;
   justify-content: center;
   position: relative;
-  top: 250px;
+  top: 180px;
 `;
 
 const Message = () => {
@@ -152,7 +152,7 @@ const Message = () => {
                             <StyledBtn
                               onClick={() => {
                                 dispatch(removeMessage(message));
-                                // deleteLikedPet(userId, pet.id);
+                                deleteMessage(message, userId);
                               }}
                             >
                               <AiOutlineCloseCircle
