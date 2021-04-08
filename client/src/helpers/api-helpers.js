@@ -66,11 +66,14 @@ export function fetchAnimal(dispatch, token, petId) {
   return fetch(url, options)
     .then((res) => res.json())
     .then((pet) => {
-      dispatch(receivePet(pet.animal, petId));
+      if (pet.status === 404) {
+        dispatch(receivePetFailed());
+      } else {
+        dispatch(receivePet(pet.animal, petId));
+      }
     })
     .catch((err) => {
       console.error(err);
-      dispatch(receivePetFailed());
     });
 }
 

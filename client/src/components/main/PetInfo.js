@@ -192,6 +192,7 @@ const NotAvailable = styled.p`
   font-size: 18px;
   position: relative;
   top: 150px;
+  text-align: center;
 `;
 
 const checkStyle = {
@@ -264,6 +265,13 @@ const PetInfo = () => {
           <LoadingIcon />
         </Rotate>
       </LoadingIconContainer>
+    );
+  }
+  if (loadingStatus === "error") {
+    return (
+      <Wrapper className="not-available">
+        <NotAvailable>This animal is no longer available...</NotAvailable>
+      </Wrapper>
     );
   }
   return (
@@ -406,11 +414,6 @@ const PetInfo = () => {
             </AdoptBtn>
           </BtnContainer>
         </>
-      )}
-      {loadingStatus === "idle" && !pet && (
-        <Wrapper className="not-available">
-          <NotAvailable>This animal is no longer available...</NotAvailable>
-        </Wrapper>
       )}
     </Wrapper>
   );
