@@ -27,17 +27,14 @@ export default function messagesReducer(state = initialState, action) {
       };
     }
     case "REMOVE_MESSAGE": {
-      const timeStamp = action.message.time;
-      const filteredMessageArr = state.messages[
-        action.message.recipient
-      ].filter((message) => {
-        return message.time !== timeStamp;
+      const orgId = action.message.orgId;
+      const filteredMessageArr = state.messages[orgId].filter((message) => {
+        return message.id !== action.message.id;
       });
-      console.log(filteredMessageArr.length, "filtered");
 
       if (filteredMessageArr.length === 0) {
         const newState = produce(state, (draftState) => {
-          delete draftState.messages[action.message.recipient];
+          delete draftState.messages[orgId];
         });
         return newState;
       } else {
@@ -45,7 +42,7 @@ export default function messagesReducer(state = initialState, action) {
           ...state,
           messages: {
             ...state.messages,
-            [action.message.recipient]: filteredMessageArr,
+            [orgId]: filteredMessageArr,
           },
         };
       }

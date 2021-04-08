@@ -164,6 +164,7 @@ const Contact = () => {
       ...data,
       recipientEmail: org.email,
       recipientPhoto: org.photos[0] ? org.photos[0].large : null,
+      orgId: org.id,
     };
     const userId = currentUserId;
     setActive("message");

@@ -159,11 +159,7 @@ export const deleteSuperLikedPet = (userId, petId) => {
 };
 
 export const createMessage = async (userId, message) => {
-  const orgArr = message.recipient.split("");
-  const newOrgArr = orgArr.filter((letter) => {
-    return letter !== ".";
-  });
-  const org = newOrgArr.join("");
+  const org = message.orgId;
   const newMessage = {
     ...message,
     time: Date.now(),
@@ -229,11 +225,7 @@ export const getMessages = (dispatch, userId) => {
 };
 
 export const deleteMessage = (message, userId) => {
-  const orgArr = message.recipient.split("");
-  const newOrgArr = orgArr.filter((letter) => {
-    return letter !== ".";
-  });
-  const org = newOrgArr.join("");
+  const org = message.orgId;
   const id = message.id;
 
   firebase
