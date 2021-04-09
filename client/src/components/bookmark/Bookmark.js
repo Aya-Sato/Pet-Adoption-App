@@ -41,6 +41,7 @@ const Heading = styled.h2`
 `;
 
 const NoPetFound = styled.div`
+  color: ${themeVars.darkGray};
   padding: 20px;
 `;
 
