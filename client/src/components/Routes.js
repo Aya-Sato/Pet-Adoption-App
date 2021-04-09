@@ -37,9 +37,9 @@ const Routes = () => {
       <Route exact path="/verification-code">
         <VerificationCode codeResult={codeResult} />
       </Route>
-      <PrivateRoute exact path="/personal-info">
+      <Route exact path="/personal-info">
         <PersonalInfo />
-      </PrivateRoute>
+      </Route>
       <PrivateRoute exact path="/welcome">
         <Welcome />
       </PrivateRoute>
