@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
-import styled from "styled-components";
+import { ip } from "../../constants";
 
 const Map = ({ address }) => {
   const [latitude, setLatitude] = useState();
@@ -9,7 +9,7 @@ const Map = ({ address }) => {
   const city = `${address.city}, ${address.state}, ${address.country}`;
 
   useEffect(() => {
-    fetch(`/organization/${city}`)
+    fetch(`${ip}/organization/${city}`)
       .then((res) => res.json())
       .then((json) => {
         setLatitude(json.data.lat);

@@ -12,10 +12,11 @@ import {
   receiveOrganization,
   receiveOrganizationFailed,
 } from "../actions";
+import { ip } from "../constants";
 
 export function fetchToken(dispatch) {
   dispatch(requestAccessToken());
-  fetch("/petfinder_access_token")
+  fetch(`${ip}/petfinder_access_token`)
     .then((res) => res.json())
     .then((json) => {
       dispatch(receiveAccessToken(json.access_token));

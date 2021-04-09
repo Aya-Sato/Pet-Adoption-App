@@ -6,6 +6,7 @@ import { CardElement, useStripe, useElements } from "@stripe/react-stripe-js";
 import axios from "axios";
 import { useHistory } from "react-router";
 import { HeaderContext } from "../header/HeaderContext";
+import { ip } from "../../constants";
 
 const Wrapper = styled.div`
   width: 100vw;
@@ -158,13 +159,10 @@ export const ApplicationForm = () => {
       console.log("token generated!", paymentMethod);
       try {
         const { id } = paymentMethod;
-        const response = await axios.post(
-          "https://adopet-pet-adoption-app.herokuapp.com/stripe/charge",
-          {
-            amount: 50,
-            id: id,
-          }
-        );
+        const response = await axios.post(`${ip}/stripe/charge`, {
+          amount: 50,
+          id: id,
+        });
 
         if (response.data.success) {
           console.log("payment successful!");

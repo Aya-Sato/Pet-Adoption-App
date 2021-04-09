@@ -11,6 +11,7 @@ import Distance from "./Distance";
 import Type from "./Type";
 import Age from "./Age";
 import Photo from "./Photo";
+import { ip } from "../../constants";
 
 import { createPreference } from "../../helpers/db-helpers";
 
@@ -86,7 +87,7 @@ const Preference = () => {
   const userId = useSelector((state) => state.currentUser.currentUserId);
 
   useEffect(() => {
-    fetch("/current_location")
+    fetch(`${ip}/current_location`)
       .then((res) => res.json())
       .then((json) => {
         setLocation({
