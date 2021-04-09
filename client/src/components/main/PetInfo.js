@@ -6,7 +6,7 @@ import styled from "styled-components";
 import { themeVars } from "../GlobalStyles";
 
 import { fetchAnimal, fetchOrganization } from "../../helpers/api-helpers";
-import { receiveSuperLikedPet } from "../../actions";
+import { receiveSuperLikedPet, removeLikedPet } from "../../actions";
 
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
@@ -406,6 +406,7 @@ const PetInfo = () => {
             <AdoptBtn
               onClick={() => {
                 dispatch(receiveSuperLikedPet(selectedPet));
+                dispatch(removeLikedPet(selectedPet));
                 history.push("/submit-application");
                 window.scrollTo(0, 0);
               }}
