@@ -2,7 +2,7 @@
   "name": "client",
   "version": "0.1.0",
   "private": true,
-  "proxy": "http://localhost:8000",
+  "proxy": "https://adopet-pet-adoption-app.herokuapp.com",
   "dependencies": {
     "@material-ui/core": "^4.11.3",
     "@stripe/react-stripe-js": "^1.4.0",

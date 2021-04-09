@@ -159,7 +159,7 @@ export const ApplicationForm = () => {
       try {
         const { id } = paymentMethod;
         const response = await axios.post(
-          "http://localhost:8000/stripe/charge",
+          "http://https:/adopet-pet-adoption-app.herokuapp.com/stripe/charge",
           {
             amount: 50,
             id: id,
