@@ -1,0 +1,29 @@
+{
+  "files": {
+    "main.css": "/static/css/main.766c14ce.chunk.css",
+    "main.js": "/static/js/main.fa35926b.chunk.js",
+    "main.js.map": "/static/js/main.fa35926b.chunk.js.map",
+    "runtime-main.js": "/static/js/runtime-main.900dd88b.js",
+    "runtime-main.js.map": "/static/js/runtime-main.900dd88b.js.map",
+    "static/css/2.165ff965.chunk.css": "/static/css/2.165ff965.chunk.css",
+    "static/js/2.9c76878b.chunk.js": "/static/js/2.9c76878b.chunk.js",
+    "static/js/2.9c76878b.chunk.js.map": "/static/js/2.9c76878b.chunk.js.map",
+    "index.html": "/index.html",
+    "static/css/2.165ff965.chunk.css.map": "/static/css/2.165ff965.chunk.css.map",
+    "static/css/main.766c14ce.chunk.css.map": "/static/css/main.766c14ce.chunk.css.map",
+    "static/js/2.9c76878b.chunk.js.LICENSE.txt": "/static/js/2.9c76878b.chunk.js.LICENSE.txt",
+    "static/media/default-profile.9bc4e7fc.png": "/static/media/default-profile.9bc4e7fc.png",
+    "static/media/facebook-logo.f846c03b.svg": "/static/media/facebook-logo.f846c03b.svg",
+    "static/media/flag-canada.0848b7db.svg": "/static/media/flag-canada.0848b7db.svg",
+    "static/media/google-icon.268a3192.svg": "/static/media/google-icon.268a3192.svg",
+    "static/media/no-photo.780351d3.png": "/static/media/no-photo.780351d3.png",
+    "static/media/slick-theme.css": "/static/media/slick.c94f7671.ttf"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.900dd88b.js",
+    "static/css/2.165ff965.chunk.css",
+    "static/js/2.9c76878b.chunk.js",
+    "static/css/main.766c14ce.chunk.css",
+    "static/js/main.fa35926b.chunk.js"
+  ]
+}
