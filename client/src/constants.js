@@ -1,1 +1,1 @@
-export const ip = "https://adopet-pet-adoption-app.herokuapp.com/";
+export const ip = "https://adopet-pet-adoption-app.herokuapp.com";
