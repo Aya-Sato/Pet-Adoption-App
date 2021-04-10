@@ -16,6 +16,7 @@
   width: 20px;
   height: 20px;
   border-radius: 50%;
+  border: none;
   background: #ff704d;
   cursor: pointer;
 }
@@ -24,6 +25,7 @@
   width: 20px;
   height: 20px;
   border-radius: 50%;
+  border: none;
   background: #ff704d;
   cursor: pointer;
 }

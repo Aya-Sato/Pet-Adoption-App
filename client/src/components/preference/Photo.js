@@ -33,6 +33,7 @@ const SliderInput = styled.input`
   height: 24px;
   -webkit-appearance: none;
   background: ${themeVars.gray};
+  border: none;
   outline: none;
   border-radius: 15px;
   transition: 0.5s;
