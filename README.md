@@ -37,7 +37,7 @@ https://adopet-pet-adoption.netlify.app
 
 ## Images
 
-<img src="./client/src/assets/log-in.jpeg">
-<img src="./client/src/assets/main.jpeg">
-<img src="./client/src/assets/preference.jpeg">
-<img src="./client/src/assets/bookmark.jpeg">
+<img src="./client/src/assets/auth.jpeg" width="450">
+<img src="./client/src/assets/main.jpeg" width="450">
+<img src="./client/src/assets/preference.jpeg" width="450">
+<img src="./client/src/assets/bookmark.jpeg" width="450">
