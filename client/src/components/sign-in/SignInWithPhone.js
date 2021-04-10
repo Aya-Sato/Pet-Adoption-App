@@ -43,7 +43,6 @@ const Flag = styled.img`
 
 const CountryCode = styled.span`
   font-size: 20px;
-  border-bottom: 2px solid ${themeVars.coralOrange};
   margin-top: 20px;
 `;
 
@@ -51,7 +50,6 @@ const Input = styled.input`
   width: 60%;
   font-size: 20px;
   border: none;
-  border-bottom: 2px solid ${themeVars.coralOrange};
   background: ${themeVars.tintedWhite};
   margin-top: 20px;
 
@@ -165,8 +163,10 @@ const SignInWithPhone = ({ setCodeResult }) => {
         <Heading>My number is</Heading>
         <InputContainer>
           <Flag src={CanadianFlag} alt="Canadian flag" />
-          <CountryCode>+1</CountryCode>
-          <Input type="text" id="number" onChange={UpdatePhoneNumber} />
+          <div style={{ borderBottom: `2px solid ${themeVars.coralOrange}` }}>
+            <CountryCode>+1</CountryCode>
+            <Input type="text" id="number" onChange={UpdatePhoneNumber} />
+          </div>
         </InputContainer>
         <Recaptcha id="recaptcha-container"></Recaptcha>
         <Caution>

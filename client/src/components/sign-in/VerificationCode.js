@@ -29,7 +29,6 @@ const Input = styled.input`
   width: 50%;
   font-size: 20px;
   border: none;
-  border-bottom: 2px solid ${themeVars.coralOrange};
   background: ${themeVars.tintedWhite};
   margin-top: 20px;
 
@@ -113,11 +112,13 @@ const VerificationCode = ({ codeResult }) => {
       <TopSection />
       <Form>
         <Heading>My code is</Heading>
-        <Input
-          type="text"
-          id="verificationCode"
-          onChange={UpdateVerificationCode}
-        />
+        <div style={{ borderBottom: `2px solid ${themeVars.coralOrange}` }}>
+          <Input
+            type="text"
+            id="verificationCode"
+            onChange={UpdateVerificationCode}
+          />
+        </div>
         <VerifyBtn type="button" onClick={() => codeVerify()}>
           Verify code
         </VerifyBtn>

@@ -34,7 +34,6 @@ const Input = styled.input`
   width: 70%;
   font-size: 20px;
   border: none;
-  border-bottom: 2px solid ${themeVars.coralOrange};
   background: ${themeVars.tintedWhite};
   margin-top: 20px;
 
@@ -116,7 +115,9 @@ const PersonalInfo = () => {
       <TopSection />
       <Form>
         <Heading>My name is</Heading>
-        <Input type="text" id="name" onChange={updateName} />
+        <div style={{ borderBottom: `2px solid ${themeVars.coralOrange}` }}>
+          <Input type="text" id="name" onChange={updateName} />
+        </div>
         <LogoContainer>
           <svg width="0" height="0">
             <linearGradient id="gradient" x1="100%" y1="100%" x2="0%" y2="0%">
@@ -134,7 +135,9 @@ const PersonalInfo = () => {
           />
         </LogoContainer>
         <Heading>My email is</Heading>
-        <Input type="email" id="email" onChange={updateEmail} />
+        <div style={{ borderBottom: `2px solid ${themeVars.coralOrange}` }}>
+          <Input type="email" id="email" onChange={updateEmail} />
+        </div>
         <ContinueBtn
           type="button"
           onClick={() => {
