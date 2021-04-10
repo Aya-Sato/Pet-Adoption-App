@@ -1,4 +1,5 @@
 import React, { useContext, useState, useEffect } from "react";
+import { useHistory } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import styled from "styled-components";
 import { PetContext } from "./PetContext";
@@ -92,6 +93,7 @@ const NoPets = styled.p`
 
 const PetCards = ({ petsArr }) => {
   const dispatch = useDispatch();
+  const history = useHistory();
   const loadingStatus = useSelector((state) => state.pets.status);
   const userId = useSelector((state) => state.currentUser.currentUserId);
   const { setSelectedPet, setSelectedPetIndex } = useContext(PetContext);
@@ -117,6 +119,10 @@ const PetCards = ({ petsArr }) => {
     } else if (direction === "up") {
       dispatch(receiveSuperLikedPet(pet));
       addSuperLikedPet(userId, pet);
+      setTimeout(() => {
+        history.push("/submit-application");
+        window.scrollTo(0, 0);
+      }, 1000);
     }
   };
 

@@ -45,7 +45,7 @@ const SuperLike = ({ swipe }) => {
         setTimeout(() => {
           history.push("/submit-application");
           window.scrollTo(0, 0);
-        }, 2000);
+        }, 1000);
       }}
     >
       <BsStarFill
