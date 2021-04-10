@@ -122,6 +122,8 @@ const Preference = () => {
   useEffect(() => {
     if ("geolocation" in navigator) {
       getAddress();
+    } else {
+      ipLookUp();
     }
   }, []);
 
@@ -135,8 +137,6 @@ const Preference = () => {
             city: json.data,
           });
         });
-    } else {
-      ipLookUp();
     }
   }, [url]);
 
