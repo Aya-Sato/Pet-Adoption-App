@@ -10,6 +10,7 @@ const {
   getCurrentLocation,
   handleDiposit,
   getLatLng,
+  getCity,
 } = require("./handlers");
 
 express()
@@ -26,6 +27,8 @@ express()
   .post("/stripe/charge", cors(), handleDiposit)
 
   .get("/organization/:city", getLatLng)
+
+  .get("/current_city/:lat/:lng", getCity)
 
   // this is our catch all endpoint.
   .get("*", (req, res) => {

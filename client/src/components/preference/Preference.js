@@ -81,12 +81,13 @@ const SubmitBtn = styled.button`
 
 const Preference = () => {
   const [location, setLocation] = useState({});
+  const [url, setUrl] = useState();
   const [distance, setDistance] = useState("300");
   const history = useHistory();
   const { register, handleSubmit, errors } = useForm();
   const userId = useSelector((state) => state.currentUser.currentUserId);
 
-  useEffect(() => {
+  const ipLookUp = () => {
     fetch(`${ip}/current_location`)
       .then((res) => res.json())
       .then((json) => {
@@ -99,7 +100,45 @@ const Preference = () => {
       .catch((err) => {
         console.error(err);
       });
+  };
+
+  const getCoordinates = () => {
+    return new Promise(function (resolve, reject) {
+      navigator.geolocation.getCurrentPosition(resolve, reject);
+    });
+  };
+
+  const getAddress = async () => {
+    const position = await getCoordinates();
+    let latitude = position.coords.latitude;
+    let longitude = position.coords.longitude;
+    setUrl(`${ip}/current_city/${latitude}/${longitude}`);
+    setLocation({
+      ...location,
+      latLong: `${latitude}, ${longitude}`,
+    });
+  };
+
+  useEffect(() => {
+    if ("geolocation" in navigator) {
+      getAddress();
+    }
   }, []);
+
+  useEffect(() => {
+    if (url) {
+      fetch(url)
+        .then((data) => data.json())
+        .then((json) => {
+          setLocation({
+            ...location,
+            city: json.data,
+          });
+        });
+    } else {
+      ipLookUp();
+    }
+  }, [url]);
 
   const onSubmit = (data) => {
     const dataWithLocation = {

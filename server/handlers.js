@@ -90,4 +90,30 @@ const getLatLng = async (req, res) => {
     });
 };
 
-module.exports = { getToken, getCurrentLocation, handleDiposit, getLatLng };
+const getCity = async (req, res) => {
+  const lat = req.params.lat;
+  const lng = req.params.lng;
+  const requestObj = {
+    q: `${lat}, ${lng}`,
+    key: process.env.OPENCAGE_API_KEY,
+  };
+  return opencage
+    .geocode(requestObj)
+    .then((data) => {
+      res.status(200).json({
+        data: `${data.results[0].components.city}, ${data.results[0].components.state_code}`,
+      });
+    })
+    .catch((error) => {
+      console.log("error", error.message);
+      res.status(404).json({ status: 404, message: "City not found" });
+    });
+};
+
+module.exports = {
+  getToken,
+  getCurrentLocation,
+  handleDiposit,
+  getLatLng,
+  getCity,
+};
