@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { useForm } from "react-hook-form";
@@ -14,6 +14,7 @@ import Photo from "./Photo";
 import { ip } from "../../constants";
 
 import { createPreference } from "../../helpers/db-helpers";
+import { HeaderContext } from "../header/HeaderContext";
 
 const FormContainer = styled.div`
   width: 100%;
@@ -86,6 +87,7 @@ const Preference = () => {
   const history = useHistory();
   const { register, handleSubmit, errors } = useForm();
   const userId = useSelector((state) => state.currentUser.currentUserId);
+  const { setActive } = useContext(HeaderContext);
 
   const ipLookUp = () => {
     fetch(`${ip}/current_location`)
@@ -142,6 +144,7 @@ const Preference = () => {
       location: location.city,
     };
     createPreference(userId, dataWithLocation);
+    setActive("main");
     history.push("/main");
   };
 
