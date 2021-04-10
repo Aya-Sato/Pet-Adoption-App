@@ -18,7 +18,7 @@
 
 ## Features
 
-- Ability to log in with Firebase authentication (Gmail, Facebook, and phone number)
+- Ability to log in with Firebase authentication (Google, Facebook, and phone number)
 - Ability to filter and view animals based on user location and various search criteria (i.e., distance, animal types, age, and photos)
 - Ability to view a detailed profile of an animal
 - Ability to swipe on animals (Like, Dislike, Super Like)
