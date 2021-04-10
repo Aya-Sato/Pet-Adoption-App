@@ -167,6 +167,9 @@ const Message = () => {
                                   color: `${themeVars.green}`,
                                   height: "22px",
                                   width: "22px",
+                                  position: "relative",
+                                  top: "-1px",
+                                  right: "4px",
                                 }}
                               />
                             </StyledBtn>
