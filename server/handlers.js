@@ -3,6 +3,7 @@
 const fetch = require("isomorphic-fetch");
 require("dotenv").config();
 const opencage = require("opencage-api-client");
+const publicIp = require("public-ip");
 
 const getToken = (req, res, next) => {
   const clientId = process.env.PETFINDER_CLIENT_ID;
@@ -29,10 +30,11 @@ const getToken = (req, res, next) => {
     });
 };
 
-const getCurrentLocation = (req, res) => {
+const getCurrentLocation = async (req, res) => {
   const key = process.env.GEOLOCATION_API;
+  const ip = await publicIp.v4();
 
-  fetch(`https://ipgeolocation.abstractapi.com/v1/?api_key=${key}`)
+  fetch(`https://ipgeolocation.abstractapi.com/v1/?api_key=${key}&ip=${ip}`)
     .then((response) => response.json())
     .then((json) => {
       res.status(200).json({ status: 200, data: json });
