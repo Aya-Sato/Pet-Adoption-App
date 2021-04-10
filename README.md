@@ -28,7 +28,7 @@
 
 ### Future Improvements
 
-- Make the app responsive for tablet and desktop devices
+- Make the app responsive for tablet and desktop devices.<br />
   This is a mobile (first) app. It is currently only compatible with mobile screen sizes.
 
 ## Netlify Link
