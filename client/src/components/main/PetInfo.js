@@ -20,7 +20,7 @@ import Rotate from "../Rotate";
 
 const Wrapper = styled.div`
   .available {
-    height: 100vh;
+    height: calc(100vh - 200px);
     overflow: scroll;
   }
 
