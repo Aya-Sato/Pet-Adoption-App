@@ -113,10 +113,6 @@ const Preference = () => {
     let latitude = position.coords.latitude;
     let longitude = position.coords.longitude;
     setUrl(`${ip}/current_city/${latitude}/${longitude}`);
-    setLocation({
-      ...location,
-      latLong: `${latitude}, ${longitude}`,
-    });
   };
 
   useEffect(() => {
@@ -140,10 +136,12 @@ const Preference = () => {
     }
   }, [url]);
 
+  console.log(location);
+
   const onSubmit = (data) => {
     const dataWithLocation = {
       ...data,
-      location: location.latLong,
+      location: location.city,
     };
     createPreference(userId, dataWithLocation);
     history.push("/main");
