@@ -21,7 +21,7 @@
 - Ability to log in with Firebase authentication (Gmail, Facebook, and phone number)
 - Ability to filter and view animals based on user location and various search criteria (i.e., distance, animal types, age, and photos)
 - Ability to view a detailed profile of an animal
-- Ability to swipe on animals (Like, Dislike, SuperLike)
+- Ability to swipe on animals (Like, Dislike, Super Like)
 - Ability to bookmark Liked/SuperLiked animals
 - Ability to view information on rescue organizations and contact them
 - Ability to submit an adoption application and make a deposit using Stripe API
