@@ -10,8 +10,8 @@ import Info from "./Info";
 const Wrapper = styled.div`
   width: 100vw;
   height: 100px;
-  position: absolute;
-  bottom: 0;
+  position: relative;
+  top: calc(100vh - 200px);
   display: flex;
   justify-content: space-around;
   align-items: center;

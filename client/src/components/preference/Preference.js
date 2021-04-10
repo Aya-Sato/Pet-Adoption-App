@@ -136,8 +136,6 @@ const Preference = () => {
     }
   }, [url]);
 
-  console.log(location);
-
   const onSubmit = (data) => {
     const dataWithLocation = {
       ...data,
